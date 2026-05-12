@@ -23,20 +23,11 @@
       color: var(--text);
       min-height: 100vh;
     }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
     .header {
-      text-align: center;
-      padding: 28px 20px 20px;
-      background: #ffffffdd;
-      backdrop-filter: blur(8px);
-      border-radius: 24px;
-      margin-bottom: 28px;
-      box-shadow: var(--shadow);
-      border: 1px solid #f8c8d8;
+      text-align: center; padding: 28px 20px 20px; background: #ffffffdd;
+      backdrop-filter: blur(8px); border-radius: 24px; margin-bottom: 28px;
+      box-shadow: var(--shadow); border: 1px solid #f8c8d8;
     }
     .header h1 { font-size: 2.2rem; color: #b9486e; margin-bottom: 4px; }
     .subtitle { color: #c4688a; font-weight: 500; font-size: 1rem; }
@@ -81,6 +72,8 @@
     }
     .tf-btns button.active-true { background: #e8679e; color: white; border-color: #e8679e; }
     .tf-btns button.active-false { background: #b08090; color: white; border-color: #b08090; }
+    .tf-row.show-correct { background: #dcf5dc !important; border-color: #4caf50 !important; }
+    .tf-row.show-user-wrong { background: #ffe0e0 !important; border-color: #ef5350 !important; }
     .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 24px 0; }
     .btn {
       padding: 14px 32px; border-radius: 40px; border: none; font-weight: 700; font-size: 1rem;
@@ -146,7 +139,7 @@
 
 <script>
 (function() {
-  // ==================== NGÂN HÀNG CÂU HỎI ====================
+  // ==================== NGÂN HÀNG CÂU HỎI ĐẦY ĐỦ ====================
   const allMCQ = [
     // --- HYDROCARBON ---
     {id:1, chapter:'hydrocarbon', q:'Alkyne từ mấy C trở lên có đồng phân mạch carbon?', opts:['2','3','4','5'], ans:2, exp:'Từ 4C (butyne) bắt đầu có đồng phân vị trí liên kết ba.'},
@@ -180,7 +173,7 @@
     {id:27, chapter:'dx_alcohol_phenol', q:'Oxi hóa propan-2-ol bằng CuO thu được', opts:['acetone','propanal','propionic acid','ethanol'], ans:0},
     {id:28, chapter:'dx_alcohol_phenol', q:'Bậc của alcohol (CH₃)₃COH là', opts:['1','2','3','4'], ans:2},
     {id:29, chapter:'dx_alcohol_phenol', q:'Phenol + Br₂ dư tạo kết tủa trắng', opts:['2,4,6-tribromophenol','2-bromophenol','4-bromophenol','1,2-dibromobenzen'], ans:0},
-    {id:30, chapter:'dx_alcohol_phenol', q:'Ethanol được điều chế bằng', opts:['lên men tinh bột','cộng nước vào ethylene','cả A và B','thủy phân dẫn xuất halogen'], ans:2},
+    {id:30, chapter:'dx_alcohol_phenol', q:'Ethanol được điều chế bằng', opts:['lên men tinh bột','cộng nước vào ethylene','cả A và B','thủy phân dẫn xuất halogen'], ans:2, lock:true},
     {id:31, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào là chloroethane?', opts:['C₂H₅Br','C₂H₅Cl','CH₃Cl','C₆H₅Cl'], ans:1},
     {id:32, chapter:'dx_alcohol_phenol', q:'Phản ứng tách HBr từ 2-bromobutane (KOH/ethanol) cho sp chính', opts:['but-1-ene','but-2-ene','but-1-yne','butane'], ans:1, exp:'Theo quy tắc Zaitsev.'},
     {id:33, chapter:'dx_alcohol_phenol', q:'Alcohol bậc I là', opts:['CH₃OH','CH₃CHOHCH₃','(CH₃)₃COH','CH₃CH₂CHOHCH₃'], ans:0},
@@ -295,111 +288,7 @@
     {q:'Tính M của acid: 6.72g acid + 200g dd NaOH 2.24% vừa đủ.', a:'60 (CH₃COOH).'}
   ];
 
-  // ==================== KIẾN THỨC CHI TIẾT ====================
-  const knowledgeHTML = `
-    <div class="knowledge-box">
-      <h2>📚 TỔNG HỢP KIẾN THỨC HÓA 11 HK2</h2>
-      <p><em>Tổng hợp từ VnDoc, VietJack, VuiHoc, Loigiaihay – bám sát SGK Kết nối tri thức.</em></p>
-
-      <h2>⛽ CHƯƠNG 4: HYDROCARBON</h2>
-
-      <h3>1. ALKANE (CnH₂n+₂, n≥1)</h3>
-      <p><b>Tính chất vật lý:</b> Nhẹ hơn nước, không tan trong nước, tan trong dung môi hữu cơ. Nhiệt độ sôi tăng dần theo chiều tăng phân tử khối.</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li>Phản ứng thế halogen (askt): CH₄ + Cl₂ → CH₃Cl + HCl.</li>
-        <li>Phản ứng cracking: Cracking alkane mạch dài tạo alkane ngắn và alkene.</li>
-        <li>Phản ứng cháy: CnH₂n+₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O.</li>
-      </ul>
-
-      <h3>2. ALKENE (CnH₂n, n≥2) VÀ ALKYNE (CnH₂n-₂, n≥2)</h3>
-      <p><b>Tên gọi:</b> Mạch chính dài nhất chứa liên kết bội. Đuôi -ene (alkene), -yne (alkyne). Đánh số từ phía gần liên kết bội hơn.</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li><b>Phản ứng cộng:</b> Cộng H₂ (Ni, t°) tạo alkane; cộng Br₂ (mất màu dd Br₂); cộng HX (quy tắc Markovnikov: H cộng vào C có nhiều H hơn).</li>
-        <li><b>Phản ứng trùng hợp:</b> nCH₂=CH₂ → (-CH₂-CH₂-)n.</li>
-        <li><b>Phản ứng oxi hóa:</b> Alkene + KMnO₄ loãng lạnh → diol; Alkyne đầu mạch thế H bằng AgNO₃/NH₃ tạo kết tủa.</li>
-      </ul>
-      <p><b>Điều chế acetylene:</b> CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂.</p>
-
-      <h3>3. ARENE (CnH₂n-₆, n≥6) ⭐</h3>
-      <p><b>Khái niệm & Danh pháp:</b></p>
-      <ul>
-        <li>Arene (hydrocarbon thơm) chứa một hay nhiều vòng benzene.</li>
-        <li><b>Tên thay thế:</b> Tên gốc alkyl + benzene. Ví dụ: methylbenzene (toluene), ethylbenzene, vinylbenzene (styrene).</li>
-        <li><b>Gốc aryl:</b> Phenyl (C₆H₅-), Benzyl (C₆H₅CH₂-).</li>
-        <li><b>Vị trí nhóm thế:</b> ortho (o-, 1,2), meta (m-, 1,3), para (p-, 1,4).</li>
-        <li>Dãy đồng đẳng benzene: C₆H₆, C₇H₈ (toluene), C₈H₁₀ (xylene, ethylbenzene), C₉H₁₂…</li>
-      </ul>
-      <p><b>Tính chất vật lý:</b> Benzene, toluene là chất lỏng không màu, mùi thơm, không tan trong nước, nhẹ hơn nước. Naphthalene là chất rắn màu trắng. Nhóm BTX (Benzene, Toluene, Xylene) có trong dầu mỏ.</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li><b>Phản ứng thế:</b> Halogen hóa (Fe, t°): C₆H₆ + Br₂ → C₆H₅Br + HBr; Nitro hóa (HNO₃/H₂SO₄ đặc, 50°C) → nitrobenzene.</li>
-        <li><b>Quy tắc định hướng:</b> Nhóm alkyl (-CH₃) định hướng ortho-para; nhóm -NO₂, -COOH định hướng meta.</li>
-        <li><b>Phản ứng cộng:</b> C₆H₆ + 3H₂ (Ni, t° cao) → cyclohexane.</li>
-        <li><b>Oxi hóa nhánh:</b> C₆H₅CH₃ + 2KMnO₄ (t°) → C₆H₅COOK + 2MnO₂ + KOH + H₂O (tạo axit benzoic).</li>
-      </ul>
-      <p><b>Ứng dụng:</b> Sản xuất polymer (styrene→PS), dung môi, thuốc nhuộm, dược phẩm.</p>
-
-      <h2>🧴 CHƯƠNG 5: DẪN XUẤT HALOGEN – ALCOHOL – PHENOL</h2>
-
-      <h3>1. DẪN XUẤT HALOGEN</h3>
-      <p><b>Danh pháp:</b> Tên gốc hydrocarbon + halogenua (gốc-chức) hoặc số chỉ vị trí + halogen + tên hydrocarbon (thay thế). Ví dụ: CH₃CH₂Cl: ethyl chloride / chloroethane.</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li><b>Phản ứng thế:</b> R-X + NaOH → R-OH + NaX.</li>
-        <li><b>Phản ứng tách:</b> R-CH₂-CH₂-X + KOH (ancol, t°) → R-CH=CH₂ + KX + H₂O (quy tắc Zaitsev).</li>
-      </ul>
-
-      <h3>2. ALCOHOL</h3>
-      <p><b>Danh pháp:</b></p>
-      <ul>
-        <li><b>Tên thông thường (gốc-chức):</b> Alcohol + tên gốc alkyl + ic. Ví dụ: CH₃OH: methyl alcohol; C₂H₅OH: ethyl alcohol.</li>
-        <li><b>Tên thay thế:</b> Tên hydrocarbon + vị trí nhóm OH (nếu cần) + ol. Ví dụ: CH₃CH₂CH₂OH: propan-1-ol.</li>
-      </ul>
-      <p><b>Tính chất vật lý:</b> Có liên kết hydrogen liên phân tử → nhiệt độ sôi cao hơn hydrocarbon, tan tốt trong nước.</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li>Tác dụng với Na: 2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑.</li>
-        <li>Oxi hóa: Alcohol bậc I + CuO → aldehyde; bậc II → ketone.</li>
-        <li>Tách nước: C₂H₅OH (H₂SO₄ đặc, 170°C) → C₂H₄↑ + H₂O.</li>
-        <li>Polyalcohol + Cu(OH)₂ → phức xanh lam (nhận biết).</li>
-      </ul>
-
-      <h3>3. PHENOL</h3>
-      <p><b>Danh pháp:</b> Thường gọi tên riêng: phenol (C₆H₅OH), cresol (CH₃C₆H₄OH), catechol (C₆H₄(OH)₂-1,2).</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li>Tính acid yếu: C₆H₅OH + NaOH → C₆H₅ONa + H₂O. Không làm đổi màu quỳ tím.</li>
-        <li>Phản ứng thế vòng thơm: C₆H₅OH + 3Br₂ → 2,4,6-tribromophenol ↓ (trắng) + 3HBr.</li>
-      </ul>
-
-      <h2>🍋 CHƯƠNG 6: HỢP CHẤT CARBONYL – CARBOXYLIC ACID</h2>
-
-      <h3>1. HỢP CHẤT CARBONYL (ALDEHYDE & KETONE)</h3>
-      <p><b>Danh pháp:</b></p>
-      <ul>
-        <li><b>Aldehyde (RCHO):</b> Tên thay thế: hydrocarbon + al (HCHO: methanal; CH₃CHO: ethanal). Tên thông thường: formaldehyde, acetaldehyde.</li>
-        <li><b>Ketone (RCOR'):</b> Tên thay thế: hydrocarbon + on (CH₃COCH₃: propan-2-one / acetone). Tên gốc-chức: tên hai gốc alkyl + ketone.</li>
-      </ul>
-      <p><b>Tính chất hóa học:</b> Aldehyde có phản ứng tráng bạc, phản ứng với Cu(OH)₂/OH⁻ (kết tủa đỏ gạch). Ketone có phản ứng iodoform (nhóm CH₃CO-). Phản ứng khử bởi NaBH₄: aldehyde → alcohol I, ketone → alcohol II.</p>
-
-      <h3>2. CARBOXYLIC ACID</h3>
-      <p><b>Danh pháp:</b></p>
-      <ul>
-        <li><b>Tên thông thường:</b> formic acid (HCOOH), acetic acid (CH₃COOH), propionic acid (C₂H₅COOH), butyric acid, valeric acid…</li>
-        <li><b>Tên thay thế:</b> Acid + hydrocarbon + oic. Ví dụ: HCOOH: methanoic acid; CH₃COOH: ethanoic acid; C₆H₅COOH: benzoic acid.</li>
-      </ul>
-      <p><b>Tính chất vật lý:</b> Liên kết hydrogen liên phân tử mạnh → nhiệt độ sôi cao nhất trong các hợp chất hữu cơ cùng số C. Thứ tự nhiệt độ sôi: carboxylic acid > alcohol > aldehyde > ketone > hydrocarbon.</p>
-      <p><b>Tính chất hóa học:</b></p>
-      <ul>
-        <li>Tính acid: Làm đỏ quỳ tím, tác dụng với kim loại, base, muối cacbonat: 2CH₃COOH + CaCO₃ → (CH₃COO)₂Ca + CO₂↑ + H₂O.</li>
-        <li>Phản ứng ester hóa: RCOOH + R'OH ⇌(H₂SO₄ đặc, t°) RCOOR' + H₂O.</li>
-      </ul>
-    </div>
-  `;
-
-  // ==================== STATE ====================
+  // ==================== STATE & LOGIC ====================
   let currentView = 'review';
   let currentChapter = 'all';
   let filteredQuestions = { mcq:[], tf:[], short:[] };
@@ -414,10 +303,18 @@
     if (mcqPool.length < 18) mcqPool = shuffle([...allMCQ]);
     if (tfPool.length < 4) tfPool = shuffle([...allTF]);
     if (shortPool.length < 6) shortPool = shuffle([...allShort]);
+
     const mcq = shuffle(mcqPool).slice(0, 18).map(q => {
-      const idxMap = shuffle([0,1,2,3]);
-      return { ...q, opts: idxMap.map(i => q.opts[i]), ans: idxMap.indexOf(q.ans) };
+      if (q.lock) return { ...q };
+      const opts = [...q.opts];
+      const correctIndex = q.ans;
+      const indices = [0,1,2,3];
+      const shuffledIndices = shuffle(indices);
+      const newOpts = shuffledIndices.map(i => opts[i]);
+      const newAns = shuffledIndices.indexOf(correctIndex);
+      return { ...q, opts: newOpts, ans: newAns };
     });
+
     return { mcq, tf: shuffle(tfPool).slice(0, 4), short: shuffle(shortPool).slice(0, 6) };
   }
 
@@ -477,28 +374,71 @@
       card.querySelectorAll('input').forEach(r=>r.disabled=true);
       card.querySelector('.exp') && (card.querySelector('.exp').style.display = 'block');
     });
+
     document.querySelectorAll('.card[data-type="tf"]').forEach(card => {
       const qid=+card.dataset.qid; const q=filteredQuestions.tf.find(q=>q.id===qid);
       let correct=0;
       card.querySelectorAll('.tf-row').forEach((row,ii)=>{
         const trueBtn=row.querySelector('.tf-true-btn'); const falseBtn=row.querySelector('.tf-false-btn');
-        const userVal= trueBtn.classList.contains('active-true')?'true':(falseBtn.classList.contains('active-false')?'false':null);
-        const correctVal=q.items[ii].ans?'true':'false';
-        row.style.background=(userVal===correctVal)?'#dcf5dc':(userVal?'#ffe0e0':'#fff0f5');
-        if(userVal===correctVal) correct++;
-        trueBtn.disabled=falseBtn.disabled=true;
+        const userVal = trueBtn.classList.contains('active-true') ? 'true' : (falseBtn.classList.contains('active-false') ? 'false' : null);
+        const correctVal = q.items[ii].ans ? 'true' : 'false';
+
+        row.classList.remove('show-correct','show-user-wrong');
+        // Luôn đánh dấu đáp án đúng
+        if (correctVal === 'true') trueBtn.classList.add('active-true'); else falseBtn.classList.add('active-false');
+        row.classList.add('show-correct'); // nền xanh
+
+        if (userVal !== null && userVal !== correctVal) {
+          row.classList.add('show-user-wrong'); // nền đỏ nếu user chọn sai
+          row.classList.remove('show-correct');
+        } else if (userVal === correctVal) {
+          correct++;
+        }
+        trueBtn.disabled = falseBtn.disabled = true;
       });
       if(correct===4) score2+=0.5; else if(correct===3) score2+=0.25;
     });
+
     document.querySelectorAll('.card[data-type="short"] .exp').forEach(el => el.style.display = 'block');
     document.querySelectorAll('.card[data-type="short"] textarea').forEach(ta => ta.disabled = true);
+
     const total = score1+score2;
     document.getElementById('resultScore').textContent = total.toFixed(1);
     resultBox.classList.add('show');
     resultBox.scrollIntoView({behavior:'smooth'});
   }
 
-  function renderKnowledge() { dynamicContent.innerHTML = knowledgeHTML; actionBar.innerHTML = ''; }
+  function renderKnowledge() {
+    dynamicContent.innerHTML = `<div class="knowledge-box">
+      <h2>📚 TỔNG HỢP KIẾN THỨC HÓA 11 HK2</h2>
+      <p><em>Tổng hợp từ VnDoc, VietJack, VuiHoc, Loigiaihay – bám sát SGK Kết nối tri thức.</em></p>
+      <h2>⛽ CHƯƠNG 4: HYDROCARBON</h2>
+      <h3>1. ALKANE (CnH₂n+₂, n≥1)</h3>
+      <p><b>Tính chất vật lý:</b> Nhẹ hơn nước, không tan trong nước. Nhiệt độ sôi tăng theo chiều tăng phân tử khối.</p>
+      <p><b>Tính chất hóa học:</b> Phản ứng thế halogen (askt), cracking, phản ứng cháy: CnH₂n+₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O.</p>
+      <h3>2. ALKENE (CnH₂n, n≥2) VÀ ALKYNE (CnH₂n-₂, n≥2)</h3>
+      <p><b>Tính chất hóa học:</b> Cộng H₂, Br₂, HX (Markovnikov). Trùng hợp. Alkyne đầu mạch + AgNO₃/NH₃ tạo kết tủa.</p>
+      <p><b>Điều chế acetylene:</b> CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂.</p>
+      <h3>3. ARENE (CnH₂n-₆, n≥6)</h3>
+      <p><b>Danh pháp:</b> Tên gốc alkyl + benzene. Vị trí: ortho, meta, para.</p>
+      <p><b>Tính chất hóa học:</b> Phản ứng thế (halogen hóa, nitro hóa), cộng H₂ khó. Quy tắc định hướng: nhóm alkyl định hướng ortho-para; nhóm -NO₂, -COOH định hướng meta. Oxi hóa nhánh alkyl bằng KMnO₄ tạo acid benzoic.</p>
+      <h2>🧴 CHƯƠNG 5: DẪN XUẤT HALOGEN – ALCOHOL – PHENOL</h2>
+      <h3>1. DẪN XUẤT HALOGEN</h3>
+      <p>Phản ứng thế OH⁻, tách HX (Zaitsev).</p>
+      <h3>2. ALCOHOL</h3>
+      <p><b>Danh pháp:</b> Tên gốc-chức (alcohol + tên alkyl + ic) hoặc tên thay thế (hydrocarbon + ol).</p>
+      <p><b>Tính chất:</b> Tác dụng Na, oxi hóa (bậc I → aldehyde, bậc II → ketone), tách nước tạo alkene. Polyalcohol + Cu(OH)₂ → xanh lam.</p>
+      <h3>3. PHENOL</h3>
+      <p>Tính acid yếu (NaOH, không đổi màu quỳ). Phản ứng thế Br₂ tạo 2,4,6-tribromophenol (trắng).</p>
+      <h2>🍋 CHƯƠNG 6: HỢP CHẤT CARBONYL – CARBOXYLIC ACID</h2>
+      <h3>1. ALDEHYDE & KETONE</h3>
+      <p>Aldehyde tráng bạc, Cu(OH)₂/OH⁻. Ketone có iodoform (CH₃CO-). Khử bởi NaBH₄.</p>
+      <h3>2. CARBOXYLIC ACID</h3>
+      <p><b>Danh pháp:</b> Thông thường (formic, acetic, propionic…); thay thế (acid + hydrocarbon + oic).</p>
+      <p><b>Tính chất:</b> Làm đỏ quỳ, tác dụng Na, NaOH, CaCO₃. Phản ứng ester hóa: RCOOH + R'OH ⇌ RCOOR' + H₂O (H₂SO₄ đặc, t°).</p>
+    </div>`;
+    actionBar.innerHTML = '';
+  }
 
   function setView(view) {
     currentView = view;
