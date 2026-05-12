@@ -139,15 +139,15 @@
 
 <script>
 (function() {
-  // ==================== NGÂN HÀNG CÂU HỎI ĐẦY ĐỦ ====================
+  // ==================== NGÂN HÀNG CÂU HỎI ĐẦY ĐỦ (ĐÃ MỞ RỘNG) ====================
   const allMCQ = [
-    // --- HYDROCARBON ---
-    {id:1, chapter:'hydrocarbon', q:'Alkyne từ mấy C trở lên có đồng phân mạch carbon?', opts:['2','3','4','5'], ans:2, exp:'Từ 4C (butyne) bắt đầu có đồng phân vị trí liên kết ba.'},
+    // ---------- HYDROCARBON ----------
+    {id:1, chapter:'hydrocarbon', q:'Alkyne từ mấy C trở lên có đồng phân mạch carbon?', opts:['2','3','4','5'], ans:2},
     {id:2, chapter:'hydrocarbon', q:'Arene là hydrocarbon chứa vòng', opts:['benzene','cyclopropane','cyclohexane','cyclopentane'], ans:0},
     {id:3, chapter:'hydrocarbon', q:'Chất không làm mất màu dd Br₂ ở điều kiện thường?', opts:['propane','propylene','propyne','styrene'], ans:0},
     {id:4, chapter:'hydrocarbon', q:'Acetylene có công thức phân tử', opts:['C₂H₄','C₂H₆','CH₄','C₂H₂'], ans:3},
     {id:5, chapter:'hydrocarbon', q:'Propene + HCl (Markovnikov) sản phẩm chính', opts:['CH₃CHClCH₃','CH₃CH₂CH₂Cl','CH₃CH₂CHCl₂','CH₃CCl₂CH₃'], ans:0},
-    {id:6, chapter:'hydrocarbon', q:'Phát biểu sai về acetylene:', opts:['Không màu','Nặng hơn không khí','Có liên kết ba','Dùng trong hàn xì'], ans:1, exp:'Acetylene nhẹ hơn không khí (M=26).'},
+    {id:6, chapter:'hydrocarbon', q:'Phát biểu sai về acetylene:', opts:['Không màu','Nặng hơn không khí','Có liên kết ba','Dùng trong hàn xì'], ans:1},
     {id:7, chapter:'hydrocarbon', q:'Nitro hoá benzene (HNO₃/H₂SO₄, ≤50°C) thu được', opts:['nitrobenzene','1,3-dinitrobenzene','phenol','aniline'], ans:0},
     {id:8, chapter:'hydrocarbon', q:'Chất phản ứng AgNO₃/NH₃ tạo kết tủa vàng?', opts:['ethane','ethylene','acetylene','but-2-yne'], ans:2},
     {id:9, chapter:'hydrocarbon', q:'LPG chứa chủ yếu', opts:['CH₄, C₂H₆','C₃H₈, C₄H₁₀','C₂H₄, C₃H₆','C₅H₁₂, C₆H₁₄'], ans:1},
@@ -161,113 +161,164 @@
     {id:17, chapter:'hydrocarbon', q:'Công thức dãy đồng đẳng benzene', opts:['CnH₂n+₂','CnH₂n','CnH₂n-₂','CnH₂n-₆'], ans:3},
     {id:18, chapter:'hydrocarbon', q:'Benzene có cấu trúc', opts:['lục giác đều, phẳng','tứ diện','thẳng','gấp khúc'], ans:0},
     {id:19, chapter:'hydrocarbon', q:'Sản phẩm chính khi oxi hóa toluene bằng KMnO₄ (t°)', opts:['benzoic acid','benzaldehyde','phenol','cresol'], ans:0},
+    {id:20, chapter:'hydrocarbon', q:'Công thức phân tử nào không phải của alkane?', opts:['CH₄','C₂H₆','C₃H₈','C₄H₈'], ans:3},
+    {id:21, chapter:'hydrocarbon', q:'Alkene X tên 2,3-dimethylhept-2-ene. CTPT của X', opts:['C9H16','C8H20','C9H18','C8H16'], ans:2},
+    {id:22, chapter:'hydrocarbon', q:'Chất nào tác dụng với AgNO3/NH3?', opts:['Methane','Ethylene','Acetylene','But-2-yne'], ans:2},
+    {id:23, chapter:'hydrocarbon', q:'Pentane là tên theo danh pháp thay thế của', opts:['CH₃[CH₂]₃CH₃','CH₃[CH₂]₄CH₃','(CH₃)₂CHCH₂CH₃','(CH₃)₄C'], ans:1},
+    {id:24, chapter:'hydrocarbon', q:'Chất không có đồng phân hình học', opts:['CH₃CH=CHCH₃','CH₂=CHCH₂CH₃','CH₃CH=CHC₂H₅','(CH₃)₂C=CHCH₃'], ans:1},
+    {id:25, chapter:'hydrocarbon', q:'Hydrocarbon chỉ có liên kết đơn trong phân tử là', opts:['C₂H₂','C₆H₆','C₂H₄','CH₄'], ans:3},
+    {id:26, chapter:'hydrocarbon', q:'Alkyne CH₃C≡CCH₃ có tên gọi là', opts:['but-1-yne','but-2-yne','methylpropyne','methylbut-1-yne'], ans:1},
+    {id:27, chapter:'hydrocarbon', q:'Thành phần chính của khí thiên nhiên, xăng, dầu diesel là', opts:['arene','alkyne','alkane','alkene'], ans:2},
+    {id:28, chapter:'hydrocarbon', q:'Alkene có công thức chung là', opts:['CnH₂n+₂ (n≥1)','CnH₂n (n≥2)','CnH₂n (n≥3)','CnH₂n-₂ (n≥2)'], ans:1},
+    {id:29, chapter:'hydrocarbon', q:'Hợp chất nào dùng để tổng hợp PVC?', opts:['CH₂=CHCH₂Cl','CH₂=CHBr','C₆H₅Cl','CH₂=CHCl'], ans:3},
+    {id:30, chapter:'hydrocarbon', q:'Hợp chất X có KLPT 56 amu, công thức thực nghiệm CH₂. CTPT của X là', opts:['C₂H₂','C₂H₄','C₄H₈','C₄H₁₀'], ans:2},
 
-    // --- DẪN XUẤT HALOGEN - ALCOHOL - PHENOL ---
-    {id:20, chapter:'dx_alcohol_phenol', q:'Hợp chất chính trong thuốc xịt gây tê cục bộ', opts:['CO₂','chloroethane','chloromethane','HCl'], ans:1},
-    {id:21, chapter:'dx_alcohol_phenol', q:'Alcohol có nhóm OH liên kết với', opts:['C no','C không no','O','vòng benzene'], ans:0},
-    {id:22, chapter:'dx_alcohol_phenol', q:'Chất tạo dung dịch xanh lam với Cu(OH)₂', opts:['methanol','glycerol','ethanol','propan-2-ol'], ans:1},
-    {id:23, chapter:'dx_alcohol_phenol', q:'Tên thay thế của CH₃CH₂CH₂OH', opts:['propan-1-ol','propan-2-ol','butan-1-ol','pentan-1-ol'], ans:0},
-    {id:24, chapter:'dx_alcohol_phenol', q:'Phenol thể hiện tính acid khi phản ứng với', opts:['Na','NaOH','Br₂','HNO₃'], ans:1},
-    {id:25, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C₃H₈O', opts:['1','2','3','4'], ans:1},
-    {id:26, chapter:'dx_alcohol_phenol', q:'Chất không phản ứng với NaOH?', opts:['phenol','acetic acid','ethanol','chloroethane'], ans:2},
-    {id:27, chapter:'dx_alcohol_phenol', q:'Oxi hóa propan-2-ol bằng CuO thu được', opts:['acetone','propanal','propionic acid','ethanol'], ans:0},
-    {id:28, chapter:'dx_alcohol_phenol', q:'Bậc của alcohol (CH₃)₃COH là', opts:['1','2','3','4'], ans:2},
-    {id:29, chapter:'dx_alcohol_phenol', q:'Phenol + Br₂ dư tạo kết tủa trắng', opts:['2,4,6-tribromophenol','2-bromophenol','4-bromophenol','1,2-dibromobenzen'], ans:0},
-    {id:30, chapter:'dx_alcohol_phenol', q:'Ethanol được điều chế bằng', opts:['lên men tinh bột','cộng nước vào ethylene','cả A và B','thủy phân dẫn xuất halogen'], ans:2, lock:true},
-    {id:31, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào là chloroethane?', opts:['C₂H₅Br','C₂H₅Cl','CH₃Cl','C₆H₅Cl'], ans:1},
-    {id:32, chapter:'dx_alcohol_phenol', q:'Phản ứng tách HBr từ 2-bromobutane (KOH/ethanol) cho sp chính', opts:['but-1-ene','but-2-ene','but-1-yne','butane'], ans:1, exp:'Theo quy tắc Zaitsev.'},
-    {id:33, chapter:'dx_alcohol_phenol', q:'Alcohol bậc I là', opts:['CH₃OH','CH₃CHOHCH₃','(CH₃)₃COH','CH₃CH₂CHOHCH₃'], ans:0},
-    {id:34, chapter:'dx_alcohol_phenol', q:'Phenol không làm đổi màu', opts:['quỳ tím','NaOH','Na','Na₂CO₃'], ans:0},
-    {id:35, chapter:'dx_alcohol_phenol', q:'Tên gọi của C₆H₅CH₂OH', opts:['phenol','benzyl alcohol','cresol','ancol benzylic'], ans:1},
-    {id:36, chapter:'dx_alcohol_phenol', q:'Chất phản ứng với Na nhưng không phản ứng với NaOH?', opts:['phenol','ethanol','acetic acid','HCl'], ans:1},
-    {id:37, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C₄H₁₀O', opts:['3','4','5','6'], ans:1},
-    {id:38, chapter:'dx_alcohol_phenol', q:'Cồn 70° nghĩa là', opts:['70% khối lượng ethanol','70% thể tích ethanol','70 mol ethanol','70g ethanol/100mL'], ans:1},
-    {id:39, chapter:'dx_alcohol_phenol', q:'Chất nào có liên kết hydrogen liên phân tử mạnh nhất?', opts:['ethane','ethanol','ethanal','ethanoic acid'], ans:3},
-    {id:40, chapter:'dx_alcohol_phenol', q:'Phenol nguy hiểm vì', opts:['dễ cháy','độc, gây bỏng','có tính acid mạnh','phản ứng với nước'], ans:1},
-    {id:41, chapter:'dx_alcohol_phenol', q:'Khi đun nóng ethanol với H₂SO₄ đặc ở 170°C thu được', opts:['ethylene','diethyl ether','ethane','acetaldehyde'], ans:0},
-    {id:42, chapter:'dx_alcohol_phenol', q:'Glycerol có công thức', opts:['C₃H₅(OH)₃','C₂H₄(OH)₂','CH₃OH','C₃H₇OH'], ans:0},
-    {id:43, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào có đồng phân hình học?', opts:['CH₂=CHCl','CH₃CH=CHBr','CH₂=CCl₂','CH₃CH₂Cl'], ans:1},
+    // ---------- DẪN XUẤT HALOGEN - ALCOHOL - PHENOL ----------
+    {id:31, chapter:'dx_alcohol_phenol', q:'Hợp chất chính trong thuốc xịt gây tê cục bộ', opts:['CO₂','chloroethane','chloromethane','HCl'], ans:1},
+    {id:32, chapter:'dx_alcohol_phenol', q:'Alcohol có nhóm OH liên kết với', opts:['C no','C không no','O','vòng benzene'], ans:0},
+    {id:33, chapter:'dx_alcohol_phenol', q:'Chất tạo dung dịch xanh lam với Cu(OH)₂', opts:['methanol','glycerol','ethanol','propan-2-ol'], ans:1},
+    {id:34, chapter:'dx_alcohol_phenol', q:'Tên thay thế của CH₃CH₂CH₂OH', opts:['propan-1-ol','propan-2-ol','butan-1-ol','pentan-1-ol'], ans:0},
+    {id:35, chapter:'dx_alcohol_phenol', q:'Phenol thể hiện tính acid khi phản ứng với', opts:['Na','NaOH','Br₂','HNO₃'], ans:1},
+    {id:36, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C₃H₈O', opts:['1','2','3','4'], ans:1},
+    {id:37, chapter:'dx_alcohol_phenol', q:'Chất không phản ứng với NaOH?', opts:['phenol','acetic acid','ethanol','chloroethane'], ans:2},
+    {id:38, chapter:'dx_alcohol_phenol', q:'Oxi hóa propan-2-ol bằng CuO thu được', opts:['acetone','propanal','propionic acid','ethanol'], ans:0},
+    {id:39, chapter:'dx_alcohol_phenol', q:'Bậc của alcohol (CH₃)₃COH là', opts:['1','2','3','4'], ans:2},
+    {id:40, chapter:'dx_alcohol_phenol', q:'Phenol + Br₂ dư tạo kết tủa trắng', opts:['2,4,6-tribromophenol','2-bromophenol','4-bromophenol','1,2-dibromobenzen'], ans:0},
+    {id:41, chapter:'dx_alcohol_phenol', q:'Ethanol được điều chế bằng', opts:['lên men tinh bột','cộng nước vào ethylene','cả A và B','thủy phân dẫn xuất halogen'], ans:2, lock:true},
+    {id:42, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào là chloroethane?', opts:['C₂H₅Br','C₂H₅Cl','CH₃Cl','C₆H₅Cl'], ans:1},
+    {id:43, chapter:'dx_alcohol_phenol', q:'Phản ứng tách HBr từ 2-bromobutane (KOH/ethanol) cho sp chính', opts:['but-1-ene','but-2-ene','but-1-yne','butane'], ans:1},
+    {id:44, chapter:'dx_alcohol_phenol', q:'Alcohol bậc I là', opts:['CH₃OH','CH₃CHOHCH₃','(CH₃)₃COH','CH₃CH₂CHOHCH₃'], ans:0},
+    {id:45, chapter:'dx_alcohol_phenol', q:'Phenol không làm đổi màu', opts:['quỳ tím','NaOH','Na','Na₂CO₃'], ans:0},
+    {id:46, chapter:'dx_alcohol_phenol', q:'Tên gọi của C₆H₅CH₂OH', opts:['phenol','benzyl alcohol','cresol','ancol benzylic'], ans:1},
+    {id:47, chapter:'dx_alcohol_phenol', q:'Chất phản ứng với Na nhưng không phản ứng với NaOH?', opts:['phenol','ethanol','acetic acid','HCl'], ans:1},
+    {id:48, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C₄H₁₀O', opts:['3','4','5','6'], ans:1},
+    {id:49, chapter:'dx_alcohol_phenol', q:'Cồn 70° nghĩa là', opts:['70% khối lượng ethanol','70% thể tích ethanol','70 mol ethanol','70g ethanol/100mL'], ans:1},
+    {id:50, chapter:'dx_alcohol_phenol', q:'Chất nào có liên kết hydrogen liên phân tử mạnh nhất?', opts:['ethane','ethanol','ethanal','ethanoic acid'], ans:3},
+    {id:51, chapter:'dx_alcohol_phenol', q:'Phenol nguy hiểm vì', opts:['dễ cháy','độc, gây bỏng','có tính acid mạnh','phản ứng với nước'], ans:1},
+    {id:52, chapter:'dx_alcohol_phenol', q:'Khi đun nóng ethanol với H₂SO₄ đặc ở 170°C thu được', opts:['ethylene','diethyl ether','ethane','acetaldehyde'], ans:0},
+    {id:53, chapter:'dx_alcohol_phenol', q:'Glycerol có công thức', opts:['C₃H₅(OH)₃','C₂H₄(OH)₂','CH₃OH','C₃H₇OH'], ans:0},
+    {id:54, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào có đồng phân hình học?', opts:['CH₂=CHCl','CH₃CH=CHBr','CH₂=CCl₂','CH₃CH₂Cl'], ans:1},
+    {id:55, chapter:'dx_alcohol_phenol', q:'Đun nóng CH₃-CH(Br)-CH₂-CH₃ với NaOH/ethanol, sản phẩm chính là', opts:['CH₃-CH=CH-CH₃','CH₃-CH=CH-CH₂-CH₃','CH₃-CH=CH₂','CH₂=CH-CH₂-CH₃'], ans:0},
+    {id:56, chapter:'dx_alcohol_phenol', q:'Phenol không phản ứng với chất nào?', opts:['NaCl','Na','Br₂','NaOH'], ans:0},
+    {id:57, chapter:'dx_alcohol_phenol', q:'Phương pháp điều chế ethanol từ tinh bột là phương pháp', opts:['từ ethyl chloride','sinh hóa (lên men)','từ ethylene','từ aldehyde acetic'], ans:1},
+    {id:58, chapter:'dx_alcohol_phenol', q:'Alcohol nào không tách nước tạo alkene?', opts:['CH₃CH(OH)CH₃','CH₃OH','CH₃CH₂CH₂OH','CH₃CH₂OH'], ans:1},
+    {id:59, chapter:'dx_alcohol_phenol', q:'Xăng E5 RON 92 chứa hàm lượng ethanol là', opts:['92%','9%','10%','5%'], ans:3},
+    {id:60, chapter:'dx_alcohol_phenol', q:'Hợp chất nào sau đây là alcohol đa chức?', opts:['HOCH₂-CH₂OH','CH₃CH₂OH','CH₂=CH-CH₂OH','HO-CH=CH-OH'], ans:0},
+    {id:61, chapter:'dx_alcohol_phenol', q:'Công thức phân tử ethanol là', opts:['C₂H₄O₂','C₂H₄O','C₂H₆','C₂H₆O'], ans:3},
+    {id:62, chapter:'dx_alcohol_phenol', q:'Chất X không phải là Phenol. Vậy X là', opts:['C₆H₅OH','C₆H₅CH₂OH','CH₃-C₆H₄-OH','HO-C₆H₄-OH'], ans:1},
+    {id:63, chapter:'dx_alcohol_phenol', q:'Hiện tượng khi nhỏ nước bromine vào dung dịch phenol', opts:['mất màu','xuất hiện kết tủa trắng','kết tủa trắng sau tan dần','kết tủa trắng và mất màu nước brom'], ans:3},
+    {id:64, chapter:'dx_alcohol_phenol', q:'Phát biểu không đúng về tính chất vật lí của phenol', opts:['Ít tan trong nước lạnh','Tan tốt trong dung môi hữu cơ','Độc, gây bỏng','Khi đun nóng, phenol không tan trong nước'], ans:3},
+    {id:65, chapter:'dx_alcohol_phenol', q:'Hợp chất gây thủng tầng ozone là', opts:['HF','HFO','HFC','CFC'], ans:3},
+    {id:66, chapter:'dx_alcohol_phenol', q:'Danh pháp IUPAC của ClCH₂CH(CH₃)CHClCH₃ là', opts:['1,3-dichloro-2-methylbutane','2,4-dichloro-3-methylbutane','1,3-dichloropentane','2,4-dichloro-2-methylbutane'], ans:0},
+    {id:67, chapter:'dx_alcohol_phenol', q:'Cồn 70° là dung dịch ethyl alcohol, mô tả đúng là', opts:['100g dd có 70mL ethanol','100mL dd có 70mL ethanol','1000g dd có 70 mol ethanol','1000mL dd có 70 mol ethanol'], ans:1},
+    {id:68, chapter:'dx_alcohol_phenol', q:'Số đồng phân C₈H₁₀O (dẫn xuất benzen) tách nước tạo monomer, không tác dụng NaOH', opts:['1','4','3','2'], ans:3},
+    {id:69, chapter:'dx_alcohol_phenol', q:'Nguyên nhân phenol dễ thế bromine hơn benzene là do', opts:['phenol tan trong nước','phenol có tính acid yếu','ảnh hưởng của -OH đến vòng benzen','ảnh hưởng của vòng benzen đến -OH'], ans:2},
+    {id:70, chapter:'dx_alcohol_phenol', q:'Chất tan tốt nhất trong nước: hexane, bromoethane, ethanol, phenol', opts:['hexane','bromoethane','ethanol','phenol'], ans:2},
 
-    // --- CARBONYL - CARBOXYLIC ACID ---
-    {id:50, chapter:'carbonyl_acid', q:'Chất tham gia phản ứng tráng bạc', opts:['CH₃OH','CH₃CHO','CH₃COCH₃','CH₃COOH'], ans:1},
-    {id:51, chapter:'carbonyl_acid', q:'Tên thay thế của HCOOH', opts:['formic acid','methanoic acid','ethanoic acid','propanoic acid'], ans:1},
-    {id:52, chapter:'carbonyl_acid', q:'Nhiệt độ sôi cao nhất:', opts:['acetone','ethyl chloride','ethanol','acetic acid'], ans:3},
-    {id:53, chapter:'carbonyl_acid', q:'Acetic acid không tác dụng với', opts:['Cu','NaOH','Na₂CO₃','C₂H₅OH (H₂SO₄)'], ans:0},
-    {id:54, chapter:'carbonyl_acid', q:'CT chung acid no, đơn chức, mạch hở', opts:['CnH₂nO₂ (n≥1)','CnH₂n+₂O₂ (n≥2)','CnH₂n-₂O (n≥2)','CnH₂n-₂O₂ (n≥3)'], ans:0},
-    {id:55, chapter:'carbonyl_acid', q:'Phản ứng ester hóa xảy ra giữa', opts:['acid và base','acid và alcohol','aldehyde và alcohol','acid và muối'], ans:1},
-    {id:56, chapter:'carbonyl_acid', q:'Chất dùng ngâm xác động vật', opts:['dd HCHO','dd CH₃CHO','dd CH₃COOH','dd CH₃OH'], ans:0},
-    {id:57, chapter:'carbonyl_acid', q:'Oxi hóa không hoàn toàn ethylene thu được', opts:['ethanol','ethanal','acetic acid','ethylene glycol'], ans:1},
-    {id:58, chapter:'carbonyl_acid', q:'Acetone có công thức', opts:['CH₃COCH₃','CH₃CH₂CHO','HCHO','CH₃COOH'], ans:0},
-    {id:59, chapter:'carbonyl_acid', q:'Thuốc thử Tollens dùng nhận biết', opts:['aldehyde','ketone','alcohol','acid'], ans:0},
-    {id:60, chapter:'carbonyl_acid', q:'Phản ứng iodoform dùng nhận biết', opts:['nhóm CH₃CO-','nhóm -CHO','nhóm -OH','nhóm -COOH'], ans:0},
-    {id:61, chapter:'carbonyl_acid', q:'Giấm ăn chứa acid nào?', opts:['HCOOH','CH₃COOH','C₂H₅COOH','C₃H₇COOH'], ans:1},
-    {id:62, chapter:'carbonyl_acid', q:'Cặn đá vôi trong ấm đun nước có thể xử lý bằng', opts:['nước','giấm ăn','muối','cồn'], ans:1},
-    {id:63, chapter:'carbonyl_acid', q:'Số đồng phân acid C₄H₈O₂', opts:['1','2','3','4'], ans:1},
-    {id:64, chapter:'carbonyl_acid', q:'Chất vừa có tính oxi hóa vừa có tính khử?', opts:['aldehyde','ketone','carboxylic acid','alcohol'], ans:0},
-    {id:65, chapter:'carbonyl_acid', q:'Formalin là dung dịch', opts:['HCHO 37-40%','CH₃CHO','CH₃COCH₃','C₂H₅OH'], ans:0},
-    {id:66, chapter:'carbonyl_acid', q:'0.1 mol CH₃CHO tráng bạc hoàn toàn thu được Ag', opts:['10.8g','21.6g','32.4g','43.2g'], ans:1},
-    {id:67, chapter:'carbonyl_acid', q:'Sản phẩm khử aldehyde bằng NaBH₄ là', opts:['alcohol bậc I','alcohol bậc II','ketone','acid'], ans:0},
-    {id:68, chapter:'carbonyl_acid', q:'Chất không phản ứng với NaHCO₃?', opts:['CH₃COOH','HCOOH','C₂H₅OH','citric acid'], ans:2},
-    {id:69, chapter:'carbonyl_acid', q:'Dung dịch acetic acid 2-5% gọi là', opts:['giấm ăn','formalin','cồn','nước muối'], ans:0},
-    {id:70, chapter:'carbonyl_acid', q:'Tên gọi của CH₃CH(CH₃)CH₂COOH', opts:['3-methylbutanoic acid','2-methylpropanoic acid','pentanoic acid','2-methylpentanoic acid'], ans:0}
+    // ---------- CARBONYL - CARBOXYLIC ACID ----------
+    {id:71, chapter:'carbonyl_acid', q:'Chất tham gia phản ứng tráng bạc', opts:['CH₃OH','CH₃CHO','CH₃COCH₃','CH₃COOH'], ans:1},
+    {id:72, chapter:'carbonyl_acid', q:'Tên thay thế của HCOOH', opts:['formic acid','methanoic acid','ethanoic acid','propanoic acid'], ans:1},
+    {id:73, chapter:'carbonyl_acid', q:'Nhiệt độ sôi cao nhất:', opts:['acetone','ethyl chloride','ethanol','acetic acid'], ans:3},
+    {id:74, chapter:'carbonyl_acid', q:'Acetic acid không tác dụng với', opts:['Cu','NaOH','Na₂CO₃','C₂H₅OH (H₂SO₄)'], ans:0},
+    {id:75, chapter:'carbonyl_acid', q:'CT chung acid no, đơn chức, mạch hở', opts:['CnH₂nO₂ (n≥1)','CnH₂n+₂O₂ (n≥2)','CnH₂n-₂O (n≥2)','CnH₂n-₂O₂ (n≥3)'], ans:0},
+    {id:76, chapter:'carbonyl_acid', q:'Phản ứng ester hóa xảy ra giữa', opts:['acid và base','acid và alcohol','aldehyde và alcohol','acid và muối'], ans:1},
+    {id:77, chapter:'carbonyl_acid', q:'Chất dùng ngâm xác động vật', opts:['dd HCHO','dd CH₃CHO','dd CH₃COOH','dd CH₃OH'], ans:0},
+    {id:78, chapter:'carbonyl_acid', q:'Oxi hóa không hoàn toàn ethylene thu được', opts:['ethanol','ethanal','acetic acid','ethylene glycol'], ans:1},
+    {id:79, chapter:'carbonyl_acid', q:'Acetone có công thức', opts:['CH₃COCH₃','CH₃CH₂CHO','HCHO','CH₃COOH'], ans:0},
+    {id:80, chapter:'carbonyl_acid', q:'Thuốc thử Tollens dùng nhận biết', opts:['aldehyde','ketone','alcohol','acid'], ans:0},
+    {id:81, chapter:'carbonyl_acid', q:'Phản ứng iodoform dùng nhận biết', opts:['nhóm CH₃CO-','nhóm -CHO','nhóm -OH','nhóm -COOH'], ans:0},
+    {id:82, chapter:'carbonyl_acid', q:'Giấm ăn chứa acid nào?', opts:['HCOOH','CH₃COOH','C₂H₅COOH','C₃H₇COOH'], ans:1},
+    {id:83, chapter:'carbonyl_acid', q:'Cặn đá vôi trong ấm đun nước có thể xử lý bằng', opts:['nước','giấm ăn','muối','cồn'], ans:1},
+    {id:84, chapter:'carbonyl_acid', q:'Số đồng phân acid C₄H₈O₂', opts:['1','2','3','4'], ans:1},
+    {id:85, chapter:'carbonyl_acid', q:'Chất vừa có tính oxi hóa vừa có tính khử?', opts:['aldehyde','ketone','carboxylic acid','alcohol'], ans:0},
+    {id:86, chapter:'carbonyl_acid', q:'Formalin là dung dịch', opts:['HCHO 37-40%','CH₃CHO','CH₃COCH₃','C₂H₅OH'], ans:0},
+    {id:87, chapter:'carbonyl_acid', q:'0.1 mol CH₃CHO tráng bạc hoàn toàn thu được Ag', opts:['10.8g','21.6g','32.4g','43.2g'], ans:1},
+    {id:88, chapter:'carbonyl_acid', q:'Sản phẩm khử aldehyde bằng NaBH₄ là', opts:['alcohol bậc I','alcohol bậc II','ketone','acid'], ans:0},
+    {id:89, chapter:'carbonyl_acid', q:'Chất không phản ứng với NaHCO₃?', opts:['CH₃COOH','HCOOH','C₂H₅OH','citric acid'], ans:2},
+    {id:90, chapter:'carbonyl_acid', q:'Dung dịch acetic acid 2-5% gọi là', opts:['giấm ăn','formalin','cồn','nước muối'], ans:0},
+    {id:91, chapter:'carbonyl_acid', q:'Tên gọi của CH₃CH(CH₃)CH₂COOH', opts:['3-methylbutanoic acid','2-methylpropanoic acid','pentanoic acid','2-methylpentanoic acid'], ans:0},
+    {id:92, chapter:'carbonyl_acid', q:'Carboxylic acid nào mạch phân nhánh, làm mất màu Br₂?', opts:['Propanoic acid','Methacrylic acid','Acrylic acid','Butanoic acid'], ans:1},
+    {id:93, chapter:'carbonyl_acid', q:'Nhiệt độ sôi cao nhất?', opts:['Formic acid','Ethyl alcohol','Acetic acid','Ethane'], ans:2},
+    {id:94, chapter:'carbonyl_acid', q:'Dãy các chất đều tác dụng AgNO₃/NH₃', opts:['Acetaldehyde, but-1-yne, ethylene','Acetaldehyde, acetylene, but-2-yne','Formaldehyde, vinylacetylene, propyne','Formaldehyde, acetylene, ethylene'], ans:2},
+    {id:95, chapter:'carbonyl_acid', q:'Chất X trong phản ứng tráng bạc (tạo lớp bạc sáng) là', opts:['Butanone','Ethanol','Formaldehyde','Glycerol'], ans:2},
+    {id:96, chapter:'carbonyl_acid', q:'Tên gọi CH₃-CH(C₂H₅)-CH₂-CHO là', opts:['3-ethylbutanal','3-methylpentanal','3-methylbutanal','3-ethylpentanal'], ans:1},
+    {id:97, chapter:'carbonyl_acid', q:'Nồng độ % formaldehyde trong formalin (1.97g + AgNO₃/NH₃ → 10.8g Ag) là', opts:['49%','40%','50%','38.07%'], ans:3},
+    {id:98, chapter:'carbonyl_acid', q:'Tên gọi của HCOOH là', opts:['formic acid','acetic acid','propionic acid','acrylic acid'], ans:0},
+    {id:99, chapter:'carbonyl_acid', q:'Để trung hòa 0.2 mol hỗn hợp 2 acid cần 0.3 mol NaOH. Hỗn hợp gồm', opts:['2 acid đồng đẳng','1 acid đơn chức, 1 acid 2 chức','2 acid đa chức','1 acid đơn chức, 1 acid đa chức'], ans:1},
+    {id:100, chapter:'carbonyl_acid', q:'Tổng hệ số cân bằng phản ứng acetaldehyde tạo iodoform', opts:['14','18','28','16'], ans:2},
+    {id:101, chapter:'carbonyl_acid', q:'CH₃CHO + Br₂ + H₂O → CH₃COOH + 2HBr. Vai trò của CH₃CHO là', opts:['chất oxi hóa','chất khử','vừa oxi hóa vừa khử','không thay đổi'], ans:1}
   ];
 
   const allTF = [
-    {id:101, chapter:'hydrocarbon', text:'But-1-ene và but-2-ene + KMnO₄ (t° thường) tạo diol.',
+    {id:201, chapter:'hydrocarbon', text:'But-1-ene và but-2-ene + KMnO₄ (t° thường) tạo diol.',
      items:[
        {text:'Một diol chứa hai nhóm alcohol bậc một.', ans:false},
        {text:'Một diol chứa một nhóm alcohol bậc một và một bậc hai.', ans:true},
        {text:'Một diol chứa hai nhóm alcohol bậc hai.', ans:true},
        {text:'Cả hai alkene đều có đồng phân cis-trans.', ans:false}
      ]},
-    {id:102, chapter:'dx_alcohol_phenol', text:'Menthol (C₁₀H₂₀O) trong bạc hà.',
+    {id:202, chapter:'dx_alcohol_phenol', text:'Menthol (C₁₀H₂₀O) trong bạc hà.',
      items:[
        {text:'Menthol là alcohol no, đơn chức.', ans:false},
        {text:'CTPT menthol là C₁₀H₂₀O.', ans:true},
        {text:'Menthol là alcohol bậc 3.', ans:false},
        {text:'%O trong menthol là 10.256%.', ans:true}
      ]},
-    {id:103, chapter:'dx_alcohol_phenol', text:'X (C₈H₈O₂) + 2NaOH → Y + 2H₂O.',
+    {id:203, chapter:'dx_alcohol_phenol', text:'X (C₈H₈O₂) + 2NaOH → Y + 2H₂O.',
      items:[
        {text:'X có 5 liên kết pi.', ans:false},
        {text:'Y là phenol đa chức.', ans:true},
        {text:'Y có 6 nguyên tử H.', ans:false},
        {text:'X làm mất màu nước bromine.', ans:true}
      ]},
-    {id:104, chapter:'carbonyl_acid', text:'Hợp chất X (C₇H₁₆O, ketone).',
+    {id:204, chapter:'carbonyl_acid', text:'Hợp chất X (C₇H₁₆O, ketone).',
      items:[
        {text:'CTPT X là C₇H₁₆O.', ans:true},
        {text:'Tên X là 2-methylhexan-5-one.', ans:true},
        {text:'X phản ứng với Tollens.', ans:false},
        {text:'X có nhóm chức carbonyl.', ans:true}
      ]},
-    {id:105, chapter:'hydrocarbon', text:'Hydrogen hóa alkene/alkyne (Ni, t°).',
+    {id:205, chapter:'hydrocarbon', text:'Hydrogen hóa alkene/alkyne (Ni, t°).',
      items:[
        {text:'Acetylene + H₂ (Lindlar) → ethane.', ans:false},
        {text:'Propylene + H₂ → propane.', ans:true},
        {text:'Isobutylene + H₂ → butane.', ans:false},
        {text:'But-1-ene và but-2-yne cộng H₂ dư cho cùng sản phẩm.', ans:true}
      ]},
-    {id:106, chapter:'dx_alcohol_phenol', text:'Thí nghiệm thủy phân bromoethane.',
+    {id:206, chapter:'dx_alcohol_phenol', text:'Thí nghiệm thủy phân bromoethane.',
      items:[
        {text:'Có thể thay NaOH bằng KOH.', ans:true},
        {text:'HNO₃ để trung hòa kiềm dư.', ans:true},
        {text:'Bước 1 dùng AgNO₃ kiểm tra ion Br⁻.', ans:true},
        {text:'Kết tủa cuối cùng là AgBr màu trắng.', ans:true}
      ]},
-    {id:107, chapter:'dx_alcohol_phenol', text:'Picric acid từ phenol + HNO₃.',
+    {id:207, chapter:'dx_alcohol_phenol', text:'Picric acid từ phenol + HNO₃.',
      items:[
        {text:'Phản ứng chứng minh ảnh hưởng -OH lên vòng benzen.', ans:true},
        {text:'Picric acid là chất rắn màu trắng.', ans:false},
        {text:'Picric acid có tính acid mạnh hơn phenol.', ans:true},
        {text:'Picric acid dùng làm thuốc nổ, thuộc da.', ans:true}
      ]},
-    {id:108, chapter:'carbonyl_acid', text:'Phát biểu về aldehyde/ketone.',
+    {id:208, chapter:'carbonyl_acid', text:'Phát biểu về aldehyde/ketone.',
      items:[
        {text:'Aldehyde vừa có tính oxi hóa vừa có tính khử.', ans:true},
        {text:'Ketone phản ứng với Tollens.', ans:false},
        {text:'Tất cả aldehyde, ketone đều có phản ứng iodoform.', ans:false},
        {text:'Bôi giấm khi bị côn trùng cắn.', ans:false}
+     ]},
+    {id:209, chapter:'dx_alcohol_phenol', text:'Xylitol (C₅H₁₂O₅) là chất tạo ngọt tự nhiên.',
+     items:[
+       {text:'Xylitol chứa 5 nhóm OH.', ans:true},
+       {text:'Xylitol tạo dung dịch xanh lam với Cu(OH)₂.', ans:true},
+       {text:'Xylitol có công thức dạng CnH₂nO₅.', ans:false},
+       {text:'%C trong xylitol là 39,47%.', ans:true}
+     ]},
+    {id:210, chapter:'hydrocarbon', text:'Các alkane kém hoạt động, phản ứng chính là thế, cracking, reforming, cháy.',
+     items:[
+       {text:'Alkane cháy tỏa nhiều nhiệt, dùng làm nhiên liệu.', ans:true},
+       {text:'Ethane và neopentane đều cho 1 sản phẩm monochloro duy nhất.', ans:false},
+       {text:'Có thể điều chế benzene từ heptane qua reforming.', ans:true},
+       {text:'Tất cả alkane thể khí đều có thể cracking.', ans:true}
      ]}
   ];
 
@@ -285,7 +336,19 @@
     {q:'Lên men 5L ethanol 9.2° (D=0.8) H=80% thu m g acid?', a:'384g.'},
     {q:'Bình gas 12kg (propane:butane=1:2 mol). Nhiệt tỏa ra?', a:'597600 kJ, dùng được ~47.8 ngày.'},
     {q:'Cho 4.6g alcohol no đơn chức X + Na dư → 1.2395 L H₂ (đkc). X là?', a:'C₂H₅OH (ethanol).'},
-    {q:'Tính M của acid: 6.72g acid + 200g dd NaOH 2.24% vừa đủ.', a:'60 (CH₃COOH).'}
+    {q:'Tính M của acid: 6.72g acid + 200g dd NaOH 2.24% vừa đủ.', a:'60 (CH₃COOH).'},
+    {q:'Năng lượng liên kết C-F trong fluoroethane là bao nhiêu? (Eb C-H 413, C=C 614, H-F 565, C-C 347 kJ/mol)', a:'485 kJ/mol.'},
+    {q:'Đun nóng dẫn xuất halogen C₅H₁₁Br trong KOH/ethanol thu 2-methylbut-2-ene. Số CTCT của X?', a:'2.'},
+    {q:'Cho 7,8g acetylene + AgNO₃/NH₃ dư thu m gam kết tủa. m = ?', a:'72g (Ag₂C₂).'},
+    {q:'Có bao nhiêu chất phản ứng với AgNO₃/NH₃: (CHO)₂, C₄H₂, CH₃OH, HCHO, CH₃OCH₃, CH₃CHO?', a:'4 ((CHO)₂, C₄H₂, HCHO, CH₃CHO).'},
+    {q:'Cho 4.5g HCHO tráng bạc hoàn toàn thu m gam Ag. m = ?', a:'64.8g.'},
+    {q:'Chất X có công thức khung phân tử ... Trong X có bao nhiêu nguyên tử H?', a:'10 (ví dụ).'},
+    {q:'Xăng E5 chứa bao nhiêu % ethanol?', a:'5%.'},
+    {q:'Từ 1 tấn toluene điều chế TNT (2,4,6-trinitrotoluene) hiệu suất 62% thu được bao nhiêu kg?', a:'≈ 1410 kg.'},
+    {q:'Tính % khối lượng vanillin trong mẫu (0.12g mẫu + 7.82mL NaOH 0.1M).', a:'≈ 99.2% (đạt tiêu chuẩn).'},
+    {q:'Hỗn hợp ethanol và phenol + Na dư → 3.7185L H₂ (đkc); + Br₂ dư → 19.86g kết tủa. % phenol?', a:'≈ 70%.'},
+    {q:'0.1 mol methyl salicylate + NaOH dư, số mol NaOH phản ứng?', a:'0.2 mol (ester của phenol và acid).'},
+    {q:'Acetone (10m³, D=0.7844) → methacrylic acid, mỗi giai đoạn H=80%. Tính thể tích methacrylic acid (D=1.015).', a:'≈ 5.18 m³.'}
   ];
 
   // ==================== STATE & LOGIC ====================
@@ -382,18 +445,13 @@
         const trueBtn=row.querySelector('.tf-true-btn'); const falseBtn=row.querySelector('.tf-false-btn');
         const userVal = trueBtn.classList.contains('active-true') ? 'true' : (falseBtn.classList.contains('active-false') ? 'false' : null);
         const correctVal = q.items[ii].ans ? 'true' : 'false';
-
         row.classList.remove('show-correct','show-user-wrong');
-        // Luôn đánh dấu đáp án đúng
         if (correctVal === 'true') trueBtn.classList.add('active-true'); else falseBtn.classList.add('active-false');
-        row.classList.add('show-correct'); // nền xanh
-
+        row.classList.add('show-correct');
         if (userVal !== null && userVal !== correctVal) {
-          row.classList.add('show-user-wrong'); // nền đỏ nếu user chọn sai
+          row.classList.add('show-user-wrong');
           row.classList.remove('show-correct');
-        } else if (userVal === correctVal) {
-          correct++;
-        }
+        } else if (userVal === correctVal) correct++;
         trueBtn.disabled = falseBtn.disabled = true;
       });
       if(correct===4) score2+=0.5; else if(correct===3) score2+=0.25;
@@ -401,9 +459,7 @@
 
     document.querySelectorAll('.card[data-type="short"] .exp').forEach(el => el.style.display = 'block');
     document.querySelectorAll('.card[data-type="short"] textarea').forEach(ta => ta.disabled = true);
-
-    const total = score1+score2;
-    document.getElementById('resultScore').textContent = total.toFixed(1);
+    document.getElementById('resultScore').textContent = (score1+score2).toFixed(1);
     resultBox.classList.add('show');
     resultBox.scrollIntoView({behavior:'smooth'});
   }
