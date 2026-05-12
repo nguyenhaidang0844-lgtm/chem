@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>Ôn tập & Kiểm tra Hóa 11 HK2 | Cherry Blossom</title>
+  <title>Ôn tập Hóa 11 HK2 | Cherry Blossom</title>
   <style>
     :root {
       --bg: #fff5f7;
@@ -16,28 +16,17 @@
       --shadow: 0 8px 24px rgba(232, 103, 158, 0.12);
       --radius: 18px;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: linear-gradient(170deg, #fff0f5 0%, #ffe4ec 40%, #fce4ec 100%);
       color: var(--text);
       min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
     }
-    body::before, body::after {
-      content: "🌸"; font-size: 40px; position: fixed; top: -50px; opacity: 0.25; z-index: 0;
-    }
-    body::before { left: 10%; animation: fall1 8s infinite linear; }
-    body::after { left: 80%; animation: fall2 10s infinite linear; }
-    @keyframes fall1 { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(360deg); } }
-    @keyframes fall2 { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(-360deg); } }
     .container {
       max-width: 1000px;
       margin: 0 auto;
       padding: 20px;
-      position: relative;
-      z-index: 1;
     }
     .header {
       text-align: center;
@@ -50,7 +39,7 @@
       border: 1px solid #f8c8d8;
     }
     .header h1 { font-size: 2.2rem; color: #b9486e; margin-bottom: 4px; }
-    .subtitle { color: #c4688a; font-weight: 500; font-size: 1rem; margin-top: 4px; }
+    .subtitle { color: #c4688a; font-weight: 500; font-size: 1rem; }
     .tab-nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
     .tab-btn {
       padding: 12px 24px; border-radius: 40px; border: 2px solid #e8a0b8; background: white;
@@ -67,8 +56,6 @@
       background: white; border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
       box-shadow: var(--shadow); border: 1px solid #f8c8d8; transition: 0.2s;
     }
-    .card.correct-card { border-left: 6px solid var(--green); background: #f4fef4; }
-    .card.wrong-card { border-left: 6px solid var(--red); background: #fff5f5; }
     .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .q-num { background: var(--pink-light); color: #b9486e; font-weight: 800; padding: 4px 14px; border-radius: 20px; font-size: 0.9rem; }
     .q-text { font-weight: 600; color: #4a2c3a; font-size: 1rem; }
@@ -87,8 +74,6 @@
       display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 10px;
       border: 1px solid #f0c8d8; background: #fefbfc;
     }
-    .tf-row.selected-true { background: #ffe0ec; border-color: #e8679e; }
-    .tf-row.selected-false { background: #f5e0e0; border-color: #dba0a0; }
     .tf-label { font-weight: 700; min-width: 24px; color: #b9486e; }
     .tf-btns button {
       padding: 5px 16px; border-radius: 16px; border: 1px solid #e0a0b8; background: white;
@@ -112,10 +97,6 @@
     }
     .result-box.show { display: block; }
     .big-score { font-size: 3rem; font-weight: 800; color: #e8679e; }
-    .timer {
-      background: #4a2c3a; color: white; padding: 8px 24px; border-radius: 30px;
-      font-weight: 700; font-size: 1.1rem; display: inline-block; margin: 8px 0 16px;
-    }
     .knowledge-box {
       background: white; border-radius: var(--radius); padding: 24px;
       max-height: 70vh; overflow-y: auto; line-height: 1.7;
@@ -127,16 +108,15 @@
     .knowledge-box table { width: 100%; border-collapse: collapse; margin: 12px 0; }
     .knowledge-box th, .knowledge-box td { border: 1px solid #f0c8d8; padding: 8px; text-align: left; }
     .knowledge-box th { background: #fff0f5; }
-    .knowledge-box p { margin-bottom: 10px; }
     footer { text-align: center; margin-top: 32px; color: #b08090; font-size: 0.85rem; }
-    @media (max-width: 600px) {
+    @media (max-width:600px) {
       .tab-btn { padding: 10px 16px; font-size: 0.85rem; }
       .header h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
-<div class="container" id="app">
+<div class="container">
   <div class="header">
     <h1>🌸 Hóa 11 HK2 – Ôn Thi Nhẹ Nhàng</h1>
     <p class="subtitle">Ngân hàng đề chuẩn Bộ GD · Mỗi lần làm là một bộ đề mới</p>
@@ -144,7 +124,6 @@
 
   <div class="tab-nav">
     <button class="tab-btn active" data-view="review">📖 Ôn tập</button>
-    <button class="tab-btn" data-view="exam">📝 Kiểm tra 45ph</button>
     <button class="tab-btn" data-view="knowledge">📚 Kiến thức</button>
   </div>
 
@@ -167,7 +146,7 @@
 
 <script>
 (function() {
-  // ==================== NGÂN HÀNG CÂU HỎI ĐẦY ĐỦ ====================
+  // ==================== NGÂN HÀNG CÂU HỎI ====================
   const allMCQ = [
     // --- HYDROCARBON ---
     {id:1, chapter:'hydrocarbon', q:'Alkyne từ mấy C trở lên có đồng phân mạch carbon?', opts:['2','3','4','5'], ans:2, exp:'Từ 4C (butyne) bắt đầu có đồng phân vị trí liên kết ba.'},
@@ -320,7 +299,7 @@
   const knowledgeHTML = `
     <div class="knowledge-box">
       <h2>📚 TỔNG HỢP KIẾN THỨC HÓA 11 HK2</h2>
-      <p><em>Bám sát chương trình mới, tổng hợp từ SGK, VnDoc, VietJack, VuiHoc.</em></p>
+      <p><em>Tổng hợp từ VnDoc, VietJack, VuiHoc, Loigiaihay – bám sát SGK Kết nối tri thức.</em></p>
 
       <h2>⛽ CHƯƠNG 4: HYDROCARBON</h2>
 
@@ -328,24 +307,31 @@
       <p><b>Tính chất vật lý:</b> Nhẹ hơn nước, không tan trong nước, tan trong dung môi hữu cơ. Nhiệt độ sôi tăng dần theo chiều tăng phân tử khối.</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
-        <li>Phản ứng thế halogen (askt): CH₄ + Cl₂ → CH₃Cl + HCl (theo cơ chế gốc tự do).</li>
-        <li>Phản ứng cracking: Cracking alkane mạch dài tạo alkane ngắn và alkene (t° cao, xt).</li>
-        <li>Phản ứng cháy: CnH₂n+₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O, tỏa nhiều nhiệt.</li>
+        <li>Phản ứng thế halogen (askt): CH₄ + Cl₂ → CH₃Cl + HCl.</li>
+        <li>Phản ứng cracking: Cracking alkane mạch dài tạo alkane ngắn và alkene.</li>
+        <li>Phản ứng cháy: CnH₂n+₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O.</li>
       </ul>
 
       <h3>2. ALKENE (CnH₂n, n≥2) VÀ ALKYNE (CnH₂n-₂, n≥2)</h3>
-      <p><b>Tính chất vật lý:</b> Tương tự alkane, nhẹ hơn nước, không màu. Alkene từ C₂ đến C₄ là chất khí.</p>
+      <p><b>Tên gọi:</b> Mạch chính dài nhất chứa liên kết bội. Đuôi -ene (alkene), -yne (alkyne). Đánh số từ phía gần liên kết bội hơn.</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
-        <li><b>Phản ứng cộng:</b> Cộng H₂ (Ni, t°) tạo alkane; cộng Br₂ (mất màu dd Br₂); cộng HX (quy tắc Markovnikov: H cộng vào C có nhiều H hơn). Ví dụ: CH₂=CH₂ + Br₂ → CH₂Br-CH₂Br.</li>
-        <li><b>Phản ứng trùng hợp:</b> nCH₂=CH₂ → (-CH₂-CH₂-)n (polyethylene).</li>
-        <li><b>Phản ứng oxi hóa:</b> Alkene + KMnO₄ loãng lạnh → diol; Alkyne đầu mạch thế H bằng AgNO₃/NH₃ tạo kết tủa (R-C≡C-Ag).</li>
+        <li><b>Phản ứng cộng:</b> Cộng H₂ (Ni, t°) tạo alkane; cộng Br₂ (mất màu dd Br₂); cộng HX (quy tắc Markovnikov: H cộng vào C có nhiều H hơn).</li>
+        <li><b>Phản ứng trùng hợp:</b> nCH₂=CH₂ → (-CH₂-CH₂-)n.</li>
+        <li><b>Phản ứng oxi hóa:</b> Alkene + KMnO₄ loãng lạnh → diol; Alkyne đầu mạch thế H bằng AgNO₃/NH₃ tạo kết tủa.</li>
       </ul>
       <p><b>Điều chế acetylene:</b> CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂.</p>
 
-      <h3>3. ARENE (HYDROCARBON THƠM)</h3>
-      <p><b>Dãy đồng đẳng:</b> CnH₂n-₆ (n≥6). Tiêu biểu: benzene (C₆H₆), toluene (C₆H₅CH₃), styrene (C₆H₅CH=CH₂).</p>
-      <p><b>Tính chất vật lý:</b> Benzene, toluene là chất lỏng không màu, mùi thơm, không tan trong nước, nhẹ hơn nước.</p>
+      <h3>3. ARENE (CnH₂n-₆, n≥6) ⭐</h3>
+      <p><b>Khái niệm & Danh pháp:</b></p>
+      <ul>
+        <li>Arene (hydrocarbon thơm) chứa một hay nhiều vòng benzene.</li>
+        <li><b>Tên thay thế:</b> Tên gốc alkyl + benzene. Ví dụ: methylbenzene (toluene), ethylbenzene, vinylbenzene (styrene).</li>
+        <li><b>Gốc aryl:</b> Phenyl (C₆H₅-), Benzyl (C₆H₅CH₂-).</li>
+        <li><b>Vị trí nhóm thế:</b> ortho (o-, 1,2), meta (m-, 1,3), para (p-, 1,4).</li>
+        <li>Dãy đồng đẳng benzene: C₆H₆, C₇H₈ (toluene), C₈H₁₀ (xylene, ethylbenzene), C₉H₁₂…</li>
+      </ul>
+      <p><b>Tính chất vật lý:</b> Benzene, toluene là chất lỏng không màu, mùi thơm, không tan trong nước, nhẹ hơn nước. Naphthalene là chất rắn màu trắng. Nhóm BTX (Benzene, Toluene, Xylene) có trong dầu mỏ.</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
         <li><b>Phản ứng thế:</b> Halogen hóa (Fe, t°): C₆H₆ + Br₂ → C₆H₅Br + HBr; Nitro hóa (HNO₃/H₂SO₄ đặc, 50°C) → nitrobenzene.</li>
@@ -353,75 +339,70 @@
         <li><b>Phản ứng cộng:</b> C₆H₆ + 3H₂ (Ni, t° cao) → cyclohexane.</li>
         <li><b>Oxi hóa nhánh:</b> C₆H₅CH₃ + 2KMnO₄ (t°) → C₆H₅COOK + 2MnO₂ + KOH + H₂O (tạo axit benzoic).</li>
       </ul>
-      <p><b>Ứng dụng:</b> Benzene, toluene, xylene (BTX) là nguyên liệu cho công nghiệp hóa chất, sản xuất nhựa, phẩm nhuộm, dược phẩm.</p>
+      <p><b>Ứng dụng:</b> Sản xuất polymer (styrene→PS), dung môi, thuốc nhuộm, dược phẩm.</p>
 
       <h2>🧴 CHƯƠNG 5: DẪN XUẤT HALOGEN – ALCOHOL – PHENOL</h2>
 
       <h3>1. DẪN XUẤT HALOGEN</h3>
-      <p><b>Khái niệm:</b> Hợp chất hữu cơ chứa nguyên tố halogen (F, Cl, Br, I) liên kết trực tiếp với carbon.</p>
+      <p><b>Danh pháp:</b> Tên gốc hydrocarbon + halogenua (gốc-chức) hoặc số chỉ vị trí + halogen + tên hydrocarbon (thay thế). Ví dụ: CH₃CH₂Cl: ethyl chloride / chloroethane.</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
-        <li><b>Phản ứng thế:</b> R-X + NaOH (dd) → R-OH + NaX (đun nóng).</li>
-        <li><b>Phản ứng tách:</b> R-CH₂-CH₂Cl + KOH (ancol, t°) → R-CH=CH₂ + KCl + H₂O (quy tắc Zaitsev: H tách ở C bậc cao hơn, sản phẩm chính là alkene bền).</li>
+        <li><b>Phản ứng thế:</b> R-X + NaOH → R-OH + NaX.</li>
+        <li><b>Phản ứng tách:</b> R-CH₂-CH₂-X + KOH (ancol, t°) → R-CH=CH₂ + KX + H₂O (quy tắc Zaitsev).</li>
       </ul>
-      <p><b>Ứng dụng:</b> Chloroethane làm thuốc tê; CFC gây thủng tầng ozone; nhiều chất là dung môi, thuốc trừ sâu.</p>
 
       <h3>2. ALCOHOL</h3>
-      <p><b>Khái niệm:</b> Nhóm -OH liên kết với nguyên tử carbon no. Phân loại bậc I, II, III.</p>
-      <p><b>Tính chất vật lý:</b> Có liên kết hydrogen liên phân tử → nhiệt độ sôi cao hơn hydrocarbon tương ứng; các alcohol nhỏ tan vô hạn trong nước.</p>
+      <p><b>Danh pháp:</b></p>
+      <ul>
+        <li><b>Tên thông thường (gốc-chức):</b> Alcohol + tên gốc alkyl + ic. Ví dụ: CH₃OH: methyl alcohol; C₂H₅OH: ethyl alcohol.</li>
+        <li><b>Tên thay thế:</b> Tên hydrocarbon + vị trí nhóm OH (nếu cần) + ol. Ví dụ: CH₃CH₂CH₂OH: propan-1-ol.</li>
+      </ul>
+      <p><b>Tính chất vật lý:</b> Có liên kết hydrogen liên phân tử → nhiệt độ sôi cao hơn hydrocarbon, tan tốt trong nước.</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
-        <li><b>Tác dụng với Na:</b> 2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑.</li>
-        <li><b>Oxi hóa:</b> Alcohol bậc I + CuO → aldehyde (R-CHO); bậc II → ketone (R-CO-R'). Bậc III không bị oxi hóa trong điều kiện này.</li>
-        <li><b>Tách nước:</b> C₂H₅OH (H₂SO₄ đặc, 170°C) → C₂H₄↑ + H₂O; ở 140°C tạo ether.</li>
-        <li><b>Phản ứng với polyol:</b> Glycerol + Cu(OH)₂ tạo phức xanh lam (nhận biết polyalcohol có 2 nhóm OH liền kề).</li>
+        <li>Tác dụng với Na: 2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑.</li>
+        <li>Oxi hóa: Alcohol bậc I + CuO → aldehyde; bậc II → ketone.</li>
+        <li>Tách nước: C₂H₅OH (H₂SO₄ đặc, 170°C) → C₂H₄↑ + H₂O.</li>
+        <li>Polyalcohol + Cu(OH)₂ → phức xanh lam (nhận biết).</li>
       </ul>
-      <p><b>Điều chế ethanol:</b> Lên men tinh bột (C₆H₁₀O₅)n → nC₆H₁₂O₆ → 2nC₂H₅OH + 2nCO₂; hoặc hydrat hóa ethylene.</p>
 
       <h3>3. PHENOL</h3>
-      <p><b>Cấu tạo:</b> Nhóm -OH liên kết trực tiếp với vòng benzene (C₆H₅OH).</p>
-      <p><b>Tính chất vật lý:</b> Chất rắn không màu, ít tan trong nước lạnh, tan nhiều trong nước nóng và dung môi hữu cơ, có tính độc, gây bỏng da.</p>
+      <p><b>Danh pháp:</b> Thường gọi tên riêng: phenol (C₆H₅OH), cresol (CH₃C₆H₄OH), catechol (C₆H₄(OH)₂-1,2).</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
-        <li>Tính acid yếu (phenol): C₆H₅OH + NaOH → C₆H₅ONa + H₂O. Không làm đổi màu quỳ tím.</li>
-        <li>Phản ứng thế vòng thơm: C₆H₅OH + 3Br₂ (dd) → 2,4,6-tribromophenol ↓ (trắng) + 3HBr. Do ảnh hưởng của nhóm -OH làm tăng mật độ electron vòng benzene, dễ thế hơn benzene.</li>
-        <li>Tác dụng với Na: 2C₆H₅OH + 2Na → 2C₆H₅ONa + H₂.</li>
+        <li>Tính acid yếu: C₆H₅OH + NaOH → C₆H₅ONa + H₂O. Không làm đổi màu quỳ tím.</li>
+        <li>Phản ứng thế vòng thơm: C₆H₅OH + 3Br₂ → 2,4,6-tribromophenol ↓ (trắng) + 3HBr.</li>
       </ul>
-      <p><b>Ứng dụng:</b> Sản xuất nhựa phenol-formaldehyde, thuốc nổ (picric acid), phẩm nhuộm, chất diệt khuẩn.</p>
 
       <h2>🍋 CHƯƠNG 6: HỢP CHẤT CARBONYL – CARBOXYLIC ACID</h2>
 
       <h3>1. HỢP CHẤT CARBONYL (ALDEHYDE & KETONE)</h3>
-      <p><b>Aldehyde (RCHO):</b> Có phản ứng tráng bạc (AgNO₃/NH₃ → Ag↓) và phản ứng với Cu(OH)₂/OH⁻ đun nóng tạo kết tủa đỏ gạch Cu₂O. Dùng để nhận biết aldehyde.</p>
-      <p><b>Ketone (RCOR'):</b> Không tráng bạc, nhưng có phản ứng iodoform (với I₂/NaOH) nếu có nhóm CH₃CO- (tạo kết tủa vàng CHI₃).</p>
-      <p><b>Tính chất hóa học chung:</b></p>
+      <p><b>Danh pháp:</b></p>
       <ul>
-        <li>Phản ứng khử (NaBH₄, LiAlH₄): Aldehyde → alcohol bậc I; Ketone → alcohol bậc II.</li>
-        <li>Phản ứng oxi hóa: Aldehyde dễ bị oxi hóa thành acid carboxylic.</li>
+        <li><b>Aldehyde (RCHO):</b> Tên thay thế: hydrocarbon + al (HCHO: methanal; CH₃CHO: ethanal). Tên thông thường: formaldehyde, acetaldehyde.</li>
+        <li><b>Ketone (RCOR'):</b> Tên thay thế: hydrocarbon + on (CH₃COCH₃: propan-2-one / acetone). Tên gốc-chức: tên hai gốc alkyl + ketone.</li>
       </ul>
-      <p><b>Formaldehyde (HCHO):</b> Dung dịch 37-40% gọi là formalin, dùng để ngâm xác, sát trùng. Sản xuất nhựa phenol-formaldehyde, ure-formaldehyde.</p>
-      <p><b>Acetone (CH₃COCH₃):</b> Là dung môi quan trọng, dùng trong sản xuất thủy tinh hữu cơ (plexiglas).</p>
+      <p><b>Tính chất hóa học:</b> Aldehyde có phản ứng tráng bạc, phản ứng với Cu(OH)₂/OH⁻ (kết tủa đỏ gạch). Ketone có phản ứng iodoform (nhóm CH₃CO-). Phản ứng khử bởi NaBH₄: aldehyde → alcohol I, ketone → alcohol II.</p>
 
       <h3>2. CARBOXYLIC ACID</h3>
-      <p><b>Công thức chung:</b> R-COOH. Acid no, đơn chức, mạch hở: CnH₂n+₁COOH hay CmH₂mO₂.</p>
-      <p><b>Tính chất vật lý:</b> Có liên kết hydrogen liên phân tử mạnh → nhiệt độ sôi cao hơn alcohol cùng số C. Acid fomic, acetic tan vô hạn trong nước; mùi chua đặc trưng.</p>
+      <p><b>Danh pháp:</b></p>
+      <ul>
+        <li><b>Tên thông thường:</b> formic acid (HCOOH), acetic acid (CH₃COOH), propionic acid (C₂H₅COOH), butyric acid, valeric acid…</li>
+        <li><b>Tên thay thế:</b> Acid + hydrocarbon + oic. Ví dụ: HCOOH: methanoic acid; CH₃COOH: ethanoic acid; C₆H₅COOH: benzoic acid.</li>
+      </ul>
+      <p><b>Tính chất vật lý:</b> Liên kết hydrogen liên phân tử mạnh → nhiệt độ sôi cao nhất trong các hợp chất hữu cơ cùng số C. Thứ tự nhiệt độ sôi: carboxylic acid > alcohol > aldehyde > ketone > hydrocarbon.</p>
       <p><b>Tính chất hóa học:</b></p>
       <ul>
-        <li><b>Tính acid:</b> Làm đỏ quỳ tím, tác dụng với kim loại trước H (Zn, Fe), base, oxide bazơ, muối cacbonat: 2CH₃COOH + CaCO₃ → (CH₃COO)₂Ca + CO₂↑ + H₂O.</li>
-        <li><b>Phản ứng ester hóa:</b> RCOOH + R'OH ⇌(H₂SO₄ đặc, t°) RCOOR' + H₂O. Đây là phản ứng thuận nghịch.</li>
+        <li>Tính acid: Làm đỏ quỳ tím, tác dụng với kim loại, base, muối cacbonat: 2CH₃COOH + CaCO₃ → (CH₃COO)₂Ca + CO₂↑ + H₂O.</li>
+        <li>Phản ứng ester hóa: RCOOH + R'OH ⇌(H₂SO₄ đặc, t°) RCOOR' + H₂O.</li>
       </ul>
-      <p><b>Acetic acid (CH₃COOH):</b> Là acid yếu, thành phần chính của giấm ăn (2-5%). Điều chế: C₂H₅OH + O₂ (men giấm) → CH₃COOH + H₂O; hoặc từ CH₃OH + CO (xt, t°).</p>
-      <p><b>Một số acid quan trọng:</b> Formic acid (HCOOH, nọc kiến); Oxalic acid (HOOC-COOH, chua của khế, sấu); Citric acid (C₆H₈O₇, trong chanh); Benzoic acid (C₆H₅COOH, chất bảo quản).</p>
     </div>
   `;
 
-  // ==================== STATE & FUNCTIONS ====================
+  // ==================== STATE ====================
   let currentView = 'review';
   let currentChapter = 'all';
   let filteredQuestions = { mcq:[], tf:[], short:[] };
-  let examTimer = null;
-  let examTimeLeft = 45 * 60;
-  let examSubmitted = false;
 
   function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
   function filterByChapter(arr, ch) { return ch === 'all' ? arr : arr.filter(i => i.chapter === ch); }
@@ -440,134 +421,50 @@
     return { mcq, tf: shuffle(tfPool).slice(0, 4), short: shuffle(shortPool).slice(0, 6) };
   }
 
-  function formatTime(sec) { const m=Math.floor(sec/60), s=sec%60; return `${m}:${s<10?'0':''}${s}`; }
-
-  // RENDER
   const dynamicContent = document.getElementById('dynamicContent');
   const actionBar = document.getElementById('actionBar');
   const resultBox = document.getElementById('resultBox');
 
   function renderReview() {
-    filteredQuestions = { mcq: filterByChapter(allMCQ, currentChapter), tf: filterByChapter(allTF, currentChapter), short: filterByChapter(allShort, currentChapter) };
+    const data = getRandomExam();
+    filteredQuestions = data;
     resultBox.classList.remove('show');
     let html = '';
-    filteredQuestions.mcq.forEach((q,i) => {
+    data.mcq.forEach((q,i) => {
       html += `<div class="card" data-qid="${q.id}" data-type="mcq">
-        <div class="q-header"><span class="q-num">MCQ ${i+1}</span><span class="q-text">${q.q}</span></div>
+        <div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.q}</span></div>
         <ul class="options-list">${q.opts.map((opt,oi) => `<li class="option-item" data-opt="${oi}"><input type="radio" name="r_mcq_${q.id}" value="${oi}">${opt}</li>`).join('')}</ul>
         ${q.exp ? `<p class="exp" style="color:#2e7d32;display:none;">💡 ${q.exp}</p>` : ''}</div>`;
     });
-    filteredQuestions.tf.forEach((q,i) => {
+    data.tf.forEach((q,i) => {
       html += `<div class="card" data-qid="${q.id}" data-type="tf">
-        <div class="q-header"><span class="q-num">TF ${i+1}</span><span class="q-text">${q.text}</span></div>
+        <div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.text}</span></div>
         <div class="tf-group">${q.items.map((it,ii) => `<div class="tf-row" data-item="${ii}"><span class="tf-label">${String.fromCharCode(97+ii)})</span><span>${it.text}</span><div class="tf-btns"><button class="tf-true-btn" data-val="true">Đúng</button><button class="tf-false-btn" data-val="false">Sai</button></div></div>`).join('')}</div></div>`;
     });
-    filteredQuestions.short.forEach((q,i) => {
-      html += `<div class="card" data-type="short"><div class="q-header"><span class="q-num">SHORT ${i+1}</span><span class="q-text">${q.q}</span></div><textarea placeholder="Nhập đáp án..." style="width:100%;min-height:50px;border-radius:8px;border:1px solid #f0c8d8;padding:8px;"></textarea><p class="exp" style="color:#2e7d32;display:none;">💡 ${q.a}</p></div>`;
-    });
-    dynamicContent.innerHTML = html;
-    actionBar.innerHTML = `<button class="btn btn-pink" id="checkReview">✅ Kiểm tra</button><button class="btn btn-outline" id="resetReview">🔄 Làm lại</button>`;
-    attachReviewEvents();
-  }
-
-  function attachReviewEvents() {
-    document.querySelectorAll('.option-item').forEach(li => li.addEventListener('click', function(){
-      const radio = this.querySelector('input'); radio.checked = true;
-      this.parentElement.querySelectorAll('.option-item').forEach(s => s.classList.remove('selected'));
-      this.classList.add('selected');
-    }));
-    document.querySelectorAll('.tf-true-btn, .tf-false-btn').forEach(btn => btn.addEventListener('click', function(){
-      const row = this.closest('.tf-row'); const val = this.dataset.val;
-      row.querySelectorAll('button').forEach(b => b.classList.remove('active-true','active-false'));
-      if(val==='true') this.classList.add('active-true'); else this.classList.add('active-false');
-      row.classList.remove('selected-true','selected-false');
-      row.classList.add(val==='true'?'selected-true':'selected-false');
-    }));
-    document.getElementById('checkReview')?.addEventListener('click', ()=>{
-      document.querySelectorAll('.card[data-type="mcq"]').forEach(card => {
-        const qid = +card.dataset.qid;
-        const q = filteredQuestions.mcq.find(q=>q.id===qid);
-        const radio = card.querySelector('input:checked');
-        card.querySelectorAll('.option-item').forEach(li => li.classList.remove('show-correct','show-wrong'));
-        const correctLi = card.querySelector(`.option-item[data-opt="${q.ans}"]`);
-        if(correctLi) correctLi.classList.add('show-correct');
-        if(radio && +radio.value !== q.ans) {
-          const sel = card.querySelector(`.option-item[data-opt="${radio.value}"]`);
-          if(sel) sel.classList.add('show-wrong');
-        }
-        card.querySelectorAll('input').forEach(r=>r.disabled=true);
-        card.querySelector('.exp').style.display = 'block';
-      });
-      document.querySelectorAll('.card[data-type="tf"]').forEach(card => {
-        const qid = +card.dataset.qid;
-        const q = filteredQuestions.tf.find(q=>q.id===qid);
-        card.querySelectorAll('.tf-row').forEach((row,ii) => {
-          const trueBtn = row.querySelector('.tf-true-btn');
-          const falseBtn = row.querySelector('.tf-false-btn');
-          const correctVal = q.items[ii].ans?'true':'false';
-          row.style.background = (trueBtn.classList.contains('active-true') && correctVal==='true') || (falseBtn.classList.contains('active-false') && correctVal==='false') ? '#dcf5dc' : '#ffe0e0';
-          trueBtn.disabled = falseBtn.disabled = true;
-        });
-      });
-      document.querySelectorAll('.card[data-type="short"] .exp').forEach(el => el.style.display = 'block');
-      document.querySelectorAll('.card[data-type="short"] textarea').forEach(ta => ta.disabled = true);
-    });
-    document.getElementById('resetReview')?.addEventListener('click', ()=>{ renderReview(); window.scrollTo(0,0); });
-  }
-
-  function renderExam() {
-    const data = getRandomExam();
-    filteredQuestions = data;
-    examSubmitted = false; examTimeLeft = 45*60;
-    resultBox.classList.remove('show');
-    let html = `<div class="timer" id="timerDisplay">⏳ ${formatTime(examTimeLeft)}</div>`;
-    data.mcq.forEach((q,i) => {
-      html += `<div class="card" data-qid="${q.id}" data-type="mcq"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.q}</span></div><ul class="options-list">${q.opts.map((opt,oi) => `<li class="option-item" data-opt="${oi}"><input type="radio" name="e_mcq_${q.id}" value="${oi}">${opt}</li>`).join('')}</ul></div>`;
-    });
-    data.tf.forEach((q,i) => {
-      html += `<div class="card" data-qid="${q.id}" data-type="tf"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.text}</span></div><div class="tf-group">${q.items.map((it,ii) => `<div class="tf-row" data-item="${ii}"><span class="tf-label">${String.fromCharCode(97+ii)})</span><span>${it.text}</span><div class="tf-btns"><button class="tf-true-btn" data-val="true">Đúng</button><button class="tf-false-btn" data-val="false">Sai</button></div></div>`).join('')}</div></div>`;
-    });
     data.short.forEach((q,i) => {
-      html += `<div class="card" data-type="short"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.q}</span></div><textarea placeholder="Nhập đáp án..." style="width:100%;min-height:50px;border-radius:8px;border:1px solid #f0c8d8;padding:8px;"></textarea></div>`;
+      html += `<div class="card" data-type="short"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.q}</span></div><textarea placeholder="Nhập đáp án..." style="width:100%;min-height:50px;border-radius:8px;border:1px solid #f0c8d8;padding:8px;"></textarea><p class="exp" style="color:#2e7d32;display:none;">💡 ${q.a}</p></div>`;
     });
     dynamicContent.innerHTML = html;
-    actionBar.innerHTML = `<button class="btn btn-pink" id="submitExam">📩 Nộp bài</button>`;
-    attachExamEvents();
-    startTimer();
+    actionBar.innerHTML = `<button class="btn btn-pink" id="btnSubmit">📩 Nộp bài & Chấm điểm</button><button class="btn btn-outline" id="btnReset">🔄 Làm đề mới</button>`;
+    attachEvents();
   }
 
-  function attachExamEvents() {
+  function attachEvents() {
     document.querySelectorAll('.option-item').forEach(li => li.addEventListener('click', function(){
-      if(examSubmitted) return;
       const radio = this.querySelector('input'); radio.checked = true;
       this.parentElement.querySelectorAll('.option-item').forEach(s => s.classList.remove('selected'));
       this.classList.add('selected');
     }));
     document.querySelectorAll('.tf-true-btn, .tf-false-btn').forEach(btn => btn.addEventListener('click', function(){
-      if(examSubmitted) return;
       const row = this.closest('.tf-row'); const val = this.dataset.val;
       row.querySelectorAll('button').forEach(b => b.classList.remove('active-true','active-false'));
       if(val==='true') this.classList.add('active-true'); else this.classList.add('active-false');
-      row.classList.remove('selected-true','selected-false');
-      row.classList.add(val==='true'?'selected-true':'selected-false');
     }));
-    document.getElementById('submitExam')?.addEventListener('click', submitExam);
+    document.getElementById('btnSubmit')?.addEventListener('click', submitAndGrade);
+    document.getElementById('btnReset')?.addEventListener('click', ()=>{ renderReview(); window.scrollTo(0,0); });
   }
 
-  function startTimer() {
-    if(examTimer) clearInterval(examTimer);
-    examTimer = setInterval(() => {
-      if(examSubmitted) { clearInterval(examTimer); return; }
-      examTimeLeft--;
-      const el = document.getElementById('timerDisplay');
-      if(el) el.innerText = `⏳ ${formatTime(examTimeLeft)}`;
-      if(examTimeLeft <= 0) { clearInterval(examTimer); alert('Hết giờ!'); submitExam(); }
-    }, 1000);
-  }
-
-  function submitExam() {
-    if(examSubmitted) return;
-    examSubmitted = true; clearInterval(examTimer);
+  function submitAndGrade() {
     let score1=0, score2=0;
     document.querySelectorAll('.card[data-type="mcq"]').forEach(card => {
       const qid=+card.dataset.qid; const q=filteredQuestions.mcq.find(q=>q.id===qid);
@@ -578,6 +475,7 @@
       if(radio && +radio.value===q.ans) score1+=0.3;
       else if(radio) { const sel=card.querySelector(`.option-item[data-opt="${radio.value}"]`); if(sel) sel.classList.add('show-wrong'); }
       card.querySelectorAll('input').forEach(r=>r.disabled=true);
+      card.querySelector('.exp') && (card.querySelector('.exp').style.display = 'block');
     });
     document.querySelectorAll('.card[data-type="tf"]').forEach(card => {
       const qid=+card.dataset.qid; const q=filteredQuestions.tf.find(q=>q.id===qid);
@@ -592,12 +490,12 @@
       });
       if(correct===4) score2+=0.5; else if(correct===3) score2+=0.25;
     });
+    document.querySelectorAll('.card[data-type="short"] .exp').forEach(el => el.style.display = 'block');
     document.querySelectorAll('.card[data-type="short"] textarea').forEach(ta => ta.disabled = true);
-    document.getElementById('resultScore').textContent = (score1+score2).toFixed(1);
+    const total = score1+score2;
+    document.getElementById('resultScore').textContent = total.toFixed(1);
     resultBox.classList.add('show');
     resultBox.scrollIntoView({behavior:'smooth'});
-    actionBar.innerHTML = `<button class="btn btn-outline" id="retryExam">🔄 Làm đề mới</button>`;
-    document.getElementById('retryExam')?.addEventListener('click', ()=>{ renderExam(); window.scrollTo(0,0); });
   }
 
   function renderKnowledge() { dynamicContent.innerHTML = knowledgeHTML; actionBar.innerHTML = ''; }
@@ -606,10 +504,8 @@
     currentView = view;
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelector(`.tab-btn[data-view="${view}"]`).classList.add('active');
-    if(examTimer) { clearInterval(examTimer); examTimer=null; }
     resultBox.classList.remove('show');
     if(view==='review') renderReview();
-    else if(view==='exam') renderExam();
     else renderKnowledge();
   }
 
@@ -618,7 +514,6 @@
     document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
     this.classList.add('active'); currentChapter = this.dataset.chapter;
     if(currentView==='review') renderReview();
-    else if(currentView==='exam') renderExam();
     else renderKnowledge();
   }));
 
