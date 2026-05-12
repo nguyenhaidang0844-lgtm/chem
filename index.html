@@ -3,582 +3,627 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>Ôn tập & Kiểm tra Hóa 11 HKII | Hydrocarbon - Dẫn xuất Halogen - Alcohol - Phenol - Carbonyl - Acid</title>
+  <title>Ôn tập & Kiểm tra Hóa 11 HK2 | Cherry Blossom</title>
   <style>
+    :root {
+      --bg: #fff5f7;
+      --card-bg: #ffffff;
+      --text: #4a2c3a;
+      --pink: #e8679e;
+      --pink-light: #ffe0ec;
+      --green: #2e7d32;
+      --red: #c62828;
+      --shadow: 0 8px 24px rgba(232, 103, 158, 0.12);
+      --radius: 18px;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf5 100%);
-      color: #1e293b; line-height: 1.5; padding: 20px; min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(170deg, #fff0f5 0%, #ffe4ec 40%, #fce4ec 100%);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
+    body::before, body::after {
+      content: "🌸"; font-size: 40px; position: fixed; top: -50px; opacity: 0.25; z-index: 0;
+    }
+    body::before { left: 10%; animation: fall1 8s infinite linear; }
+    body::after { left: 80%; animation: fall2 10s infinite linear; }
+    @keyframes fall1 { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(360deg); } }
+    @keyframes fall2 { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(-360deg); } }
     .container {
-      max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px); border-radius: 32px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08); padding: 25px 30px; transition: all 0.2s;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
     }
-    h1 {
-      font-size: 2.2rem; text-align: center; color: #0c4a6e; margin-bottom: 5px;
-      font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px;
+    .header {
+      text-align: center;
+      padding: 28px 20px 20px;
+      background: #ffffffdd;
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid #f8c8d8;
     }
-    .subtitle {
-      text-align: center; color: #475569; margin-bottom: 20px; font-style: italic;
-      font-size: 0.95rem; border-bottom: 1px solid #cbd5e1; padding-bottom: 15px;
+    .header h1 { font-size: 2.2rem; color: #b9486e; margin-bottom: 4px; }
+    .subtitle { color: #c4688a; font-weight: 500; font-size: 1rem; margin-top: 4px; }
+    .tab-nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+    .tab-btn {
+      padding: 12px 24px; border-radius: 40px; border: 2px solid #e8a0b8; background: white;
+      font-weight: 700; cursor: pointer; transition: 0.25s; color: #8b4c62; font-size: 0.95rem;
     }
-    .main-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 10px; }
-    .main-tab {
-      padding: 12px 24px; border-radius: 40px; background: #f1f5f9; border: none;
-      font-weight: 700; font-size: 1rem; color: #334155; cursor: pointer;
-      transition: all 0.25s; border: 1px solid transparent;
+    .tab-btn.active { background: #e8679e; color: white; border-color: #e8679e; box-shadow: 0 6px 16px rgba(232,103,158,0.35); }
+    .chapter-filter { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 16px; }
+    .chip {
+      padding: 8px 16px; border-radius: 30px; border: 1px solid #e8a0b8; background: white;
+      font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.2s; color: #8b4c62;
     }
-    .main-tab.active { background: #0369a1; color: white; box-shadow: 0 8px 18px rgba(3,105,161,0.3); }
-    .main-tab:hover:not(.active) { background: #e2e8f0; }
-    .chapter-filter {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 15px 0 10px;
+    .chip.active { background: #e8679e; color: white; border-color: #e8679e; }
+    .card {
+      background: white; border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
+      box-shadow: var(--shadow); border: 1px solid #f8c8d8; transition: 0.2s;
     }
-    .chapter-btn {
-      padding: 8px 16px; border-radius: 30px; background: white; border: 1px solid #94a3b8;
-      font-weight: 600; font-size: 0.85rem; color: #334155; cursor: pointer; transition: 0.2s;
+    .card.correct-card { border-left: 6px solid var(--green); background: #f4fef4; }
+    .card.wrong-card { border-left: 6px solid var(--red); background: #fff5f5; }
+    .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .q-num { background: var(--pink-light); color: #b9486e; font-weight: 800; padding: 4px 14px; border-radius: 20px; font-size: 0.9rem; }
+    .q-text { font-weight: 600; color: #4a2c3a; font-size: 1rem; }
+    .options-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .option-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 12px;
+      border: 1.5px solid #f0c8d8; cursor: pointer; transition: 0.2s; background: #fefbfc;
     }
-    .chapter-btn.active { background: #0369a1; color: white; border-color: #0369a1; }
-    .mode-bar { display: flex; justify-content: center; gap: 15px; margin: 15px 0; flex-wrap: wrap; }
-    .mode-btn {
-      padding: 12px 30px; border-radius: 36px; font-weight: 700; font-size: 1rem;
-      background: white; border: 2px solid #0369a1; color: #0369a1; cursor: pointer;
-      transition: 0.25s; display: flex; align-items: center; gap: 8px;
+    .option-item:hover { background: #ffe4ec; border-color: #e8679e; }
+    .option-item.selected { background: #ffe0ec; border-color: #e8679e; font-weight: 500; }
+    .option-item.show-correct { background: #dcf5dc !important; border-color: #4caf50 !important; }
+    .option-item.show-wrong { background: #ffe0e0 !important; border-color: #ef5350 !important; }
+    .option-item input[type="radio"] { accent-color: #e8679e; }
+    .tf-group { display: flex; flex-direction: column; gap: 8px; }
+    .tf-row {
+      display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 10px;
+      border: 1px solid #f0c8d8; background: #fefbfc;
     }
-    .mode-btn.active { background: #0369a1; color: white; }
-    .quiz-area { margin-top: 15px; max-height: 70vh; overflow-y: auto; padding-right: 5px; }
-    .question-card {
-      background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 20px;
-      padding: 18px; margin-bottom: 16px; transition: 0.2s;
+    .tf-row.selected-true { background: #ffe0ec; border-color: #e8679e; }
+    .tf-row.selected-false { background: #f5e0e0; border-color: #dba0a0; }
+    .tf-label { font-weight: 700; min-width: 24px; color: #b9486e; }
+    .tf-btns button {
+      padding: 5px 16px; border-radius: 16px; border: 1px solid #e0a0b8; background: white;
+      cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: 0.2s; margin: 0 2px;
     }
-    .question-text { font-weight: 700; font-size: 1rem; margin-bottom: 14px; color: #0c4a6e; }
-    .options { display: flex; flex-direction: column; gap: 8px; }
-    .option {
-      display: flex; align-items: center; gap: 10px; padding: 10px 16px;
-      border-radius: 14px; background: white; border: 1px solid #cbd5e1; cursor: pointer; transition: 0.2s;
-    }
-    .option:hover { background: #e0f2fe; border-color: #0369a1; }
-    .option.selected { background: #bae6fd; border-color: #0284c7; }
-    .option.correct { background: #d1fae5; border-color: #10b981; }
-    .option.incorrect { background: #fee2e2; border-color: #ef4444; }
-    .explanation {
-      margin-top: 10px; background: #fef9c3; padding: 8px 14px; border-radius: 12px;
-      font-size: 0.9rem; border-left: 4px solid #eab308;
-    }
+    .tf-btns button.active-true { background: #e8679e; color: white; border-color: #e8679e; }
+    .tf-btns button.active-false { background: #b08090; color: white; border-color: #b08090; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 24px 0; }
     .btn {
-      padding: 12px 24px; border-radius: 30px; border: none; font-weight: 700;
-      cursor: pointer; background: #0369a1; color: white; transition: 0.2s; font-size: 0.95rem;
+      padding: 14px 32px; border-radius: 40px; border: none; font-weight: 700; font-size: 1rem;
+      cursor: pointer; letter-spacing: 0.5px; transition: 0.25s; text-transform: uppercase;
     }
-    .btn.outline { background: white; border: 2px solid #0369a1; color: #0369a1; }
-    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-pink { background: #e8679e; color: white; }
+    .btn-pink:hover { background: #d14e82; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #e8679e; border: 2px solid #e8679e; }
+    .btn-outline:hover { background: #fff0f5; }
+    .btn:disabled { opacity: 0.5; pointer-events: none; }
+    .result-box {
+      background: white; border-radius: 20px; padding: 28px; text-align: center;
+      border: 2px solid #e8679e; margin: 24px 0; display: none;
+    }
+    .result-box.show { display: block; }
+    .big-score { font-size: 3rem; font-weight: 800; color: #e8679e; }
     .timer {
-      background: #0f172a; color: white; padding: 10px 24px; border-radius: 40px;
-      font-weight: 700; font-size: 1.2rem; display: inline-block; margin-bottom: 10px;
+      background: #4a2c3a; color: white; padding: 8px 24px; border-radius: 30px;
+      font-weight: 700; font-size: 1.1rem; display: inline-block; margin: 8px 0 16px;
     }
-    .progress { height: 8px; background: #e2e8f0; border-radius: 10px; margin: 10px 0 20px; }
-    .progress-fill { height: 100%; background: #0369a1; border-radius: 10px; width: 0%; }
-    .result-summary { background: #e0f2fe; border-radius: 20px; padding: 20px; margin: 15px 0; text-align: center; }
-    .knowledge-content {
-      background: white; border-radius: 20px; padding: 20px; max-height: 70vh; overflow-y: auto;
+    .knowledge-box {
+      background: white; border-radius: var(--radius); padding: 24px;
+      max-height: 70vh; overflow-y: auto; line-height: 1.7;
     }
-    .knowledge-content h2 {
-      color: #0369a1; margin: 20px 0 12px; border-bottom: 2px solid #bae6fd; padding-bottom: 6px;
-    }
-    .knowledge-content h3 { color: #075985; margin: 15px 0 8px; }
-    .knowledge-content ul, .knowledge-content ol { margin-left: 25px; margin-bottom: 15px; }
-    .knowledge-content li { margin-bottom: 6px; }
-    .knowledge-content table {
-      width: 100%; border-collapse: collapse; margin: 15px 0;
-    }
-    .knowledge-content th, .knowledge-content td {
-      border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left;
-    }
-    .knowledge-content th { background: #f1f5f9; font-weight: 600; }
-    .highlight { background: #fef9c3; padding: 2px 6px; border-radius: 4px; }
-    footer { margin-top: 30px; text-align: center; font-size: 0.8rem; color: #64748b; }
+    .knowledge-box h2 { color: #b9486e; margin-top: 24px; border-bottom: 2px solid #f8c8d8; padding-bottom: 6px; }
+    .knowledge-box h3 { color: #8b4c62; margin-top: 16px; }
+    .knowledge-box ul, .knowledge-box ol { margin-left: 24px; margin-bottom: 12px; }
+    .knowledge-box li { margin-bottom: 4px; }
+    .knowledge-box table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    .knowledge-box th, .knowledge-box td { border: 1px solid #f0c8d8; padding: 8px; text-align: left; }
+    .knowledge-box th { background: #fff0f5; }
+    .knowledge-box p { margin-bottom: 10px; }
+    footer { text-align: center; margin-top: 32px; color: #b08090; font-size: 0.85rem; }
     @media (max-width: 600px) {
-      .container { padding: 15px; }
-      .main-tab { padding: 10px 16px; font-size: 0.9rem; }
+      .tab-btn { padding: 10px 16px; font-size: 0.85rem; }
+      .header h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
 <div class="container" id="app">
-  <h1>🧪 HÓA 11 – HKII</h1>
-  <div class="subtitle">Hydrocarbon · Dẫn xuất Halogen - Alcohol - Phenol · Carbonyl - Carboxylic Acid</div>
-
-  <div class="main-tabs">
-    <button class="main-tab active" data-view="review">📖 Ôn tập</button>
-    <button class="main-tab" data-view="exam">📝 Kiểm tra</button>
-    <button class="main-tab" data-view="knowledge">📚 Kiến thức</button>
+  <div class="header">
+    <h1>🌸 Hóa 11 HK2 – Ôn Thi Nhẹ Nhàng</h1>
+    <p class="subtitle">Ngân hàng đề chuẩn Bộ GD · Mỗi lần làm là một bộ đề mới</p>
   </div>
 
-  <div id="chapterFilterContainer" class="chapter-filter">
-    <button class="chapter-btn active" data-chapter="all">Tất cả</button>
-    <button class="chapter-btn" data-chapter="hydrocarbon">Hydrocarbon</button>
-    <button class="chapter-btn" data-chapter="dx_alcohol_phenol">Dẫn xuất Halogen - Alcohol - Phenol</button>
-    <button class="chapter-btn" data-chapter="carbonyl_acid">Carbonyl - Carboxylic Acid</button>
+  <div class="tab-nav">
+    <button class="tab-btn active" data-view="review">📖 Ôn tập</button>
+    <button class="tab-btn" data-view="exam">📝 Kiểm tra 45ph</button>
+    <button class="tab-btn" data-view="knowledge">📚 Kiến thức</button>
   </div>
 
-  <div id="dynamicContent" class="quiz-area"></div>
-  <div id="actionBar" style="text-align: center; margin-top: 15px;"></div>
-  <footer>Ngân hàng câu hỏi & kiến thức tổng hợp từ đề minh họa, VietJack, Vungoi, VuiHoc, Loigiaihay.</footer>
+  <div class="chapter-filter" id="chapterFilter">
+    <button class="chip active" data-chapter="all">Tất cả</button>
+    <button class="chip" data-chapter="hydrocarbon">Hydrocarbon</button>
+    <button class="chip" data-chapter="dx_alcohol_phenol">Dẫn xuất Halogen - Alcohol - Phenol</button>
+    <button class="chip" data-chapter="carbonyl_acid">Carbonyl - Carboxylic Acid</button>
+  </div>
+
+  <div id="dynamicContent"></div>
+  <div id="actionBar" class="btn-row"></div>
+  <div class="result-box" id="resultBox">
+    <div class="big-score" id="resultScore">0.0</div>
+    <p>/ 7.4 điểm (trắc nghiệm)</p>
+    <p style="font-size:0.9rem;color:#8b4c62;">📌 Phần tự luận – xem đáp án gợi ý bên dưới.</p>
+  </div>
+  <footer>🌸 Cherry Blossom Hóa 11 – 2025 🌸</footer>
 </div>
 
 <script>
-  (function() {
-    // ========== NGÂN HÀNG CÂU HỎI PHONG PHÚ ==========
-    const questionBank = [
-      // HYDROCARBON
-      { id:1, chapter:'hydrocarbon', q:'Alkyne từ mấy C trở lên có đồng phân mạch carbon?', opts:['2','3','4','5'], ans:2, exp:'Từ 4C (butyne) bắt đầu có đồng phân vị trí liên kết ba.' },
-      { id:2, chapter:'hydrocarbon', q:'Arene là hydrocarbon chứa vòng', opts:['benzene','cyclopropane','cyclohexane','cyclopentane'], ans:0 },
-      { id:3, chapter:'hydrocarbon', q:'Chất nào không làm mất màu dung dịch Br2 ở điều kiện thường?', opts:['Propane','Propylene','Propyne','Styrene'], ans:0 },
-      { id:4, chapter:'hydrocarbon', q:'Acetylene có công thức phân tử', opts:['C2H4','C2H6','CH4','C2H2'], ans:3 },
-      { id:5, chapter:'hydrocarbon', q:'Sản phẩm chính khi cộng HCl vào propene (theo Markovnikov)', opts:['CH3-CHCl-CH3','CH3-CH2-CH2Cl','CH3-CH2-CHCl2','CH3-CCl2-CH3'], ans:0 },
-      { id:6, chapter:'hydrocarbon', q:'Phát biểu sai về acetylene:', opts:['Chất khí không màu','Nặng hơn không khí','Có liên kết ba','Dùng trong hàn xì'], ans:1, exp:'Acetylene nhẹ hơn không khí (M=26).' },
-      { id:7, chapter:'hydrocarbon', q:'Nitro hoá benzene (HNO3/H2SO4, 50°C) thu được', opts:['Nitrobenzene','1,3-dinitrobenzene','Phenol','Aniline'], ans:0 },
-      { id:8, chapter:'hydrocarbon', q:'Chất phản ứng với AgNO3/NH3 tạo kết tủa vàng?', opts:['Ethane','Ethylene','Acetylene','But-2-yne'], ans:2 },
-      { id:9, chapter:'hydrocarbon', q:'Tên gọi của CH≡C-CH2-CH3 là', opts:['But-1-yne','But-2-yne','But-1-ene','Butane'], ans:0 },
-      { id:10, chapter:'hydrocarbon', q:'Phản ứng đặc trưng của alkane là', opts:['Cộng','Thế','Trùng hợp','Oxi hóa hoàn toàn'], ans:1 },
-      { id:11, chapter:'hydrocarbon', q:'Styrene có công thức phân tử', opts:['C7H8','C8H8','C6H6','C8H10'], ans:1 },
-      { id:12, chapter:'hydrocarbon', q:'Để phân biệt ethane và ethene dùng', opts:['dd Br2','dd NaOH','dd AgNO3','Quỳ tím'], ans:0 },
-      { id:13, chapter:'hydrocarbon', q:'Số đồng phân cấu tạo của C4H8 (alkene) là', opts:['2','3','4','5'], ans:1, exp:'but-1-ene, but-2-ene, 2-methylpropene.' },
-      { id:14, chapter:'hydrocarbon', q:'Phản ứng nào chứng minh benzene có tính thơm?', opts:['Cộng H2','Thế Br2 (Fe)','Cháy','Cộng Cl2'], ans:1 },
-      { id:15, chapter:'hydrocarbon', q:'Khí dầu mỏ hóa lỏng (LPG) chứa chủ yếu', opts:['CH4, C2H6','C3H8, C4H10','C2H4, C3H6','C5H12, C6H14'], ans:1 },
-      { id:16, chapter:'hydrocarbon', q:'Toluene có công thức', opts:['C6H5CH3','C6H5C2H5','C6H4(CH3)2','C6H6'], ans:0 },
-      { id:17, chapter:'hydrocarbon', q:'Alkene có công thức chung', opts:['CnH2n+2','CnH2n','CnH2n-2','CnH2n-6'], ans:1 },
-      { id:18, chapter:'hydrocarbon', q:'Phản ứng cộng H2 của alkyne (xt Pd/PbCO3) dừng ở', opts:['Alkane','Alkene','Alcohol','Ketone'], ans:1 },
-      { id:19, chapter:'hydrocarbon', q:'Chất nào sau đây là hydrocarbon thơm?', opts:['C6H12','C6H6','C2H2','C3H8'], ans:1 },
-      { id:20, chapter:'hydrocarbon', q:'Khi đốt cháy hoàn toàn một alkane, tỉ lệ mol CO2 : H2O là', opts:['1:1','>1','<1','tùy alkane'], ans:2, exp:'Alkane cho nH2O > nCO2.' },
-      { id:66, chapter:'hydrocarbon', q:'Công thức chung của dãy đồng đẳng benzene là', opts:['CnH2n+2','CnH2n','CnH2n-2','CnH2n-6'], ans:3, exp:'Benzene: C6H6, toluene: C7H8 → CnH2n-6 (n≥6).' },
-      { id:67, chapter:'hydrocarbon', q:'Benzene có cấu trúc như thế nào?', opts:['Lục giác đều, phẳng','Tứ diện','Thẳng','Góc'], ans:0 },
-      { id:68, chapter:'hydrocarbon', q:'Phản ứng nitro hóa toluene ưu tiên thế vào vị trí nào?', opts:['ortho và para','meta','ortho','para'], ans:0, exp:'Nhóm -CH3 định hướng ortho-para.' },
-      { id:69, chapter:'hydrocarbon', q:'Sản phẩm chính khi oxi hóa toluene bằng KMnO4 (t°) là', opts:['Benzoic acid','Benzaldehyde','Phenol','Cresol'], ans:0 },
-      { id:70, chapter:'hydrocarbon', q:'Chất nào không phải là arene?', opts:['Benzene','Toluene','Cyclohexane','Styrene'], ans:2, exp:'Cyclohexane là cycloalkane, không có vòng thơm.' },
+(function() {
+  // ==================== NGÂN HÀNG CÂU HỎI ĐẦY ĐỦ ====================
+  const allMCQ = [
+    // --- HYDROCARBON ---
+    {id:1, chapter:'hydrocarbon', q:'Alkyne từ mấy C trở lên có đồng phân mạch carbon?', opts:['2','3','4','5'], ans:2, exp:'Từ 4C (butyne) bắt đầu có đồng phân vị trí liên kết ba.'},
+    {id:2, chapter:'hydrocarbon', q:'Arene là hydrocarbon chứa vòng', opts:['benzene','cyclopropane','cyclohexane','cyclopentane'], ans:0},
+    {id:3, chapter:'hydrocarbon', q:'Chất không làm mất màu dd Br₂ ở điều kiện thường?', opts:['propane','propylene','propyne','styrene'], ans:0},
+    {id:4, chapter:'hydrocarbon', q:'Acetylene có công thức phân tử', opts:['C₂H₄','C₂H₆','CH₄','C₂H₂'], ans:3},
+    {id:5, chapter:'hydrocarbon', q:'Propene + HCl (Markovnikov) sản phẩm chính', opts:['CH₃CHClCH₃','CH₃CH₂CH₂Cl','CH₃CH₂CHCl₂','CH₃CCl₂CH₃'], ans:0},
+    {id:6, chapter:'hydrocarbon', q:'Phát biểu sai về acetylene:', opts:['Không màu','Nặng hơn không khí','Có liên kết ba','Dùng trong hàn xì'], ans:1, exp:'Acetylene nhẹ hơn không khí (M=26).'},
+    {id:7, chapter:'hydrocarbon', q:'Nitro hoá benzene (HNO₃/H₂SO₄, ≤50°C) thu được', opts:['nitrobenzene','1,3-dinitrobenzene','phenol','aniline'], ans:0},
+    {id:8, chapter:'hydrocarbon', q:'Chất phản ứng AgNO₃/NH₃ tạo kết tủa vàng?', opts:['ethane','ethylene','acetylene','but-2-yne'], ans:2},
+    {id:9, chapter:'hydrocarbon', q:'LPG chứa chủ yếu', opts:['CH₄, C₂H₆','C₃H₈, C₄H₁₀','C₂H₄, C₃H₆','C₅H₁₂, C₆H₁₄'], ans:1},
+    {id:10, chapter:'hydrocarbon', q:'Styrene có CTPT', opts:['C₇H₈','C₈H₈','C₆H₆','C₈H₁₀'], ans:1},
+    {id:11, chapter:'hydrocarbon', q:'Đồng phân của CH₂=CHCH₂CH₂CH₃', opts:['(CH₃)₂C=CHCH₃','CH₂=CHCH₂CH₃','CH≡CCH₂CH₂CH₃','CH₂=CHCH₂CH=CH₂'], ans:0},
+    {id:12, chapter:'hydrocarbon', q:'Chất tham gia cả 4 phản ứng: cháy, cộng Br₂, cộng H₂, thế AgNO₃/NH₃', opts:['ethane','ethylene','acetylene','cyclopropane'], ans:2},
+    {id:13, chapter:'hydrocarbon', q:'Phân biệt ethane và ethene thuận tiện nhất bằng', opts:['đốt cháy','cộng H₂','nước bromine','trùng hợp'], ans:2},
+    {id:14, chapter:'hydrocarbon', q:'Phát biểu không đúng:', opts:['Số H trong hydrocarbon luôn chẵn','Liên kết đôi gồm 1σ và 1π','Hydrocarbon không no chứa liên kết bội','CT chung alkane là CnH₂n'], ans:3},
+    {id:15, chapter:'hydrocarbon', q:'Toluene có công thức', opts:['C₆H₅CH₃','C₆H₅C₂H₅','C₆H₄(CH₃)₂','C₆H₆'], ans:0},
+    {id:16, chapter:'hydrocarbon', q:'Alkene có công thức chung', opts:['CnH₂n+₂','CnH₂n','CnH₂n-₂','CnH₂n-₆'], ans:1},
+    {id:17, chapter:'hydrocarbon', q:'Công thức dãy đồng đẳng benzene', opts:['CnH₂n+₂','CnH₂n','CnH₂n-₂','CnH₂n-₆'], ans:3},
+    {id:18, chapter:'hydrocarbon', q:'Benzene có cấu trúc', opts:['lục giác đều, phẳng','tứ diện','thẳng','gấp khúc'], ans:0},
+    {id:19, chapter:'hydrocarbon', q:'Sản phẩm chính khi oxi hóa toluene bằng KMnO₄ (t°)', opts:['benzoic acid','benzaldehyde','phenol','cresol'], ans:0},
 
-      // DẪN XUẤT HALOGEN - ALCOHOL - PHENOL
-      { id:21, chapter:'dx_alcohol_phenol', q:'Thuốc xịt gây tê cục bộ chứa', opts:['CO2','Chloroethane','Chloromethane','HCl'], ans:1 },
-      { id:22, chapter:'dx_alcohol_phenol', q:'Alcohol có nhóm OH liên kết với', opts:['C no','C không no','O','vòng benzene'], ans:0 },
-      { id:23, chapter:'dx_alcohol_phenol', q:'Chất tạo dung dịch xanh lam với Cu(OH)2', opts:['Methanol','Glycerol','Ethanol','Propan-2-ol'], ans:1 },
-      { id:24, chapter:'dx_alcohol_phenol', q:'Tên thay thế của CH3CH2CH2OH', opts:['Propan-1-ol','Propan-2-ol','Butan-1-ol','Pentan-1-ol'], ans:0 },
-      { id:25, chapter:'dx_alcohol_phenol', q:'Phenol thể hiện tính acid khi phản ứng với', opts:['Na','NaOH','Br2','HNO3'], ans:1 },
-      { id:26, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C3H8O', opts:['1','2','3','4'], ans:1 },
-      { id:27, chapter:'dx_alcohol_phenol', q:'Chất không phản ứng với NaOH?', opts:['Phenol','Acetic acid','Ethanol','Chloroethane'], ans:2 },
-      { id:28, chapter:'dx_alcohol_phenol', q:'Oxi hóa propan-2-ol bằng CuO thu được', opts:['Acetone','Propanal','Propionic acid','Ethanol'], ans:0 },
-      { id:29, chapter:'dx_alcohol_phenol', q:'Bậc của alcohol (CH3)3COH là', opts:['1','2','3','4'], ans:2 },
-      { id:30, chapter:'dx_alcohol_phenol', q:'Phenol tác dụng với Br2 tạo kết tủa trắng', opts:['2,4,6-tribromophenol','2-bromophenol','4-bromophenol','1,2-dibromobenzene'], ans:0 },
-      { id:31, chapter:'dx_alcohol_phenol', q:'Ethanol có thể điều chế bằng phương pháp', opts:['Lên men tinh bột','Cộng nước vào ethylene','Cả A và B','Thủy phân dẫn xuất halogen'], ans:2 },
-      { id:32, chapter:'dx_alcohol_phenol', q:'Chất nào sau đây là dẫn xuất halogen?', opts:['C2H5Br','C2H5OH','CH3COOH','C6H12O6'], ans:0 },
-      { id:33, chapter:'dx_alcohol_phenol', q:'Phản ứng tách HBr từ 2-bromobutane (KOH/ethanol) thu được sản phẩm chính', opts:['But-1-ene','But-2-ene','But-1-yne','Butane'], ans:1, exp:'Theo quy tắc Zaitsev.' },
-      { id:34, chapter:'dx_alcohol_phenol', q:'Alcohol nào sau đây là alcohol bậc I?', opts:['CH3OH','CH3CHOHCH3','(CH3)3COH','CH3CH2CHOHCH3'], ans:0 },
-      { id:35, chapter:'dx_alcohol_phenol', q:'Dung dịch phenol có tính acid yếu, không làm đổi màu', opts:['Quỳ tím','NaOH','Na','Na2CO3'], ans:0 },
-      { id:36, chapter:'dx_alcohol_phenol', q:'Tên gọi của C6H5CH2OH là', opts:['Phenol','Benzyl alcohol','Cresol','Ancol benzylic'], ans:1 },
-      { id:37, chapter:'dx_alcohol_phenol', q:'Chất nào phản ứng với Na nhưng không phản ứng với NaOH?', opts:['Phenol','Ethanol','Acetic acid','HCl'], ans:1 },
-      { id:38, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C4H10O', opts:['3','4','5','6'], ans:1, exp:'butan-1-ol, butan-2-ol, 2-methylpropan-1-ol, 2-methylpropan-2-ol.' },
-      { id:39, chapter:'dx_alcohol_phenol', q:'Cồn 70° có nghĩa là', opts:['70% khối lượng ethanol','70% thể tích ethanol','70 mol ethanol','70 gam ethanol/100ml'], ans:1 },
-      { id:40, chapter:'dx_alcohol_phenol', q:'Phenol nguy hiểm vì', opts:['Dễ cháy','Độc, gây bỏng','Có tính acid mạnh','Phản ứng với nước'], ans:1 },
-      { id:41, chapter:'dx_alcohol_phenol', q:'Chất nào có liên kết hydrogen liên phân tử mạnh nhất?', opts:['Ethane','Ethanol','Ethanal','Ethanoic acid'], ans:3 },
-      { id:42, chapter:'dx_alcohol_phenol', q:'Phản ứng ester hóa giữa ethanol và acetic acid cần xúc tác', opts:['H2SO4 đặc','NaOH','HCl','Ni'], ans:0 },
-      { id:43, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào có đồng phân hình học?', opts:['CH2=CHCl','CH3CH=CHBr','CH2=CCl2','CH3CH2Cl'], ans:1 },
-      { id:44, chapter:'dx_alcohol_phenol', q:'Glycerol có công thức', opts:['C3H5(OH)3','C2H4(OH)2','CH3OH','C3H7OH'], ans:0 },
-      { id:45, chapter:'dx_alcohol_phenol', q:'Khi đun nóng ethanol với H2SO4 đặc ở 170°C thu được', opts:['Ethylene','Diethyl ether','Ethane','Acetaldehyde'], ans:0 },
+    // --- DẪN XUẤT HALOGEN - ALCOHOL - PHENOL ---
+    {id:20, chapter:'dx_alcohol_phenol', q:'Hợp chất chính trong thuốc xịt gây tê cục bộ', opts:['CO₂','chloroethane','chloromethane','HCl'], ans:1},
+    {id:21, chapter:'dx_alcohol_phenol', q:'Alcohol có nhóm OH liên kết với', opts:['C no','C không no','O','vòng benzene'], ans:0},
+    {id:22, chapter:'dx_alcohol_phenol', q:'Chất tạo dung dịch xanh lam với Cu(OH)₂', opts:['methanol','glycerol','ethanol','propan-2-ol'], ans:1},
+    {id:23, chapter:'dx_alcohol_phenol', q:'Tên thay thế của CH₃CH₂CH₂OH', opts:['propan-1-ol','propan-2-ol','butan-1-ol','pentan-1-ol'], ans:0},
+    {id:24, chapter:'dx_alcohol_phenol', q:'Phenol thể hiện tính acid khi phản ứng với', opts:['Na','NaOH','Br₂','HNO₃'], ans:1},
+    {id:25, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C₃H₈O', opts:['1','2','3','4'], ans:1},
+    {id:26, chapter:'dx_alcohol_phenol', q:'Chất không phản ứng với NaOH?', opts:['phenol','acetic acid','ethanol','chloroethane'], ans:2},
+    {id:27, chapter:'dx_alcohol_phenol', q:'Oxi hóa propan-2-ol bằng CuO thu được', opts:['acetone','propanal','propionic acid','ethanol'], ans:0},
+    {id:28, chapter:'dx_alcohol_phenol', q:'Bậc của alcohol (CH₃)₃COH là', opts:['1','2','3','4'], ans:2},
+    {id:29, chapter:'dx_alcohol_phenol', q:'Phenol + Br₂ dư tạo kết tủa trắng', opts:['2,4,6-tribromophenol','2-bromophenol','4-bromophenol','1,2-dibromobenzen'], ans:0},
+    {id:30, chapter:'dx_alcohol_phenol', q:'Ethanol được điều chế bằng', opts:['lên men tinh bột','cộng nước vào ethylene','cả A và B','thủy phân dẫn xuất halogen'], ans:2},
+    {id:31, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào là chloroethane?', opts:['C₂H₅Br','C₂H₅Cl','CH₃Cl','C₆H₅Cl'], ans:1},
+    {id:32, chapter:'dx_alcohol_phenol', q:'Phản ứng tách HBr từ 2-bromobutane (KOH/ethanol) cho sp chính', opts:['but-1-ene','but-2-ene','but-1-yne','butane'], ans:1, exp:'Theo quy tắc Zaitsev.'},
+    {id:33, chapter:'dx_alcohol_phenol', q:'Alcohol bậc I là', opts:['CH₃OH','CH₃CHOHCH₃','(CH₃)₃COH','CH₃CH₂CHOHCH₃'], ans:0},
+    {id:34, chapter:'dx_alcohol_phenol', q:'Phenol không làm đổi màu', opts:['quỳ tím','NaOH','Na','Na₂CO₃'], ans:0},
+    {id:35, chapter:'dx_alcohol_phenol', q:'Tên gọi của C₆H₅CH₂OH', opts:['phenol','benzyl alcohol','cresol','ancol benzylic'], ans:1},
+    {id:36, chapter:'dx_alcohol_phenol', q:'Chất phản ứng với Na nhưng không phản ứng với NaOH?', opts:['phenol','ethanol','acetic acid','HCl'], ans:1},
+    {id:37, chapter:'dx_alcohol_phenol', q:'Số đồng phân alcohol C₄H₁₀O', opts:['3','4','5','6'], ans:1},
+    {id:38, chapter:'dx_alcohol_phenol', q:'Cồn 70° nghĩa là', opts:['70% khối lượng ethanol','70% thể tích ethanol','70 mol ethanol','70g ethanol/100mL'], ans:1},
+    {id:39, chapter:'dx_alcohol_phenol', q:'Chất nào có liên kết hydrogen liên phân tử mạnh nhất?', opts:['ethane','ethanol','ethanal','ethanoic acid'], ans:3},
+    {id:40, chapter:'dx_alcohol_phenol', q:'Phenol nguy hiểm vì', opts:['dễ cháy','độc, gây bỏng','có tính acid mạnh','phản ứng với nước'], ans:1},
+    {id:41, chapter:'dx_alcohol_phenol', q:'Khi đun nóng ethanol với H₂SO₄ đặc ở 170°C thu được', opts:['ethylene','diethyl ether','ethane','acetaldehyde'], ans:0},
+    {id:42, chapter:'dx_alcohol_phenol', q:'Glycerol có công thức', opts:['C₃H₅(OH)₃','C₂H₄(OH)₂','CH₃OH','C₃H₇OH'], ans:0},
+    {id:43, chapter:'dx_alcohol_phenol', q:'Dẫn xuất halogen nào có đồng phân hình học?', opts:['CH₂=CHCl','CH₃CH=CHBr','CH₂=CCl₂','CH₃CH₂Cl'], ans:1},
 
-      // CARBONYL - CARBOXYLIC ACID
-      { id:46, chapter:'carbonyl_acid', q:'Chất tham gia phản ứng tráng bạc', opts:['CH3OH','CH3CHO','CH3COCH3','CH3COOH'], ans:1 },
-      { id:47, chapter:'carbonyl_acid', q:'Tên thay thế của HCOOH', opts:['Formic acid','Methanoic acid','Ethanoic acid','Propanoic acid'], ans:1 },
-      { id:48, chapter:'carbonyl_acid', q:'Nhiệt độ sôi cao nhất: acetone, ethyl chloride, ethanol, acetic acid?', opts:['Acetone','Ethyl chloride','Ethanol','Acetic acid'], ans:3 },
-      { id:49, chapter:'carbonyl_acid', q:'Acetic acid không tác dụng với', opts:['Cu','NaOH','Na2CO3','C2H5OH (H2SO4 đặc)'], ans:0 },
-      { id:50, chapter:'carbonyl_acid', q:'Công thức chung của carboxylic acid no, đơn chức, mạch hở', opts:['CnH2nO2 (n≥1)','CnH2n+2O2','CnH2n-2O','CnH2n-2O2'], ans:0 },
-      { id:51, chapter:'carbonyl_acid', q:'Phản ứng ester hóa là phản ứng giữa', opts:['Acid và base','Acid và alcohol','Aldehyde và alcohol','Acid và muối'], ans:1 },
-      { id:52, chapter:'carbonyl_acid', q:'Chất dùng ngâm xác động vật', opts:['dd HCHO','dd CH3CHO','dd CH3COOH','dd CH3OH'], ans:0 },
-      { id:53, chapter:'carbonyl_acid', q:'Oxi hóa không hoàn toàn ethylene thu được', opts:['Ethanol','Ethanal','Acetic acid','Ethylene glycol'], ans:1 },
-      { id:54, chapter:'carbonyl_acid', q:'Acetone có công thức', opts:['CH3COCH3','CH3CH2CHO','HCHO','CH3COOH'], ans:0 },
-      { id:55, chapter:'carbonyl_acid', q:'Thuốc thử Tollens dùng để nhận biết', opts:['Aldehyde','Ketone','Alcohol','Acid'], ans:0 },
-      { id:56, chapter:'carbonyl_acid', q:'Phản ứng iodoform dùng để nhận biết', opts:['Nhóm CH3CO-','Nhóm -CHO','Nhóm -OH','Nhóm -COOH'], ans:0 },
-      { id:57, chapter:'carbonyl_acid', q:'Giấm ăn chứa acid nào?', opts:['HCOOH','CH3COOH','C2H5COOH','C3H7COOH'], ans:1 },
-      { id:58, chapter:'carbonyl_acid', q:'Cặn trong ấm đun nước (CaCO3) có thể xử lý bằng', opts:['Nước','Giấm ăn','Muối','Cồn'], ans:1 },
-      { id:59, chapter:'carbonyl_acid', q:'Số đồng phân acid carboxylic C4H8O2', opts:['1','2','3','4'], ans:1, exp:'CH3CH2CH2COOH và (CH3)2CHCOOH.' },
-      { id:60, chapter:'carbonyl_acid', q:'Chất nào vừa có tính oxi hóa vừa có tính khử?', opts:['Aldehyde','Ketone','Carboxylic acid','Alcohol'], ans:0 },
-      { id:61, chapter:'carbonyl_acid', q:'Formalin là dung dịch chất nào?', opts:['HCHO 37-40%','CH3CHO','CH3COCH3','C2H5OH'], ans:0 },
-      { id:62, chapter:'carbonyl_acid', q:'Phản ứng 2CH3CHO + O2 → 2CH3COOH thuộc loại', opts:['Oxi hóa','Khử','Cộng','Trùng hợp'], ans:0 },
-      { id:63, chapter:'carbonyl_acid', q:'Chất không phản ứng với NaHCO3?', opts:['CH3COOH','HCOOH','C2H5OH','Citric acid'], ans:2 },
-      { id:64, chapter:'carbonyl_acid', q:'Dung dịch acetic acid 2-5% gọi là', opts:['Giấm ăn','Formalin','Cồn','Nước muối'], ans:0 },
-      { id:65, chapter:'carbonyl_acid', q:'Sản phẩm khử aldehyde bằng NaBH4 là', opts:['Alcohol bậc I','Alcohol bậc II','Ketone','Acid'], ans:0 }
-    ];
+    // --- CARBONYL - CARBOXYLIC ACID ---
+    {id:50, chapter:'carbonyl_acid', q:'Chất tham gia phản ứng tráng bạc', opts:['CH₃OH','CH₃CHO','CH₃COCH₃','CH₃COOH'], ans:1},
+    {id:51, chapter:'carbonyl_acid', q:'Tên thay thế của HCOOH', opts:['formic acid','methanoic acid','ethanoic acid','propanoic acid'], ans:1},
+    {id:52, chapter:'carbonyl_acid', q:'Nhiệt độ sôi cao nhất:', opts:['acetone','ethyl chloride','ethanol','acetic acid'], ans:3},
+    {id:53, chapter:'carbonyl_acid', q:'Acetic acid không tác dụng với', opts:['Cu','NaOH','Na₂CO₃','C₂H₅OH (H₂SO₄)'], ans:0},
+    {id:54, chapter:'carbonyl_acid', q:'CT chung acid no, đơn chức, mạch hở', opts:['CnH₂nO₂ (n≥1)','CnH₂n+₂O₂ (n≥2)','CnH₂n-₂O (n≥2)','CnH₂n-₂O₂ (n≥3)'], ans:0},
+    {id:55, chapter:'carbonyl_acid', q:'Phản ứng ester hóa xảy ra giữa', opts:['acid và base','acid và alcohol','aldehyde và alcohol','acid và muối'], ans:1},
+    {id:56, chapter:'carbonyl_acid', q:'Chất dùng ngâm xác động vật', opts:['dd HCHO','dd CH₃CHO','dd CH₃COOH','dd CH₃OH'], ans:0},
+    {id:57, chapter:'carbonyl_acid', q:'Oxi hóa không hoàn toàn ethylene thu được', opts:['ethanol','ethanal','acetic acid','ethylene glycol'], ans:1},
+    {id:58, chapter:'carbonyl_acid', q:'Acetone có công thức', opts:['CH₃COCH₃','CH₃CH₂CHO','HCHO','CH₃COOH'], ans:0},
+    {id:59, chapter:'carbonyl_acid', q:'Thuốc thử Tollens dùng nhận biết', opts:['aldehyde','ketone','alcohol','acid'], ans:0},
+    {id:60, chapter:'carbonyl_acid', q:'Phản ứng iodoform dùng nhận biết', opts:['nhóm CH₃CO-','nhóm -CHO','nhóm -OH','nhóm -COOH'], ans:0},
+    {id:61, chapter:'carbonyl_acid', q:'Giấm ăn chứa acid nào?', opts:['HCOOH','CH₃COOH','C₂H₅COOH','C₃H₇COOH'], ans:1},
+    {id:62, chapter:'carbonyl_acid', q:'Cặn đá vôi trong ấm đun nước có thể xử lý bằng', opts:['nước','giấm ăn','muối','cồn'], ans:1},
+    {id:63, chapter:'carbonyl_acid', q:'Số đồng phân acid C₄H₈O₂', opts:['1','2','3','4'], ans:1},
+    {id:64, chapter:'carbonyl_acid', q:'Chất vừa có tính oxi hóa vừa có tính khử?', opts:['aldehyde','ketone','carboxylic acid','alcohol'], ans:0},
+    {id:65, chapter:'carbonyl_acid', q:'Formalin là dung dịch', opts:['HCHO 37-40%','CH₃CHO','CH₃COCH₃','C₂H₅OH'], ans:0},
+    {id:66, chapter:'carbonyl_acid', q:'0.1 mol CH₃CHO tráng bạc hoàn toàn thu được Ag', opts:['10.8g','21.6g','32.4g','43.2g'], ans:1},
+    {id:67, chapter:'carbonyl_acid', q:'Sản phẩm khử aldehyde bằng NaBH₄ là', opts:['alcohol bậc I','alcohol bậc II','ketone','acid'], ans:0},
+    {id:68, chapter:'carbonyl_acid', q:'Chất không phản ứng với NaHCO₃?', opts:['CH₃COOH','HCOOH','C₂H₅OH','citric acid'], ans:2},
+    {id:69, chapter:'carbonyl_acid', q:'Dung dịch acetic acid 2-5% gọi là', opts:['giấm ăn','formalin','cồn','nước muối'], ans:0},
+    {id:70, chapter:'carbonyl_acid', q:'Tên gọi của CH₃CH(CH₃)CH₂COOH', opts:['3-methylbutanoic acid','2-methylpropanoic acid','pentanoic acid','2-methylpentanoic acid'], ans:0}
+  ];
 
-    // ========== KIẾN THỨC TỔNG HỢP ==========
-    const knowledgeData = {
-      hydrocarbon: `
-        <h2>⛽ Chương 4: Hydrocarbon</h2>
-        <p><em>Hydrocarbon là những hợp chất hữu cơ chỉ chứa C và H.</em></p>
+  const allTF = [
+    {id:101, chapter:'hydrocarbon', text:'But-1-ene và but-2-ene + KMnO₄ (t° thường) tạo diol.',
+     items:[
+       {text:'Một diol chứa hai nhóm alcohol bậc một.', ans:false},
+       {text:'Một diol chứa một nhóm alcohol bậc một và một bậc hai.', ans:true},
+       {text:'Một diol chứa hai nhóm alcohol bậc hai.', ans:true},
+       {text:'Cả hai alkene đều có đồng phân cis-trans.', ans:false}
+     ]},
+    {id:102, chapter:'dx_alcohol_phenol', text:'Menthol (C₁₀H₂₀O) trong bạc hà.',
+     items:[
+       {text:'Menthol là alcohol no, đơn chức.', ans:false},
+       {text:'CTPT menthol là C₁₀H₂₀O.', ans:true},
+       {text:'Menthol là alcohol bậc 3.', ans:false},
+       {text:'%O trong menthol là 10.256%.', ans:true}
+     ]},
+    {id:103, chapter:'dx_alcohol_phenol', text:'X (C₈H₈O₂) + 2NaOH → Y + 2H₂O.',
+     items:[
+       {text:'X có 5 liên kết pi.', ans:false},
+       {text:'Y là phenol đa chức.', ans:true},
+       {text:'Y có 6 nguyên tử H.', ans:false},
+       {text:'X làm mất màu nước bromine.', ans:true}
+     ]},
+    {id:104, chapter:'carbonyl_acid', text:'Hợp chất X (C₇H₁₆O, ketone).',
+     items:[
+       {text:'CTPT X là C₇H₁₆O.', ans:true},
+       {text:'Tên X là 2-methylhexan-5-one.', ans:true},
+       {text:'X phản ứng với Tollens.', ans:false},
+       {text:'X có nhóm chức carbonyl.', ans:true}
+     ]},
+    {id:105, chapter:'hydrocarbon', text:'Hydrogen hóa alkene/alkyne (Ni, t°).',
+     items:[
+       {text:'Acetylene + H₂ (Lindlar) → ethane.', ans:false},
+       {text:'Propylene + H₂ → propane.', ans:true},
+       {text:'Isobutylene + H₂ → butane.', ans:false},
+       {text:'But-1-ene và but-2-yne cộng H₂ dư cho cùng sản phẩm.', ans:true}
+     ]},
+    {id:106, chapter:'dx_alcohol_phenol', text:'Thí nghiệm thủy phân bromoethane.',
+     items:[
+       {text:'Có thể thay NaOH bằng KOH.', ans:true},
+       {text:'HNO₃ để trung hòa kiềm dư.', ans:true},
+       {text:'Bước 1 dùng AgNO₃ kiểm tra ion Br⁻.', ans:true},
+       {text:'Kết tủa cuối cùng là AgBr màu trắng.', ans:true}
+     ]},
+    {id:107, chapter:'dx_alcohol_phenol', text:'Picric acid từ phenol + HNO₃.',
+     items:[
+       {text:'Phản ứng chứng minh ảnh hưởng -OH lên vòng benzen.', ans:true},
+       {text:'Picric acid là chất rắn màu trắng.', ans:false},
+       {text:'Picric acid có tính acid mạnh hơn phenol.', ans:true},
+       {text:'Picric acid dùng làm thuốc nổ, thuộc da.', ans:true}
+     ]},
+    {id:108, chapter:'carbonyl_acid', text:'Phát biểu về aldehyde/ketone.',
+     items:[
+       {text:'Aldehyde vừa có tính oxi hóa vừa có tính khử.', ans:true},
+       {text:'Ketone phản ứng với Tollens.', ans:false},
+       {text:'Tất cả aldehyde, ketone đều có phản ứng iodoform.', ans:false},
+       {text:'Bôi giấm khi bị côn trùng cắn.', ans:false}
+     ]}
+  ];
 
-        <h3>1. Alkane (CnH2n+2, n≥1)</h3>
-        <ul>
-          <li><b>Cấu tạo:</b> Chỉ có liên kết đơn C-C, C-H, mạch hở.</li>
-          <li><b>Tính chất vật lí:</b> Nhẹ hơn nước, không tan trong nước, tan trong dung môi hữu cơ.</li>
-          <li><b>Tính chất hóa học:</b> Phản ứng thế halogen (askt), cracking, phản ứng cháy: CnH2n+2 + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O.</li>
-          <li><b>Ứng dụng:</b> Nhiên liệu, dung môi, nguyên liệu tổng hợp hữu cơ.</li>
-        </ul>
+  const allShort = [
+    {q:'Cho CH≡C–CH₂OH tác dụng với: Cu(OH)₂; AgNO₃/NH₃; H₂ (Ni,t°); Na; nước bromine; KMnO₄; NaOH. Có bao nhiêu phản ứng?', a:'5 (trừ NaOH).'},
+    {q:'Số đồng phân alcohol C₃H₈O?', a:'2 (propan-1-ol, propan-2-ol).'},
+    {q:'X + Ca → muối C₄H₄O₄Ca. CTCT X?', a:'HOOC-CH=CH-COOH.'},
+    {q:'Điều chế 33.6L C₂H₂ (đktc) cần m gam đất đèn (80% CaC₂). m = ?', a:'120g.'},
+    {q:'Trung hòa 0.005 mol citric acid (C₆H₈O₇) cần V mL NaOH 0.4M. V = ?', a:'37.5 mL.'},
+    {q:'Số chất tác dụng I₂/NaOH tạo iodoform: CH₃CH₂CHO, CH₃COCH₃, CH₃CH₂CH₂OH, CH₃COOH.', a:'2 (CH₃COCH₃ và CH₃CH₂CHO).'},
+    {q:'Trung hòa 40mL giấm (D=1g/mL) cần 25mL NaOH 1M. Nồng độ %?', a:'3.75%.'},
+    {q:'Oxi hóa ethylene → ethanal. Dẫn 2.479L X (đkc) qua AgNO₃/NH₃ dư thu 16.2g Ag. H%?', a:'75%.'},
+    {q:'6.72g acid X + 200g dd NaOH 2.24%. Tìm M(X)?', a:'60 (CH₃COOH).'},
+    {q:'Chuẩn độ 6mL acetic acid bằng NaOH 0.15M (V TB = 19.97mL). Nồng độ mol?', a:'0.5M.'},
+    {q:'Lên men 5L ethanol 9.2° (D=0.8) H=80% thu m g acid?', a:'384g.'},
+    {q:'Bình gas 12kg (propane:butane=1:2 mol). Nhiệt tỏa ra?', a:'597600 kJ, dùng được ~47.8 ngày.'},
+    {q:'Cho 4.6g alcohol no đơn chức X + Na dư → 1.2395 L H₂ (đkc). X là?', a:'C₂H₅OH (ethanol).'},
+    {q:'Tính M của acid: 6.72g acid + 200g dd NaOH 2.24% vừa đủ.', a:'60 (CH₃COOH).'}
+  ];
 
-        <h3>2. Alkene (CnH2n, n≥2) và Alkyne (CnH2n-2, n≥2)</h3>
-        <ul>
-          <li><b>Alkene:</b> Có 1 liên kết đôi C=C. Phản ứng cộng (H₂, Br₂, HX), trùng hợp, oxi hóa bởi KMnO₄. <b>Quy tắc Markovnikov:</b> H cộng vào C có nhiều H hơn.</li>
-          <li><b>Alkyne:</b> Có 1 liên kết ba C≡C. Tương tự alkene, thêm phản ứng thế ion kim loại (AgNO₃/NH₃) với alkyne đầu mạch tạo kết tủa.</li>
-          <li><b>Điều chế acetylene:</b> CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂.</li>
-        </ul>
+  // ==================== KIẾN THỨC CHI TIẾT ====================
+  const knowledgeHTML = `
+    <div class="knowledge-box">
+      <h2>📚 TỔNG HỢP KIẾN THỨC HÓA 11 HK2</h2>
+      <p><em>Bám sát chương trình mới, tổng hợp từ SGK, VnDoc, VietJack, VuiHoc.</em></p>
 
-        <h3>3. Arene (Hydrocarbon thơm) ⭐</h3>
-        <p><b>Khái niệm:</b> Arene là hydrocarbon có <span class="highlight">một hay nhiều vòng benzene</span>. Benzene (C₆H₆) là arene đơn giản nhất. Dãy đồng đẳng của benzene có công thức chung <b>CnH2n-6 (n ≥ 6)</b>.</p>
-        
-        <h4>a. Cấu tạo và danh pháp</h4>
-        <ul>
-          <li><b>Benzene:</b> 6C tạo thành lục giác đều, tất cả nguyên tử nằm trên một mặt phẳng, góc liên kết 120°, độ dài liên kết C-C đều bằng 139 pm.</li>
-          <li><b>Danh pháp:</b> Tên nhánh alkyl + benzene (vd: methylbenzene/toluene, vinylbenzene/styrene).</li>
-          <li><b>Vị trí nhóm thế:</b> ortho (o-, 1,2), meta (m-, 1,3), para (p-, 1,4).</li>
-          <li><b>Gốc aryl:</b> Phenyl (C₆H₅-), Benzyl (C₆H₅CH₂-).</li>
-          <li>Các arene thường gặp: toluene (C₆H₅CH₃), xylene (C₆H₄(CH₃)₂), styrene (C₆H₅CH=CH₂), naphthalene (C₁₀H₈).</li>
-        </ul>
+      <h2>⛽ CHƯƠNG 4: HYDROCARBON</h2>
 
-        <h4>b. Tính chất vật lí</h4>
-        <ul>
-          <li>Benzene, toluene, styrene, xylene là chất lỏng không màu; naphthalene là chất rắn trắng.</li>
-          <li>Không tan trong nước, nhẹ hơn nước, tan trong dung môi hữu cơ, có mùi đặc trưng, dễ cháy.</li>
-          <li>Nhóm BTX (Benzene, Toluene, Xylene) có trong dầu mỏ và nhựa than đá.</li>
-        </ul>
+      <h3>1. ALKANE (CnH₂n+₂, n≥1)</h3>
+      <p><b>Tính chất vật lý:</b> Nhẹ hơn nước, không tan trong nước, tan trong dung môi hữu cơ. Nhiệt độ sôi tăng dần theo chiều tăng phân tử khối.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li>Phản ứng thế halogen (askt): CH₄ + Cl₂ → CH₃Cl + HCl (theo cơ chế gốc tự do).</li>
+        <li>Phản ứng cracking: Cracking alkane mạch dài tạo alkane ngắn và alkene (t° cao, xt).</li>
+        <li>Phản ứng cháy: CnH₂n+₂ + (3n+1)/2 O₂ → nCO₂ + (n+1)H₂O, tỏa nhiều nhiệt.</li>
+      </ul>
 
-        <h4>c. Tính chất hóa học</h4>
-        <p><b>Vòng benzene bền, khó tham gia phản ứng cộng, phản ứng đặc trưng là phản ứng thế.</b></p>
-        <table>
-          <tr><th>Loại phản ứng</th><th>Phương trình tiêu biểu</th><th>Điều kiện</th></tr>
-          <tr>
-            <td><b>Phản ứng thế Halogen</b></td>
-            <td>C₆H₆ + Br₂ →(FeBr₃, t°) C₆H₅Br + HBr<br>C₆H₅CH₃ + Br₂ →(FeBr₃, t°) o-bromotoluene + p-bromotoluene</td>
-            <td>Xúc tác FeCl₃/FeBr₃, nhiệt độ</td>
-          </tr>
-          <tr>
-            <td><b>Phản ứng Nitro hóa</b></td>
-            <td>C₆H₆ + HNO₃ →(H₂SO₄ đặc, 50°C) C₆H₅NO₂ + H₂O</td>
-            <td>HNO₃ đặc, H₂SO₄ đặc, ≤50°C</td>
-          </tr>
-          <tr>
-            <td><b>Phản ứng cộng H₂</b></td>
-            <td>C₆H₆ + 3H₂ →(Ni, t° cao, áp suất) C₆H₁₂ (cyclohexane)</td>
-            <td>Ni, t° cao, áp suất cao</td>
-          </tr>
-          <tr>
-            <td><b>Oxi hóa nhánh alkyl</b></td>
-            <td>C₆H₅CH₃ + 2KMnO₄ →(t°) C₆H₅COOK + 2MnO₂ + KOH + H₂O</td>
-            <td>KMnO₄, đun nóng</td>
-          </tr>
-          <tr>
-            <td><b>Phản ứng cháy</b></td>
-            <td>C₆H₆ + 15/2 O₂ → 6CO₂ + 3H₂O</td>
-            <td></td>
-          </tr>
-        </table>
-        <p><b>Quy tắc thế vào vòng benzene:</b> Khi vòng benzene có sẵn nhóm thế loại I (alkyl, -OH, -NH₂), phản ứng thế ưu tiên vào vị trí <b>ortho và para</b>. Nhóm thế loại II (-COOH, -CHO, -NO₂) định hướng <b>meta</b>.</p>
+      <h3>2. ALKENE (CnH₂n, n≥2) VÀ ALKYNE (CnH₂n-₂, n≥2)</h3>
+      <p><b>Tính chất vật lý:</b> Tương tự alkane, nhẹ hơn nước, không màu. Alkene từ C₂ đến C₄ là chất khí.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li><b>Phản ứng cộng:</b> Cộng H₂ (Ni, t°) tạo alkane; cộng Br₂ (mất màu dd Br₂); cộng HX (quy tắc Markovnikov: H cộng vào C có nhiều H hơn). Ví dụ: CH₂=CH₂ + Br₂ → CH₂Br-CH₂Br.</li>
+        <li><b>Phản ứng trùng hợp:</b> nCH₂=CH₂ → (-CH₂-CH₂-)n (polyethylene).</li>
+        <li><b>Phản ứng oxi hóa:</b> Alkene + KMnO₄ loãng lạnh → diol; Alkyne đầu mạch thế H bằng AgNO₃/NH₃ tạo kết tủa (R-C≡C-Ag).</li>
+      </ul>
+      <p><b>Điều chế acetylene:</b> CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂.</p>
 
-        <h4>d. Ứng dụng và điều chế</h4>
-        <ul>
-          <li><b>Ứng dụng:</b> Sản xuất polymer (styrene→PS), dung môi, thuốc nhuộm, dược phẩm, chất tẩy rửa (LAS).</li>
-          <li><b>Điều chế:</b> Chủ yếu từ dầu mỏ qua quá trình reforming.</li>
-          <li><b>Lưu ý an toàn:</b> Arene (đặc biệt benzene) là chất độc, có khả năng gây ung thư, cần tuân thủ quy tắc an toàn khi sử dụng.</li>
-        </ul>
-      `,
-      dx_alcohol_phenol: `
-        <h2>🧴 Chương 5: Dẫn xuất Halogen - Alcohol - Phenol</h2>
+      <h3>3. ARENE (HYDROCARBON THƠM)</h3>
+      <p><b>Dãy đồng đẳng:</b> CnH₂n-₆ (n≥6). Tiêu biểu: benzene (C₆H₆), toluene (C₆H₅CH₃), styrene (C₆H₅CH=CH₂).</p>
+      <p><b>Tính chất vật lý:</b> Benzene, toluene là chất lỏng không màu, mùi thơm, không tan trong nước, nhẹ hơn nước.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li><b>Phản ứng thế:</b> Halogen hóa (Fe, t°): C₆H₆ + Br₂ → C₆H₅Br + HBr; Nitro hóa (HNO₃/H₂SO₄ đặc, 50°C) → nitrobenzene.</li>
+        <li><b>Quy tắc định hướng:</b> Nhóm alkyl (-CH₃) định hướng ortho-para; nhóm -NO₂, -COOH định hướng meta.</li>
+        <li><b>Phản ứng cộng:</b> C₆H₆ + 3H₂ (Ni, t° cao) → cyclohexane.</li>
+        <li><b>Oxi hóa nhánh:</b> C₆H₅CH₃ + 2KMnO₄ (t°) → C₆H₅COOK + 2MnO₂ + KOH + H₂O (tạo axit benzoic).</li>
+      </ul>
+      <p><b>Ứng dụng:</b> Benzene, toluene, xylene (BTX) là nguyên liệu cho công nghiệp hóa chất, sản xuất nhựa, phẩm nhuộm, dược phẩm.</p>
 
-        <h3>1. Dẫn xuất Halogen</h3>
-        <ul>
-          <li><b>Khái niệm:</b> Thay thế H của hydrocarbon bằng halogen (F, Cl, Br, I).</li>
-          <li><b>Tính chất hóa học:</b>
-            <ul>
-              <li>Phản ứng thế với OH⁻: R-X + NaOH →(t°) R-OH + NaX.</li>
-              <li>Phản ứng tách: R-CH₂-CH₂-X + KOH →(ethanol, t°) R-CH=CH₂ + KX + H₂O. <b>Quy tắc Zaitsev:</b> H ở C bậc cao hơn bị tách ưu tiên.</li>
-            </ul>
-          </li>
-          <li><b>Ứng dụng:</b> Dung môi, thuốc trừ sâu, chất làm lạnh (CFC - gây thủng tầng ozone), thuốc gây tê (chloroethane).</li>
-        </ul>
+      <h2>🧴 CHƯƠNG 5: DẪN XUẤT HALOGEN – ALCOHOL – PHENOL</h2>
 
-        <h3>2. Alcohol</h3>
-        <ul>
-          <li><b>Khái niệm:</b> Nhóm -OH liên kết với C no. Phân loại bậc I, II, III.</li>
-          <li><b>Tính chất vật lí:</b> Alcohol có liên kết hydrogen liên phân tử → nhiệt độ sôi cao hơn hydrocarbon tương ứng. Tan tốt trong nước.</li>
-          <li><b>Tính chất hóa học:</b>
-            <ul>
-              <li>Tác dụng với Na: 2ROH + 2Na → 2RONa + H₂↑.</li>
-              <li>Oxi hóa: RCH₂OH + CuO →(t°) RCHO + Cu + H₂O (aldehyde); R₂CHOH + CuO →(t°) R₂C=O + Cu + H₂O (ketone).</li>
-              <li>Phản ứng tách nước: Alcohol →(H₂SO₄ đặc, 170°C) alkene + H₂O.</li>
-              <li>Polyalcohol (glycerol) hòa tan Cu(OH)₂ tạo dung dịch xanh lam đặc trưng.</li>
-            </ul>
-          </li>
-          <li><b>Điều chế ethanol:</b> Lên men tinh bột hoặc hydrat hóa ethylene (C₂H₄ + H₂O →(H⁺, t°) C₂H₅OH).</li>
-        </ul>
+      <h3>1. DẪN XUẤT HALOGEN</h3>
+      <p><b>Khái niệm:</b> Hợp chất hữu cơ chứa nguyên tố halogen (F, Cl, Br, I) liên kết trực tiếp với carbon.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li><b>Phản ứng thế:</b> R-X + NaOH (dd) → R-OH + NaX (đun nóng).</li>
+        <li><b>Phản ứng tách:</b> R-CH₂-CH₂Cl + KOH (ancol, t°) → R-CH=CH₂ + KCl + H₂O (quy tắc Zaitsev: H tách ở C bậc cao hơn, sản phẩm chính là alkene bền).</li>
+      </ul>
+      <p><b>Ứng dụng:</b> Chloroethane làm thuốc tê; CFC gây thủng tầng ozone; nhiều chất là dung môi, thuốc trừ sâu.</p>
 
-        <h3>3. Phenol</h3>
-        <ul>
-          <li><b>Cấu tạo:</b> Nhóm -OH gắn trực tiếp vào vòng benzene.</li>
-          <li><b>Tính chất hóa học:</b>
-            <ul>
-              <li>Tính acid yếu (phenol): C₆H₅OH + NaOH → C₆H₅ONa + H₂O. Không làm đổi màu quỳ tím.</li>
-              <li>Phản ứng thế vòng thơm: C₆H₅OH + 3Br₂ → C₆H₂Br₃OH↓ (trắng) + 3HBr.</li>
-            </ul>
-          </li>
-          <li><b>Điều chế:</b> Từ cumene hoặc nhựa than đá.</li>
-        </ul>
-      `,
-      carbonyl_acid: `
-        <h2>🍋 Chương 6: Hợp chất Carbonyl - Carboxylic Acid</h2>
+      <h3>2. ALCOHOL</h3>
+      <p><b>Khái niệm:</b> Nhóm -OH liên kết với nguyên tử carbon no. Phân loại bậc I, II, III.</p>
+      <p><b>Tính chất vật lý:</b> Có liên kết hydrogen liên phân tử → nhiệt độ sôi cao hơn hydrocarbon tương ứng; các alcohol nhỏ tan vô hạn trong nước.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li><b>Tác dụng với Na:</b> 2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑.</li>
+        <li><b>Oxi hóa:</b> Alcohol bậc I + CuO → aldehyde (R-CHO); bậc II → ketone (R-CO-R'). Bậc III không bị oxi hóa trong điều kiện này.</li>
+        <li><b>Tách nước:</b> C₂H₅OH (H₂SO₄ đặc, 170°C) → C₂H₄↑ + H₂O; ở 140°C tạo ether.</li>
+        <li><b>Phản ứng với polyol:</b> Glycerol + Cu(OH)₂ tạo phức xanh lam (nhận biết polyalcohol có 2 nhóm OH liền kề).</li>
+      </ul>
+      <p><b>Điều chế ethanol:</b> Lên men tinh bột (C₆H₁₀O₅)n → nC₆H₁₂O₆ → 2nC₂H₅OH + 2nCO₂; hoặc hydrat hóa ethylene.</p>
 
-        <h3>1. Hợp chất Carbonyl (Aldehyde & Ketone)</h3>
-        <ul>
-          <li><b>Aldehyde (RCHO):</b> Có phản ứng tráng bạc (AgNO₃/NH₃), phản ứng với Cu(OH)₂/OH⁻ tạo kết tủa đỏ gạch Cu₂O.</li>
-          <li><b>Ketone (RCOR'):</b> Không tráng bạc, nhưng có phản ứng iodoform (nhóm CH₃CO-).</li>
-          <li><b>Phản ứng khử:</b> Aldehyde → alcohol bậc I; Ketone → alcohol bậc II (tác nhân NaBH₄, LiAlH₄).</li>
-          <li><b>Formaldehyde (HCHO):</b> Dung dịch 37-40% gọi là formalin, dùng bảo quản mẫu, sản xuất nhựa.</li>
-        </ul>
+      <h3>3. PHENOL</h3>
+      <p><b>Cấu tạo:</b> Nhóm -OH liên kết trực tiếp với vòng benzene (C₆H₅OH).</p>
+      <p><b>Tính chất vật lý:</b> Chất rắn không màu, ít tan trong nước lạnh, tan nhiều trong nước nóng và dung môi hữu cơ, có tính độc, gây bỏng da.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li>Tính acid yếu (phenol): C₆H₅OH + NaOH → C₆H₅ONa + H₂O. Không làm đổi màu quỳ tím.</li>
+        <li>Phản ứng thế vòng thơm: C₆H₅OH + 3Br₂ (dd) → 2,4,6-tribromophenol ↓ (trắng) + 3HBr. Do ảnh hưởng của nhóm -OH làm tăng mật độ electron vòng benzene, dễ thế hơn benzene.</li>
+        <li>Tác dụng với Na: 2C₆H₅OH + 2Na → 2C₆H₅ONa + H₂.</li>
+      </ul>
+      <p><b>Ứng dụng:</b> Sản xuất nhựa phenol-formaldehyde, thuốc nổ (picric acid), phẩm nhuộm, chất diệt khuẩn.</p>
 
-        <h3>2. Carboxylic Acid</h3>
-        <ul>
-          <li><b>Công thức chung:</b> R-COOH. Acid no, đơn chức, mạch hở: CnH2n+1COOH hay CmH2mO₂.</li>
-          <li><b>Tính chất vật lí:</b> Có liên kết hydrogen liên phân tử → nhiệt độ sôi cao nhất trong các loại hợp chất hữu cơ cùng phân tử khối.</li>
-          <li><b>Tính chất hóa học:</b>
-            <ul>
-              <li>Tính acid: Làm đỏ quỳ tím, tác dụng với kim loại, base, muối cacbonat. 2CH₃COOH + CaCO₃ → (CH₃COO)₂Ca + CO₂↑ + H₂O.</li>
-              <li>Phản ứng ester hóa: RCOOH + R'OH ⇌(H₂SO₄ đặc, t°) RCOOR' + H₂O.</li>
-            </ul>
-          </li>
-          <li><b>Acetic acid (CH₃COOH):</b> Thành phần giấm ăn (2-5%). Điều chế bằng lên men ethanol hoặc oxi hóa alkane.</li>
-        </ul>
-      `
-    };
+      <h2>🍋 CHƯƠNG 6: HỢP CHẤT CARBONYL – CARBOXYLIC ACID</h2>
 
-    // State
-    let currentView = 'review';
-    let currentChapter = 'all';
-    let userAnswers = {};
-    let filteredQuestions = [];
-    let examTimer = null;
-    let examTimeLeft = 45 * 60;
-    let examSubmitted = false;
+      <h3>1. HỢP CHẤT CARBONYL (ALDEHYDE & KETONE)</h3>
+      <p><b>Aldehyde (RCHO):</b> Có phản ứng tráng bạc (AgNO₃/NH₃ → Ag↓) và phản ứng với Cu(OH)₂/OH⁻ đun nóng tạo kết tủa đỏ gạch Cu₂O. Dùng để nhận biết aldehyde.</p>
+      <p><b>Ketone (RCOR'):</b> Không tráng bạc, nhưng có phản ứng iodoform (với I₂/NaOH) nếu có nhóm CH₃CO- (tạo kết tủa vàng CHI₃).</p>
+      <p><b>Tính chất hóa học chung:</b></p>
+      <ul>
+        <li>Phản ứng khử (NaBH₄, LiAlH₄): Aldehyde → alcohol bậc I; Ketone → alcohol bậc II.</li>
+        <li>Phản ứng oxi hóa: Aldehyde dễ bị oxi hóa thành acid carboxylic.</li>
+      </ul>
+      <p><b>Formaldehyde (HCHO):</b> Dung dịch 37-40% gọi là formalin, dùng để ngâm xác, sát trùng. Sản xuất nhựa phenol-formaldehyde, ure-formaldehyde.</p>
+      <p><b>Acetone (CH₃COCH₃):</b> Là dung môi quan trọng, dùng trong sản xuất thủy tinh hữu cơ (plexiglas).</p>
 
-    const mainTabs = document.querySelectorAll('.main-tab');
-    const chapterFilterContainer = document.getElementById('chapterFilterContainer');
-    const chapterBtns = document.querySelectorAll('.chapter-btn');
-    const dynamicContent = document.getElementById('dynamicContent');
-    const actionBar = document.getElementById('actionBar');
+      <h3>2. CARBOXYLIC ACID</h3>
+      <p><b>Công thức chung:</b> R-COOH. Acid no, đơn chức, mạch hở: CnH₂n+₁COOH hay CmH₂mO₂.</p>
+      <p><b>Tính chất vật lý:</b> Có liên kết hydrogen liên phân tử mạnh → nhiệt độ sôi cao hơn alcohol cùng số C. Acid fomic, acetic tan vô hạn trong nước; mùi chua đặc trưng.</p>
+      <p><b>Tính chất hóa học:</b></p>
+      <ul>
+        <li><b>Tính acid:</b> Làm đỏ quỳ tím, tác dụng với kim loại trước H (Zn, Fe), base, oxide bazơ, muối cacbonat: 2CH₃COOH + CaCO₃ → (CH₃COO)₂Ca + CO₂↑ + H₂O.</li>
+        <li><b>Phản ứng ester hóa:</b> RCOOH + R'OH ⇌(H₂SO₄ đặc, t°) RCOOR' + H₂O. Đây là phản ứng thuận nghịch.</li>
+      </ul>
+      <p><b>Acetic acid (CH₃COOH):</b> Là acid yếu, thành phần chính của giấm ăn (2-5%). Điều chế: C₂H₅OH + O₂ (men giấm) → CH₃COOH + H₂O; hoặc từ CH₃OH + CO (xt, t°).</p>
+      <p><b>Một số acid quan trọng:</b> Formic acid (HCOOH, nọc kiến); Oxalic acid (HOOC-COOH, chua của khế, sấu); Citric acid (C₆H₈O₇, trong chanh); Benzoic acid (C₆H₅COOH, chất bảo quản).</p>
+    </div>
+  `;
 
-    function filterQuestions() {
-      if (currentChapter === 'all') {
-        filteredQuestions = [...questionBank];
-      } else {
-        filteredQuestions = questionBank.filter(q => q.chapter === currentChapter);
-      }
-    }
+  // ==================== STATE & FUNCTIONS ====================
+  let currentView = 'review';
+  let currentChapter = 'all';
+  let filteredQuestions = { mcq:[], tf:[], short:[] };
+  let examTimer = null;
+  let examTimeLeft = 45 * 60;
+  let examSubmitted = false;
 
-    function shuffleArray(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
+  function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+  function filterByChapter(arr, ch) { return ch === 'all' ? arr : arr.filter(i => i.chapter === ch); }
 
-    function renderReview() {
-      filterQuestions();
-      if (filteredQuestions.length === 0) {
-        dynamicContent.innerHTML = '<p>Không có câu hỏi cho chương này.</p>';
-        return;
-      }
-      let html = '';
-      filteredQuestions.forEach((q, idx) => {
-        const selected = userAnswers[q.id] !== undefined ? userAnswers[q.id] : null;
-        const showResult = selected !== null;
-        html += `<div class="question-card" data-qid="${q.id}">`;
-        html += `<div class="question-text">Câu ${idx+1}: ${q.q}</div><div class="options">`;
-        q.opts.forEach((opt, optIdx) => {
-          let cls = 'option';
-          if (showResult && optIdx === q.ans) cls += ' correct';
-          if (showResult && selected === optIdx && selected !== q.ans) cls += ' incorrect';
-          if (selected === optIdx && !showResult) cls += ' selected';
-          html += `<div class="${cls}" data-opt="${optIdx}">${opt}</div>`;
-        });
-        html += `</div>`;
-        if (showResult && q.exp) html += `<div class="explanation">💡 ${q.exp}</div>`;
-        html += `</div>`;
-      });
-      dynamicContent.innerHTML = html;
-      actionBar.innerHTML = `<button class="btn outline" id="resetReviewBtn">🔄 Làm lại tất cả</button>`;
-      document.querySelectorAll('.option').forEach(opt => {
-        opt.addEventListener('click', function(e) {
-          if (currentView !== 'review') return;
-          const card = this.closest('.question-card');
-          const qid = parseInt(card.dataset.qid);
-          const optIdx = parseInt(this.dataset.opt);
-          if (userAnswers[qid] !== undefined) return;
-          userAnswers[qid] = optIdx;
-          renderReview();
-        });
-      });
-      document.getElementById('resetReviewBtn')?.addEventListener('click', ()=>{
-        userAnswers = {};
-        renderReview();
-      });
-    }
-
-    function startExam() {
-      filterQuestions();
-      if (filteredQuestions.length === 0) {
-        alert('Không đủ câu hỏi.');
-        return;
-      }
-      let examQ = shuffleArray([...filteredQuestions]);
-      if (examQ.length > 18) examQ = examQ.slice(0, 18);
-      filteredQuestions = examQ;
-      userAnswers = {};
-      examSubmitted = false;
-      examTimeLeft = 45 * 60;
-      renderExam();
-      startTimer();
-    }
-
-    function renderExam() {
-      let html = `<div class="timer" id="timerDisplay">⏳ ${formatTime(examTimeLeft)}</div>`;
-      const answered = Object.keys(userAnswers).length;
-      const total = filteredQuestions.length;
-      html += `<div class="progress"><div class="progress-fill" style="width:${(answered/total)*100}%"></div></div>`;
-      filteredQuestions.forEach((q, idx) => {
-        const sel = userAnswers[q.id] !== undefined ? userAnswers[q.id] : null;
-        html += `<div class="question-card" data-qid="${q.id}">`;
-        html += `<div class="question-text">Câu ${idx+1}: ${q.q}</div><div class="options">`;
-        q.opts.forEach((opt, optIdx) => {
-          let cls = 'option';
-          if (sel === optIdx) cls += ' selected';
-          html += `<div class="${cls}" data-opt="${optIdx}">${opt}</div>`;
-        });
-        html += `</div></div>`;
-      });
-      dynamicContent.innerHTML = html;
-      actionBar.innerHTML = `<button class="btn" id="submitExamBtn">📩 Nộp bài</button>`;
-      document.querySelectorAll('.option').forEach(opt => {
-        opt.addEventListener('click', function(e) {
-          if (examSubmitted) return;
-          const card = this.closest('.question-card');
-          const qid = parseInt(card.dataset.qid);
-          const optIdx = parseInt(this.dataset.opt);
-          userAnswers[qid] = optIdx;
-          renderExam();
-        });
-      });
-      document.getElementById('submitExamBtn')?.addEventListener('click', submitExam);
-    }
-
-    function formatTime(sec) {
-      const m = Math.floor(sec/60);
-      const s = sec%60;
-      return `${m}:${s<10?'0':''}${s}`;
-    }
-
-    function startTimer() {
-      if (examTimer) clearInterval(examTimer);
-      examTimer = setInterval(() => {
-        if (examSubmitted) { clearInterval(examTimer); return; }
-        examTimeLeft--;
-        const timerEl = document.getElementById('timerDisplay');
-        if (timerEl) timerEl.innerText = `⏳ ${formatTime(examTimeLeft)}`;
-        if (examTimeLeft <= 0) {
-          clearInterval(examTimer);
-          alert('Hết giờ!');
-          submitExam();
-        }
-      }, 1000);
-    }
-
-    function submitExam() {
-      if (examSubmitted) return;
-      examSubmitted = true;
-      clearInterval(examTimer);
-      let correct = 0;
-      filteredQuestions.forEach(q => { if (userAnswers[q.id] === q.ans) correct++; });
-      const total = filteredQuestions.length;
-      const score = (correct/total*10).toFixed(1);
-      let html = `<div class="result-summary"><h3>📊 Kết quả</h3><p>✅ Đúng: <b>${correct}/${total}</b> — Điểm: <b>${score}/10</b></p></div>`;
-      filteredQuestions.forEach((q, idx) => {
-        const sel = userAnswers[q.id];
-        html += `<div class="question-card"><div class="question-text">Câu ${idx+1}: ${q.q}</div><div class="options">`;
-        q.opts.forEach((opt, optIdx) => {
-          let cls = 'option';
-          if (optIdx === q.ans) cls += ' correct';
-          if (sel === optIdx && sel !== q.ans) cls += ' incorrect';
-          html += `<div class="${cls}">${opt}</div>`;
-        });
-        html += `</div>`;
-        if (q.exp) html += `<div class="explanation">💡 ${q.exp}</div>`;
-        html += `</div>`;
-      });
-      dynamicContent.innerHTML = html;
-      actionBar.innerHTML = `<button class="btn outline" id="retryExamBtn">🔄 Làm đề mới</button>`;
-      document.getElementById('retryExamBtn')?.addEventListener('click', ()=>{
-        userAnswers = {};
-        examSubmitted = false;
-        startExam();
-      });
-    }
-
-    function renderKnowledge(chapter = 'all') {
-      let html = '<div class="knowledge-content">';
-      if (chapter === 'all' || chapter === 'hydrocarbon') html += knowledgeData.hydrocarbon;
-      if (chapter === 'all' || chapter === 'dx_alcohol_phenol') html += knowledgeData.dx_alcohol_phenol;
-      if (chapter === 'all' || chapter === 'carbonyl_acid') html += knowledgeData.carbonyl_acid;
-      html += '</div>';
-      dynamicContent.innerHTML = html;
-      actionBar.innerHTML = '';
-    }
-
-    function setView(view) {
-      currentView = view;
-      mainTabs.forEach(t => t.classList.remove('active'));
-      document.querySelector(`.main-tab[data-view="${view}"]`).classList.add('active');
-      if (examTimer) { clearInterval(examTimer); examTimer = null; }
-      userAnswers = {};
-      examSubmitted = false;
-
-      if (view === 'knowledge') {
-        chapterFilterContainer.style.display = 'flex';
-        renderKnowledge(currentChapter);
-      } else {
-        chapterFilterContainer.style.display = 'flex';
-        if (view === 'review') renderReview();
-        else startExam();
-      }
-    }
-
-    mainTabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        const view = e.target.dataset.view;
-        setView(view);
-      });
+  function getRandomExam() {
+    let mcqPool = filterByChapter(allMCQ, currentChapter);
+    let tfPool = filterByChapter(allTF, currentChapter);
+    let shortPool = filterByChapter(allShort, currentChapter);
+    if (mcqPool.length < 18) mcqPool = shuffle([...allMCQ]);
+    if (tfPool.length < 4) tfPool = shuffle([...allTF]);
+    if (shortPool.length < 6) shortPool = shuffle([...allShort]);
+    const mcq = shuffle(mcqPool).slice(0, 18).map(q => {
+      const idxMap = shuffle([0,1,2,3]);
+      return { ...q, opts: idxMap.map(i => q.opts[i]), ans: idxMap.indexOf(q.ans) };
     });
+    return { mcq, tf: shuffle(tfPool).slice(0, 4), short: shuffle(shortPool).slice(0, 6) };
+  }
 
-    chapterBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        chapterBtns.forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        currentChapter = e.target.dataset.chapter;
-        if (currentView === 'knowledge') {
-          renderKnowledge(currentChapter);
-        } else {
-          userAnswers = {};
-          if (examTimer) clearInterval(examTimer);
-          if (currentView === 'review') renderReview();
-          else startExam();
-        }
-      });
+  function formatTime(sec) { const m=Math.floor(sec/60), s=sec%60; return `${m}:${s<10?'0':''}${s}`; }
+
+  // RENDER
+  const dynamicContent = document.getElementById('dynamicContent');
+  const actionBar = document.getElementById('actionBar');
+  const resultBox = document.getElementById('resultBox');
+
+  function renderReview() {
+    filteredQuestions = { mcq: filterByChapter(allMCQ, currentChapter), tf: filterByChapter(allTF, currentChapter), short: filterByChapter(allShort, currentChapter) };
+    resultBox.classList.remove('show');
+    let html = '';
+    filteredQuestions.mcq.forEach((q,i) => {
+      html += `<div class="card" data-qid="${q.id}" data-type="mcq">
+        <div class="q-header"><span class="q-num">MCQ ${i+1}</span><span class="q-text">${q.q}</span></div>
+        <ul class="options-list">${q.opts.map((opt,oi) => `<li class="option-item" data-opt="${oi}"><input type="radio" name="r_mcq_${q.id}" value="${oi}">${opt}</li>`).join('')}</ul>
+        ${q.exp ? `<p class="exp" style="color:#2e7d32;display:none;">💡 ${q.exp}</p>` : ''}</div>`;
     });
+    filteredQuestions.tf.forEach((q,i) => {
+      html += `<div class="card" data-qid="${q.id}" data-type="tf">
+        <div class="q-header"><span class="q-num">TF ${i+1}</span><span class="q-text">${q.text}</span></div>
+        <div class="tf-group">${q.items.map((it,ii) => `<div class="tf-row" data-item="${ii}"><span class="tf-label">${String.fromCharCode(97+ii)})</span><span>${it.text}</span><div class="tf-btns"><button class="tf-true-btn" data-val="true">Đúng</button><button class="tf-false-btn" data-val="false">Sai</button></div></div>`).join('')}</div></div>`;
+    });
+    filteredQuestions.short.forEach((q,i) => {
+      html += `<div class="card" data-type="short"><div class="q-header"><span class="q-num">SHORT ${i+1}</span><span class="q-text">${q.q}</span></div><textarea placeholder="Nhập đáp án..." style="width:100%;min-height:50px;border-radius:8px;border:1px solid #f0c8d8;padding:8px;"></textarea><p class="exp" style="color:#2e7d32;display:none;">💡 ${q.a}</p></div>`;
+    });
+    dynamicContent.innerHTML = html;
+    actionBar.innerHTML = `<button class="btn btn-pink" id="checkReview">✅ Kiểm tra</button><button class="btn btn-outline" id="resetReview">🔄 Làm lại</button>`;
+    attachReviewEvents();
+  }
 
-    setView('review');
-  })();
+  function attachReviewEvents() {
+    document.querySelectorAll('.option-item').forEach(li => li.addEventListener('click', function(){
+      const radio = this.querySelector('input'); radio.checked = true;
+      this.parentElement.querySelectorAll('.option-item').forEach(s => s.classList.remove('selected'));
+      this.classList.add('selected');
+    }));
+    document.querySelectorAll('.tf-true-btn, .tf-false-btn').forEach(btn => btn.addEventListener('click', function(){
+      const row = this.closest('.tf-row'); const val = this.dataset.val;
+      row.querySelectorAll('button').forEach(b => b.classList.remove('active-true','active-false'));
+      if(val==='true') this.classList.add('active-true'); else this.classList.add('active-false');
+      row.classList.remove('selected-true','selected-false');
+      row.classList.add(val==='true'?'selected-true':'selected-false');
+    }));
+    document.getElementById('checkReview')?.addEventListener('click', ()=>{
+      document.querySelectorAll('.card[data-type="mcq"]').forEach(card => {
+        const qid = +card.dataset.qid;
+        const q = filteredQuestions.mcq.find(q=>q.id===qid);
+        const radio = card.querySelector('input:checked');
+        card.querySelectorAll('.option-item').forEach(li => li.classList.remove('show-correct','show-wrong'));
+        const correctLi = card.querySelector(`.option-item[data-opt="${q.ans}"]`);
+        if(correctLi) correctLi.classList.add('show-correct');
+        if(radio && +radio.value !== q.ans) {
+          const sel = card.querySelector(`.option-item[data-opt="${radio.value}"]`);
+          if(sel) sel.classList.add('show-wrong');
+        }
+        card.querySelectorAll('input').forEach(r=>r.disabled=true);
+        card.querySelector('.exp').style.display = 'block';
+      });
+      document.querySelectorAll('.card[data-type="tf"]').forEach(card => {
+        const qid = +card.dataset.qid;
+        const q = filteredQuestions.tf.find(q=>q.id===qid);
+        card.querySelectorAll('.tf-row').forEach((row,ii) => {
+          const trueBtn = row.querySelector('.tf-true-btn');
+          const falseBtn = row.querySelector('.tf-false-btn');
+          const correctVal = q.items[ii].ans?'true':'false';
+          row.style.background = (trueBtn.classList.contains('active-true') && correctVal==='true') || (falseBtn.classList.contains('active-false') && correctVal==='false') ? '#dcf5dc' : '#ffe0e0';
+          trueBtn.disabled = falseBtn.disabled = true;
+        });
+      });
+      document.querySelectorAll('.card[data-type="short"] .exp').forEach(el => el.style.display = 'block');
+      document.querySelectorAll('.card[data-type="short"] textarea').forEach(ta => ta.disabled = true);
+    });
+    document.getElementById('resetReview')?.addEventListener('click', ()=>{ renderReview(); window.scrollTo(0,0); });
+  }
+
+  function renderExam() {
+    const data = getRandomExam();
+    filteredQuestions = data;
+    examSubmitted = false; examTimeLeft = 45*60;
+    resultBox.classList.remove('show');
+    let html = `<div class="timer" id="timerDisplay">⏳ ${formatTime(examTimeLeft)}</div>`;
+    data.mcq.forEach((q,i) => {
+      html += `<div class="card" data-qid="${q.id}" data-type="mcq"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.q}</span></div><ul class="options-list">${q.opts.map((opt,oi) => `<li class="option-item" data-opt="${oi}"><input type="radio" name="e_mcq_${q.id}" value="${oi}">${opt}</li>`).join('')}</ul></div>`;
+    });
+    data.tf.forEach((q,i) => {
+      html += `<div class="card" data-qid="${q.id}" data-type="tf"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.text}</span></div><div class="tf-group">${q.items.map((it,ii) => `<div class="tf-row" data-item="${ii}"><span class="tf-label">${String.fromCharCode(97+ii)})</span><span>${it.text}</span><div class="tf-btns"><button class="tf-true-btn" data-val="true">Đúng</button><button class="tf-false-btn" data-val="false">Sai</button></div></div>`).join('')}</div></div>`;
+    });
+    data.short.forEach((q,i) => {
+      html += `<div class="card" data-type="short"><div class="q-header"><span class="q-num">Câu ${i+1}</span><span class="q-text">${q.q}</span></div><textarea placeholder="Nhập đáp án..." style="width:100%;min-height:50px;border-radius:8px;border:1px solid #f0c8d8;padding:8px;"></textarea></div>`;
+    });
+    dynamicContent.innerHTML = html;
+    actionBar.innerHTML = `<button class="btn btn-pink" id="submitExam">📩 Nộp bài</button>`;
+    attachExamEvents();
+    startTimer();
+  }
+
+  function attachExamEvents() {
+    document.querySelectorAll('.option-item').forEach(li => li.addEventListener('click', function(){
+      if(examSubmitted) return;
+      const radio = this.querySelector('input'); radio.checked = true;
+      this.parentElement.querySelectorAll('.option-item').forEach(s => s.classList.remove('selected'));
+      this.classList.add('selected');
+    }));
+    document.querySelectorAll('.tf-true-btn, .tf-false-btn').forEach(btn => btn.addEventListener('click', function(){
+      if(examSubmitted) return;
+      const row = this.closest('.tf-row'); const val = this.dataset.val;
+      row.querySelectorAll('button').forEach(b => b.classList.remove('active-true','active-false'));
+      if(val==='true') this.classList.add('active-true'); else this.classList.add('active-false');
+      row.classList.remove('selected-true','selected-false');
+      row.classList.add(val==='true'?'selected-true':'selected-false');
+    }));
+    document.getElementById('submitExam')?.addEventListener('click', submitExam);
+  }
+
+  function startTimer() {
+    if(examTimer) clearInterval(examTimer);
+    examTimer = setInterval(() => {
+      if(examSubmitted) { clearInterval(examTimer); return; }
+      examTimeLeft--;
+      const el = document.getElementById('timerDisplay');
+      if(el) el.innerText = `⏳ ${formatTime(examTimeLeft)}`;
+      if(examTimeLeft <= 0) { clearInterval(examTimer); alert('Hết giờ!'); submitExam(); }
+    }, 1000);
+  }
+
+  function submitExam() {
+    if(examSubmitted) return;
+    examSubmitted = true; clearInterval(examTimer);
+    let score1=0, score2=0;
+    document.querySelectorAll('.card[data-type="mcq"]').forEach(card => {
+      const qid=+card.dataset.qid; const q=filteredQuestions.mcq.find(q=>q.id===qid);
+      const radio=card.querySelector('input:checked');
+      card.querySelectorAll('.option-item').forEach(li=>li.classList.remove('show-correct','show-wrong'));
+      const correctLi=card.querySelector(`.option-item[data-opt="${q.ans}"]`);
+      if(correctLi) correctLi.classList.add('show-correct');
+      if(radio && +radio.value===q.ans) score1+=0.3;
+      else if(radio) { const sel=card.querySelector(`.option-item[data-opt="${radio.value}"]`); if(sel) sel.classList.add('show-wrong'); }
+      card.querySelectorAll('input').forEach(r=>r.disabled=true);
+    });
+    document.querySelectorAll('.card[data-type="tf"]').forEach(card => {
+      const qid=+card.dataset.qid; const q=filteredQuestions.tf.find(q=>q.id===qid);
+      let correct=0;
+      card.querySelectorAll('.tf-row').forEach((row,ii)=>{
+        const trueBtn=row.querySelector('.tf-true-btn'); const falseBtn=row.querySelector('.tf-false-btn');
+        const userVal= trueBtn.classList.contains('active-true')?'true':(falseBtn.classList.contains('active-false')?'false':null);
+        const correctVal=q.items[ii].ans?'true':'false';
+        row.style.background=(userVal===correctVal)?'#dcf5dc':(userVal?'#ffe0e0':'#fff0f5');
+        if(userVal===correctVal) correct++;
+        trueBtn.disabled=falseBtn.disabled=true;
+      });
+      if(correct===4) score2+=0.5; else if(correct===3) score2+=0.25;
+    });
+    document.querySelectorAll('.card[data-type="short"] textarea').forEach(ta => ta.disabled = true);
+    document.getElementById('resultScore').textContent = (score1+score2).toFixed(1);
+    resultBox.classList.add('show');
+    resultBox.scrollIntoView({behavior:'smooth'});
+    actionBar.innerHTML = `<button class="btn btn-outline" id="retryExam">🔄 Làm đề mới</button>`;
+    document.getElementById('retryExam')?.addEventListener('click', ()=>{ renderExam(); window.scrollTo(0,0); });
+  }
+
+  function renderKnowledge() { dynamicContent.innerHTML = knowledgeHTML; actionBar.innerHTML = ''; }
+
+  function setView(view) {
+    currentView = view;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.tab-btn[data-view="${view}"]`).classList.add('active');
+    if(examTimer) { clearInterval(examTimer); examTimer=null; }
+    resultBox.classList.remove('show');
+    if(view==='review') renderReview();
+    else if(view==='exam') renderExam();
+    else renderKnowledge();
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', ()=> setView(btn.dataset.view)));
+  document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', function(){
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    this.classList.add('active'); currentChapter = this.dataset.chapter;
+    if(currentView==='review') renderReview();
+    else if(currentView==='exam') renderExam();
+    else renderKnowledge();
+  }));
+
+  renderReview();
+})();
 </script>
 </body>
 </html>
