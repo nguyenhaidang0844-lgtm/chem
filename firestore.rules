@@ -1,0 +1,45 @@
+rules_version = '2';
+// Dán toàn bộ file này vào Firebase Console > Firestore Database > Rules > Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function validName(n) {
+      return n is string && n.size() >= 2 && n.size() <= 20;
+    }
+
+    // Điểm hợp lệ: đúng chủ tài khoản, điểm 0 – 10, thời gian làm bài 60 s – 45 phút
+    function validScore(id) {
+      let d = request.resource.data;
+      return request.auth != null
+        && d.keys().hasOnly(['uid', 'name', 'examId', 'score', 'time', 'at'])
+        && d.uid == request.auth.uid
+        && id == request.auth.uid + '_' + d.examId
+        && validName(d.name)
+        && d.examId in ['de1', 'de2', 'de3', 'de4', 'de5', 'de6', 'de7']
+        && d.score is number && d.score >= 0 && d.score <= 10
+        && d.time is int && d.time >= 60 && d.time <= 2700
+        && d.at == request.time;
+    }
+
+    // Biệt danh: chỉ chủ tài khoản đọc/ghi
+    match /profiles/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name'])
+        && validName(request.resource.data.name);
+      allow delete: if false;
+    }
+
+    // Bảng xếp hạng: ai cũng xem được; chỉ ghi khi điểm mới tốt hơn (hoặc bằng điểm nhưng nhanh hơn)
+    match /scores/{id} {
+      allow read: if true;
+      allow create: if validScore(id);
+      allow update: if validScore(id)
+        && resource.data.uid == request.auth.uid
+        && (request.resource.data.score > resource.data.score
+            || (request.resource.data.score == resource.data.score
+                && request.resource.data.time <= resource.data.time));
+      allow delete: if false;
+    }
+  }
+}

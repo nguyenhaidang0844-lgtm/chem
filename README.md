@@ -1,9 +1,10 @@
 # Ôn thi Hóa học 12
 
 Website ôn tập Hóa học 12 theo cấu trúc đề THPT (18 trắc nghiệm · 4 đúng/sai · 6 trả lời ngắn = 28 câu, 10 điểm, 40 phút).
-Các câu tính toán tự **đổi số** mỗi lần làm; nhập lại **mã đề** để làm đúng bộ số cũ.
+Các câu tính toán tự **đổi số** mỗi lần làm.
 
 - **Đề 7 (trộn):** mỗi mã đề bốc ngẫu nhiên 18 + 4 + 6 câu từ kho câu của Đề 1 – 6, không trùng dạng câu. Thêm đề mới vào kho bằng cách khai báo thêm id trong `blend` ở `js/exams/meta.js`.
+- **Đăng nhập Google và bảng xếp hạng** (theo từng đề và tab Tổng): cần bật Firebase một lần, xem [SETUP.md](SETUP.md). Chưa bật thì web tự ẩn phần này.
 - 2 chế độ: **Thi thử** (đồng hồ 40 phút, chấm khi nộp) và **Luyện tập** (xem đáp án ngay).
 - Lời giải chi tiết sau khi nộp bài; lịch sử điểm lưu trong trình duyệt (localStorage).
 - Không cần build: chỉ là HTML/CSS/JS thuần, chạy được trên GitHub Pages.
@@ -22,6 +23,9 @@ css/style.css         giao diện (có chế độ tối tự động)
 js/engine.js          seed, chấm điểm THPT, dựng đề
 js/calc1.js, calc2.js bộ sinh câu tính toán (ester, chất béo, xà phòng)
 js/render.js, app.js  hiển thị và điều khiển
+js/backend.js         đăng nhập Google + bảng xếp hạng (Firebase)
+js/firebase-config.js cấu hình Firebase (dán vào theo SETUP.md)
+firestore.rules       luật bảo mật Firestore
 js/exams/meta.js      danh sách đề
 js/exams/deN.js       nội dung từng đề
 ```
