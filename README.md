@@ -3,6 +3,7 @@
 Website ôn tập Hóa học 12 theo cấu trúc đề THPT (18 trắc nghiệm · 4 đúng/sai · 6 trả lời ngắn = 28 câu, 10 điểm, 40 phút).
 Các câu tính toán tự **đổi số** mỗi lần làm; nhập lại **mã đề** để làm đúng bộ số cũ.
 
+- **Đề 7 (trộn):** mỗi mã đề bốc ngẫu nhiên 18 + 4 + 6 câu từ kho câu của Đề 1 – 6, không trùng dạng câu. Thêm đề mới vào kho bằng cách khai báo thêm id trong `blend` ở `js/exams/meta.js`.
 - 2 chế độ: **Thi thử** (đồng hồ 40 phút, chấm khi nộp) và **Luyện tập** (xem đáp án ngay).
 - Lời giải chi tiết sau khi nộp bài; lịch sử điểm lưu trong trình duyệt (localStorage).
 - Không cần build: chỉ là HTML/CSS/JS thuần, chạy được trên GitHub Pages.

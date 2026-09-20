@@ -64,34 +64,49 @@
 
   // ---------- Dựng đề từ seed ----------
   // Câu có thể là object thường hoặc { gen: function(r) { return {...}; } }
+  var QUOTA = { mcq: 18, tf: 4, short: 6 };
+  function metaOf(id) { return registry.meta.filter(function (m) { return m.id === id; })[0]; }
+  // Đề "trộn" (meta.blend = [id, ...]): kho câu = gộp các đề nguồn
+  function poolOf(id, kind) {
+    var m = metaOf(id);
+    if (!m || !m.blend) return registry.parts[id][kind];
+    return m.blend.reduce(function (a, b) { return a.concat(registry.parts[b][kind]); }, []);
+  }
+  // Dấu vết để tránh chọn hai câu cùng dạng trong một đề trộn (số liệu được che đi)
+  function signature(o) { return String(o.text).replace(/[\d,.]+/g, '#').replace(/\s+/g, ' ').slice(0, 70); }
+
   function build(id, seed) {
-    var parts = Exams.parts(id);
+    var blend = !!(metaOf(id) && metaOf(id).blend);
     var r = makeRng(seed);
     function inst(q, i) {
       var qr = makeRng(seed * 131 + i * 7919 + 17);
       return typeof q === 'function' ? q(qr) : JSON.parse(JSON.stringify(q));
     }
-    var out = [];
+    var out = [], seen = {};
     var n = 0;
-    parts.mcq.forEach(function (q) {
-      var o = inst(q, n++);
-      o.type = 'mcq';
-      var idx = o.options.map(function (_, i) { return i; });
-      var fixed = o.fixed || o.options.every(function (t) { return /^[\d.,\s%]/.test(String(t)); });
-      if (!fixed) idx = r.shuffle(idx);
-      o.correct = idx.indexOf(o.answer);
-      o.options = idx.map(function (i) { return o.options[i]; });
-      out.push(o);
-    });
-    parts.tf.forEach(function (q) {
-      var o = inst(q, n++);
-      o.type = 'tf';
-      out.push(o);
-    });
-    parts.short.forEach(function (q) {
-      var o = inst(q, n++);
-      o.type = 'short';
-      out.push(o);
+    ['mcq', 'tf', 'short'].forEach(function (kind, ki) {
+      var list = poolOf(id, kind), picked = [];
+      if (blend) {
+        var order = r.shuffle(list.map(function (_, i) { return i; }));
+        for (var j = 0; j < order.length && picked.length < QUOTA[kind]; j++) {
+          var o = inst(list[order[j]], order[j] + ki * 1000);
+          var sig = signature(o);
+          if (!seen[sig]) { seen[sig] = 1; picked.push(o); }
+        }
+      } else {
+        picked = list.map(function (q) { return inst(q, n++); });
+      }
+      picked.forEach(function (o) {
+        o.type = kind;
+        if (kind === 'mcq') {
+          var idx = o.options.map(function (_, i) { return i; });
+          var fixed = o.fixed || o.options.every(function (t) { return /^[\d.,\s%]/.test(String(t)); });
+          if (!fixed) idx = r.shuffle(idx);
+          o.correct = idx.indexOf(o.answer);
+          o.options = idx.map(function (i) { return o.options[i]; });
+        }
+        out.push(o);
+      });
     });
     return out;
   }

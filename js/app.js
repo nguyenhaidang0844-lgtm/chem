@@ -53,7 +53,7 @@
       '<h2 class="sec-title" style="margin-top:44px">Bộ đề</h2><p class="sec-sub">' + exams.length + ' đề · mỗi đề 10 điểm.</p><div class="grid">';
     exams.forEach(function (e) {
       var b = best(e.id), no = (e.id.match(/\d+/) || ['0'])[0], name = e.title.split('·').pop().trim();
-      h += '<div class="card"><div class="no">' + two(parseInt(no, 10)) + '</div><div class="chap">' + C.esc(e.chapter) + '</div><h3>' + C.esc(name) + '</h3><p>' + C.esc(e.desc) + '</p>' +
+      h += '<div class="card' + (e.mix ? ' mix' : '') + '"><div class="no">' + (e.mix ? '<span class="tag">Trộn ngẫu nhiên</span>' : '') + two(parseInt(no, 10)) + '</div><div class="chap">' + C.esc(e.chapter) + '</div><h3>' + C.esc(name) + '</h3><p>' + C.esc(e.desc) + '</p>' +
         '<div class="cardfoot"><span>28 câu · 10 điểm' + (b !== null ? '<br>Cao nhất: <b>' + C.fmt(b) + '</b>' : '') + '</span><button class="btn" data-act="start" data-id="' + e.id + '">Làm bài</button></div></div>';
     });
     h += '</div></div></section>';
