@@ -40,7 +40,7 @@
     var exams = C.Exams.list(), hist = loadHistory();
     var h = '<header class="topbar"><div class="wrap topbar-in">' + logo('Ôn thi THPT') + '<div class="tb-right"><a class="link" href="#modes" style="color:#fff">Bộ đề</a><a class="link" href="#scoring" style="color:#fff">Điểm</a><a class="btn" href="#modes">Bắt đầu</a></div></div></header>';
     h += '<section class="hero">' + petals() + '<div class="wrap"><div><span class="chip">Chương 1 · Ester – Lipid</span>' +
-      '<h1>Ôn thi<br>Hóa học 12<em>Đổi số mỗi lần</em></h1>' +
+      '<h1>Ôn thi<br>Hóa học 12</h1>' +
       '<p class="lead">Đề thi thử theo cấu trúc THPT, chia thành nhiều đề. Câu tính toán tự thay số mỗi lần làm, có lời giải chi tiết ngay sau khi nộp bài.</p>' +
       '<div class="hero-cta"><a class="btn" href="#modes">Chọn đề</a><a class="btn ghost" href="#scoring">Cách tính điểm</a></div></div>' +
       '<div class="pixcard"><div class="pixpanel">' + sakura() + '</div><div class="pixcap">Cấu trúc mỗi đề · 28 câu · 40 phút</div>' +
