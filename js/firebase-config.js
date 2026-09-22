@@ -9,4 +9,9 @@
      appId: "1:1234567890:web:abcdef"
    };
 */
-window.CHEM_FIREBASE = null;
+window.CHEM_FIREBASE = {
+  apiKey: "AIzaSyDibPJBWB-IuAiOODTZf6TgLCd3BhaYz4c",
+  authDomain: "l12tin2627.firebaseapp.com",
+  projectId: "l12tin2627",
+  appId: "1:783914823645:web:b9eed0fe264e4ca213d034"
+};
