@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Di truyền phân tử – Ôn thi</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1b1f2a;--muted:#5d6475;--line:#e3e6ee;--accent:#2f4bd8;--accent-soft:#e8ecff;--ok:#1a8a4a;--ok-soft:#e3f6ea;--bad:#c62f2f;--bad-soft:#fde8e8;
+--A:#e0533d;--T:#2e8bd6;--G:#2f9e5a;--C:#e0a526;--U:#9b59d0;--old:#26307a;--new:#f08a3c;--rna:#9b59d0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11141b;--card:#1a1e28;--ink:#e8ebf2;--muted:#9aa2b4;--line:#2b3040;--accent:#7d93ff;--accent-soft:#232a45;--ok:#4cd28a;--ok-soft:#173226;--bad:#ff7b7b;--bad-soft:#3a1d1d;--old:#8f9cff}}
+:root[data-theme="dark"]{--bg:#11141b;--card:#1a1e28;--ink:#e8ebf2;--muted:#9aa2b4;--line:#2b3040;--accent:#7d93ff;--accent-soft:#232a45;--ok:#4cd28a;--ok-soft:#173226;--bad:#ff7b7b;--bad-soft:#3a1d1d;--old:#8f9cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 90px}
+h1{font-size:1.7rem;margin:.2em 0}
+h2{font-size:1.3rem;margin:1.8em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--line)}
+h3{font-size:1.05rem;margin:1.2em 0 .4em;color:var(--accent)}
+.sub{color:var(--muted);margin:0}
+.tabs{display:flex;gap:8px;margin:16px 0;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5}
+.tab{flex:1;padding:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+.sim{border:2px dashed var(--accent);background:var(--card);border-radius:14px;padding:16px;margin:14px 0}
+.sim>.lbl{display:inline-block;background:var(--accent);color:#fff;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:99px;margin-bottom:8px;letter-spacing:.03em}
+ul{padding-left:1.2em;margin:.3em 0}li{margin:.2em 0}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+.tbl{overflow-x:auto}
+.key{background:var(--accent-soft);border-left:4px solid var(--accent);padding:10px 12px;border-radius:8px;margin:10px 0}
+.trap{background:var(--bad-soft);border-left:4px solid var(--bad);padding:10px 12px;border-radius:8px;margin:10px 0}
+.analogy{background:var(--ok-soft);border-left:4px solid var(--ok);padding:10px 12px;border-radius:8px;margin:10px 0}
+input[type=text],select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.btn{padding:9px 16px;border:none;border-radius:10px;background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.sm{padding:5px 10px;font-size:.85rem}
+.seq{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;letter-spacing:.5px;overflow-x:auto;white-space:nowrap;padding:4px 0}
+.nt{display:inline-block;width:20px;text-align:center;font-weight:800;color:#fff;border-radius:3px;margin:1px 0}
+.nA{background:var(--A)}.nT{background:var(--T)}.nG{background:var(--G)}.nC{background:var(--C)}.nU{background:var(--U)}
+.bond{display:inline-block;width:20px;text-align:center;color:var(--muted);font-size:11px;line-height:1}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
+.stat{background:var(--accent-soft);border-radius:8px;padding:8px 10px}
+.stat b{display:block;font-size:1.15rem}
+.stat span{font-size:.8rem;color:var(--muted)}
+.meter{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--C),var(--G))}
+.mols{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.mol{display:flex;flex-direction:column;gap:3px;padding:6px;border:1px solid var(--line);border-radius:6px}
+.mol i{display:block;width:46px;height:7px;border-radius:3px}
+.mol .o{background:var(--old)}.mol .n{background:var(--new)}
+.legend{display:flex;gap:14px;font-size:.85rem;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:18px;height:8px;border-radius:3px;margin-right:4px;vertical-align:middle}
+.codons{display:flex;flex-wrap:wrap;gap:4px;margin-top:22px}
+.cd{position:relative;font-family:ui-monospace,Menlo,monospace;font-weight:800;padding:6px 6px;border-radius:6px;border:1px solid var(--line);background:var(--bg);min-width:52px;text-align:center}
+.cd small{display:block;font-weight:600;font-size:.72rem;color:var(--muted)}
+.cd.stop{border-color:var(--bad);color:var(--bad)}
+.cd.start{border-color:var(--ok);color:var(--ok)}
+.cd.pre{opacity:.35}
+.cd .site{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:.72rem;font-weight:800;background:var(--accent);color:#fff;padding:0 6px;border-radius:4px}
+.chain{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;min-height:34px}
+.aa{background:var(--G);color:#fff;border-radius:99px;padding:4px 10px;font-weight:700;font-size:.85rem}
+.aa.f{background:var(--A)}
+.ctab{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-family:ui-monospace,Menlo,monospace;font-size:.8rem}
+.cc{padding:4px;border:1px solid var(--line);border-radius:4px;text-align:center;background:var(--bg)}
+.cc.hl{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cc.st{color:var(--bad)}
+.aabtns{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.exbar{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:6px 0;font-size:.75rem;font-weight:800;color:#fff}
+.exbar div{display:flex;align-items:center;justify-content:center;min-width:24px}
+.ex{background:var(--T)}.in{background:var(--muted)}
+svg text{fill:var(--ink);font-family:system-ui,sans-serif}
+.step-cap{min-height:3.2em;margin-top:6px}
+/* exam */
+.exsel{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.q .n{font-weight:700;color:var(--accent)}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;margin:6px 0;cursor:pointer}
+.opt input{margin-top:5px}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.tf{width:100%;border-collapse:collapse;margin-top:8px}
+.tf td{padding:8px;border:none;border-top:1px solid var(--line)}
+.tf td.c{width:48px;text-align:center}
+.tf tr.right td{background:var(--ok-soft)}
+.tf tr.wrong td{background:var(--bad-soft)}
+.short{margin-top:8px;padding:8px 10px;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:160px}
+.short.right{border-color:var(--ok);background:var(--ok-soft)}
+.short.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.exp{display:none;margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--accent-soft);font-size:.95rem}
+.done .exp{display:block}
+.bar{position:sticky;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;margin:24px -16px 0;flex-wrap:wrap}
+.timer{font-variant-numeric:tabular-nums;font-weight:800}
+.score{font-size:1.1rem;font-weight:800}
+.hide{display:none!important}
+.note{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:.8rem;font-weight:700;margin-left:6px}
+.mini{width:100%;font-size:.9rem;margin:8px 0}
+.mini td,.mini th{padding:5px 8px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p style="margin:0 0 4px"><a href="sinh.html" style="color:var(--muted);text-decoration:none;font-size:.9rem">← Sinh học 12</a></p>
+<h1>Di truyền phân tử</h1>
+<p class="sub">Sinh học 12 – Chương 1 · Bài 1: DNA và tái bản DNA · Bài 2: Gene, hệ gene và quá trình truyền đạt thông tin di truyền</p>
+
+<div class="tabs">
+<button class="tab on" data-t="kt">📘 Kiến thức + mô phỏng</button>
+<button class="tab" data-t="de">📝 Luyện đề</button>
+</div>
+
+<!-- ================= KIẾN THỨC ================= -->
+<section id="kt">
+
+<div class="analogy"><b>Hình dung cả chương trong một câu:</b> DNA là <b>cuốn sổ công thức nấu ăn</b> cất trong két sắt (nhân tế bào). Mỗi <b>gene</b> là một công thức. Muốn nấu món nào, tế bào không mang cả cuốn sổ ra bếp mà chỉ <b>photo</b> đúng trang cần dùng (phiên mã tạo mRNA). Bản photo được đưa tới <b>đầu bếp ribosome</b>. Đầu bếp đọc từng "từ" gồm 3 chữ cái (codon), còn <b>shipper tRNA</b> mang đúng nguyên liệu tới (amino acid). Kết quả là một món ăn: <b>protein</b>. Mỗi khi tế bào phân chia, cả cuốn sổ được <b>chép lại</b> để chia cho hai tế bào con (tái bản DNA).</div>
+
+<h2>1. DNA – "cuốn sổ" viết bằng 4 chữ cái</h2>
+<div class="card">
+<ul>
+<li><b>Chức năng:</b> mang, bảo quản và truyền đạt thông tin di truyền.</li>
+<li><b>Đa phân:</b> được cấu tạo từ 4 loại nucleotide A, T, G, C. Mỗi nucleotide gồm nhóm phosphate, đường deoxyribose và một base nitrogen. Bốn chữ cái này ghép lại được vô số "câu", nên DNA chứa được lượng thông tin khổng lồ.</li>
+<li><b>Chuỗi xoắn kép (Watson – Crick):</b> hai mạch song song ngược chiều (một mạch 5'→3', mạch kia 3'→5'). Đường kính 2 nm, mỗi chu kì xoắn dài 3,4 nm và gồm 10 cặp nucleotide, mỗi cặp cách nhau 0,34 nm.</li>
+<li><b>Nguyên tắc bổ sung (NTBS):</b> A đi với T bằng 2 liên kết hydrogen, G đi với C bằng 3 liên kết hydrogen. Biết một mạch là suy ra được mạch kia.</li>
+</ul>
+<div class="key"><b>Vì sao cấu trúc phù hợp chức năng?</b>
+<br>• Đa phân với 4 loại nucleotide cho phép <b>ghi</b> thông tin rất đa dạng.
+<br>• Xoắn kép giúp phân tử <b>bền</b>, thông tin ít hư hỏng.
+<br>• NTBS cho phép <b>sao chép</b> sang mRNA rồi dịch mã ra protein.
+<br>• Kết cặp đặc hiệu giúp thông tin truyền qua các thế hệ <b>gần như nguyên vẹn</b>.</div>
+<div class="trap"><b>Bẫy hay gặp:</b> "Protein tạo nên tính trạng, vậy sao protein không làm vật chất di truyền?" Lí do là protein <b>không tự sao chép theo khuôn</b> và không có cơ chế bắt cặp bổ sung để truyền thông tin chính xác.</div>
+</div>
+
+<div class="sim"><span class="lbl">MÔ PHỎNG 1</span>
+<h3 style="margin-top:0">Xưởng lắp DNA</h3>
+<p class="note">Gõ một mạch DNA (chỉ dùng A, T, G, C), máy tự lắp mạch bổ sung và tính các thông số.</p>
+<input type="text" id="dnaIn" value="ATGCGCATTAGCCGAT" maxlength="60">
+<div class="row"><button class="btn sm ghost" data-dna="ATATATATTAAT">Nhiều A–T</button><button class="btn sm ghost" data-dna="GCGCCGGCGCGC">Nhiều G–C</button><button class="btn sm ghost" data-dna="ATGCACGCACCTCCTTACTAA">Gene "HAPPY"</button></div>
+<div id="dnaOut"></div>
+</div>
+
+<h3>Công thức "bỏ túi"</h3>
+<div class="card tbl"><table>
+<tr><th>Đại lượng</th><th>Công thức</th></tr>
+<tr><td>Tổng nucleotide</td><td>N = 2A + 2G · A = T, G = C · %A + %G = 50%</td></tr>
+<tr><td>Chiều dài</td><td>L = (N/2) × 0,34 nm (1 nm = 10 Å, 1 µm = 1000 nm)</td></tr>
+<tr><td>Số chu kì xoắn</td><td>C = N / 20</td></tr>
+<tr><td>Liên kết hydrogen</td><td>H = 2A + 3G</td></tr>
+<tr><td>Trên từng mạch</td><td>A = A₁ + A₂ = A₁ + T₁ ; G = G₁ + C₁</td></tr>
+<tr><td>Nhân đôi k lần (từ 1 DNA)</td><td>DNA con = 2<sup>k</sup> · DNA còn mạch cũ = 2 · DNA toàn mạch mới = 2<sup>k</sup> − 2 · số mạch mới = 2<sup>k+1</sup> − 2</td></tr>
+<tr><td>Nguyên liệu môi trường</td><td>N<sub>mt</sub> = N(2<sup>k</sup> − 1) · A<sub>mt</sub> = A(2<sup>k</sup> − 1)</td></tr>
+</table></div>
+
+<h2>2. Tái bản DNA – "photo" nguyên cuốn sổ</h2>
+<div class="card">
+<p><b>Giai đoạn 1 – Khởi đầu:</b> protein và enzyme bám vào điểm khởi đầu sao chép (<b>Ori</b>) rồi tách DNA thành hai mạch đơn về <b>hai phía</b>, tạo thành hai <b>chạc sao chép hình chữ Y</b>. Hai chạc này hợp lại thành một đơn vị tái bản. Tiếp đó, <b>RNA polymerase</b> tổng hợp <b>đoạn mồi</b> (RNA ngắn) để tạo đầu 3'-OH.</p>
+<p><b>Giai đoạn 2 – Tổng hợp mạch mới:</b> <b>DNA polymerase</b> gắn nucleotide vào đầu 3' theo NTBS. Enzyme này chỉ chạy một chiều là <b>5'→3'</b>, vì vậy:</p>
+<ul>
+<li>Trên mạch khuôn <b>3'→5'</b> (tính theo hướng chạc mở), mạch mới được tổng hợp <b>liên tục</b>, bám theo chạc.</li>
+<li>Trên mạch khuôn <b>5'→3'</b>, mạch mới phải tổng hợp <b>ngược hướng chạc</b>, thành từng đoạn ngắn gọi là <b>Okazaki</b>. Mỗi đoạn cần một đoạn mồi. Sau đó DNA polymerase thay mồi bằng DNA và <b>ligase</b> nối các đoạn lại.</li>
+</ul>
+<div class="analogy"><b>Hình dung:</b> hai người sơn hai bên vỉa hè, trong khi một chiếc xe (chạc sao chép) chạy dần về phía trước. Luật là chỉ được sơn theo một chiều. Người bên trái sơn cùng chiều xe chạy nên cứ thế sơn liền một mạch. Người bên phải phải sơn ngược chiều xe, nên cứ xe chạy thêm một đoạn là quay lại sơn một khúc ngắn. Đó chính là các đoạn Okazaki.</div>
+</div>
+
+<div class="sim"><span class="lbl">MÔ PHỎNG 2</span>
+<h3 style="margin-top:0">Chạc sao chép từng bước</h3>
+<svg viewBox="0 0 360 210" width="100%" style="max-width:560px;display:block;margin:auto" id="forkSvg">
+ <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2f9e5a"/></marker></defs>
+ <g id="fk0">
+  <line x1="215" y1="98" x2="345" y2="98" stroke="var(--old)" stroke-width="5"/>
+  <line x1="215" y1="112" x2="345" y2="112" stroke="var(--old)" stroke-width="5"/>
+  <text x="330" y="90" font-size="10">3'</text><text x="330" y="130" font-size="10">5'</text>
+ </g>
+ <g id="fk1">
+  <polyline points="15,40 215,98" fill="none" stroke="var(--old)" stroke-width="5"/>
+  <polyline points="15,170 215,112" fill="none" stroke="var(--old)" stroke-width="5"/>
+  <text x="4" y="34" font-size="10">5'</text><text x="4" y="186" font-size="10">3'</text>
+  <circle cx="218" cy="105" r="11" fill="#2f9e5a" opacity=".85"/><text x="200" y="80" font-size="9">tách mạch →</text>
+  <text x="95" y="30" font-size="10">khuôn 3'→5' (theo hướng chạc)</text>
+  <text x="95" y="200" font-size="10">khuôn 5'→3'</text>
+ </g>
+ <g id="fk2">
+  <line x1="170" y1="92" x2="195" y2="99" stroke="#e0533d" stroke-width="5"/>
+  <line x1="40" y1="159" x2="62" y2="152" stroke="#e0533d" stroke-width="5"/>
+  <line x1="100" y1="141" x2="122" y2="135" stroke="#e0533d" stroke-width="5"/>
+  <line x1="160" y1="124" x2="182" y2="118" stroke="#e0533d" stroke-width="5"/>
+  <text x="150" y="112" font-size="9" style="fill:#e0533d">mồi</text>
+ </g>
+ <g id="fk3">
+  <line x1="25" y1="56" x2="170" y2="97" stroke="#2f9e5a" stroke-width="4" marker-end="url(#ar)"/>
+  <text x="30" y="74" font-size="10" style="fill:#2f9e5a">mạch liên tục →</text>
+  <line x1="98" y1="142" x2="64" y2="152" stroke="#2f9e5a" stroke-width="4" marker-end="url(#ar)"/>
+  <line x1="158" y1="125" x2="124" y2="135" stroke="#2f9e5a" stroke-width="4" marker-end="url(#ar)"/>
+  <line x1="200" y1="112" x2="184" y2="117" stroke="#2f9e5a" stroke-width="4"/>
+  <text x="60" y="176" font-size="10" style="fill:#2f9e5a">← Okazaki</text>
+ </g>
+ <g id="fk4">
+  <line x1="40" y1="159" x2="62" y2="152" stroke="#2f9e5a" stroke-width="5"/>
+  <line x1="100" y1="141" x2="122" y2="135" stroke="#2f9e5a" stroke-width="5"/>
+  <circle cx="63" cy="152" r="5" fill="#e0a526"/><circle cx="123" cy="135" r="5" fill="#e0a526"/>
+  <text x="130" y="160" font-size="9" style="fill:#e0a526">● ligase nối</text>
+ </g>
+</svg>
+<div class="step-cap" id="forkCap"></div>
+<div class="row"><button class="btn sm ghost" id="forkPrev">← Lùi</button><button class="btn sm" id="forkNext">Bước tiếp →</button><span class="note" id="forkNum"></span></div>
+</div>
+
+<div class="card">
+<div class="key"><b>Nguyên tắc:</b> bổ sung + <b>bán bảo toàn</b>. Mỗi DNA con có 1 mạch cũ (của mẹ) và 1 mạch mới. Hai DNA con giống nhau và giống DNA mẹ.</div>
+<div class="tbl"><table>
+<tr><th></th><th>Nhân sơ</th><th>Nhân thực</th></tr>
+<tr><td>Số Ori trên mỗi phân tử DNA</td><td>1</td><td>Nhiều, nên tái bản đồng thời ở nhiều vùng và nhanh hơn</td></tr>
+<tr><td>Loại DNA polymerase</td><td>Ít</td><td>Nhiều hơn</td></tr>
+</table></div>
+<p class="note">Ứng dụng: nhân bản DNA trong ống nghiệm từ mẫu vật hiện trường (pháp y), tìm tác nhân gây bệnh, giải trình tự gene, công nghệ di truyền. Enzyme tái bản của vi khuẩn khác enzyme của người, vì vậy có thể thiết kế kháng sinh đánh "trúng" vi khuẩn mà ít hại người.</p>
+</div>
+
+<div class="sim"><span class="lbl">MÔ PHỎNG 3</span>
+<h3 style="margin-top:0">Thí nghiệm bán bảo toàn (kiểu Meselson – Stahl)</h3>
+<p class="note">Ban đầu DNA chỉ chứa <sup>15</sup>N (mạch "cũ"). Chuyển sang môi trường <sup>14</sup>N, rồi kéo thanh trượt để cho tái bản qua nhiều thế hệ.</p>
+<div class="legend"><span><i style="background:var(--old)"></i>mạch cũ (<sup>15</sup>N)</span><span><i style="background:var(--new)"></i>mạch mới (<sup>14</sup>N)</span></div>
+<div class="row"><label>Số lần tái bản: <b id="genV">0</b></label><input type="range" id="gen" min="0" max="5" value="0" style="flex:1"></div>
+<div id="genStats" class="stats"></div>
+<div id="mols" class="mols"></div>
+</div>
+
+<h2>3. Gene – một "công thức" trong cuốn sổ</h2>
+<div class="card">
+<p><b>Gene</b> là một đoạn DNA mang thông tin quy định sản phẩm là <b>chuỗi polypeptide hoặc RNA</b>. Gene có hai mạch nhưng chỉ <b>mạch khuôn</b> được dùng để tổng hợp mRNA. Mạch còn lại là <b>mạch mã hoá</b>, có trình tự giống mRNA, chỉ khác là mang T thay cho U.</p>
+<div class="tbl"><table>
+<tr><th>Vùng</th><th>Vị trí (trên mạch khuôn)</th><th>Vai trò</th></tr>
+<tr><td>Điều hoà</td><td>Đầu 3'</td><td>Chứa <b>promoter</b>, nơi RNA polymerase bám vào, và vùng liên kết protein điều hoà</td></tr>
+<tr><td>Mã hoá</td><td>Giữa</td><td>Mang thông tin quy định trình tự nucleotide của RNA</td></tr>
+<tr><td>Kết thúc</td><td>Đầu 5'</td><td>Mang tín hiệu kết thúc phiên mã</td></tr>
+</table></div>
+<div class="tbl" style="margin-top:10px"><table>
+<tr><th></th><th>Nhân sơ</th><th>Nhân thực</th></tr>
+<tr><td>Tổ chức</td><td>Các gene liên quan chức năng thường xếp thành nhóm, dùng chung 1 vùng điều hoà và 1 vùng kết thúc</td><td>Mỗi gene có đủ 3 vùng riêng</td></tr>
+<tr><td>Vùng mã hoá</td><td>Liên tục, gọi là gene <b>không phân mảnh</b></td><td>Phần lớn là gene <b>phân mảnh</b>: exon (được dịch mã) xen kẽ intron (không được dịch mã)</td></tr>
+</table></div>
+<p><b>Phân loại:</b> theo chức năng có gene cấu trúc (tạo sản phẩm cấu tạo tế bào) và gene điều hoà (tạo sản phẩm điều khiển gene khác). Theo cấu trúc có gene phân mảnh và gene không phân mảnh.</p>
+</div>
+
+<h2>4. Hệ gene</h2>
+<div class="card">
+<p><b>Hệ gene</b> là tập hợp <b>tất cả vật chất di truyền (DNA)</b> trong tế bào của một sinh vật, <u>kể cả những đoạn DNA không phải gene</u>.</p>
+<div class="key"><b>Hệ gene người (giải trình tự xong năm 2004):</b>
+<br>• Hơn <b>3,2 tỉ cặp</b> nucleotide trên 23 cặp NST, độ chính xác 99,999%.
+<br>• Khoảng <b>21 300 gene</b> mã hoá protein.
+<br>• Exon chỉ chiếm khoảng <b>1,5%</b> hệ gene, vùng điều hoà khoảng <b>5%</b>, còn intron chiếm khoảng <b>20%</b>.
+<br>• Trung bình mỗi gene dài khoảng 27 000 cặp nucleotide và có khoảng 10 exon.</div>
+<p><b>Ứng dụng:</b> y học (phát hiện gene bệnh, chọn thuốc hướng đích cho ung thư), pháp y (tìm thủ phạm, nhận dạng nạn nhân, xác định huyết thống) và tiến hoá (hệ gene càng giống nhau thì quan hệ họ hàng càng gần; tinh tinh là loài gần người nhất).</p>
+<div class="trap"><b>Bẫy:</b> "Exon chiếm 20%" là <b>sai</b>, con số 20% là của intron. Câu "tập hợp tất cả các gene là hệ gene" cũng <b>sai</b>, vì hệ gene gồm toàn bộ DNA chứ không chỉ các gene.</div>
+</div>
+
+<h2>5. Phiên mã – "photo" một trang công thức</h2>
+<div class="card">
+<ul>
+<li><b>Khởi đầu:</b> protein bám vào vùng điều hoà, thu hút RNA polymerase tới promoter.</li>
+<li><b>Tổng hợp:</b> RNA polymerase đọc mạch khuôn theo chiều 3'→5' và tổng hợp RNA theo chiều <b>5'→3'</b>. Cặp bổ sung là A–U, T–A, G–C, C–G.</li>
+<li><b>Kết thúc:</b> khi gặp tín hiệu kết thúc ở đầu 5' mạch khuôn.</li>
+</ul>
+<p><b>Nhân thực:</b> phiên mã tạo ra <b>tiền mRNA</b>. Tiền mRNA được gắn <b>mũ 7-methyl guanine</b> ở đầu 5' và <b>đuôi poly A</b> ở đầu 3', sau đó <b>cắt intron, nối exon</b> để thành mRNA trưởng thành, rồi mới ra tế bào chất. <b>Nhân sơ:</b> không có màng nhân, nên mRNA đang phiên mã tới đâu thì được dịch mã tới đó, và một mRNA có thể mang thông tin của nhiều gene.</p>
+</div>
+
+<div class="sim"><span class="lbl">MÔ PHỎNG 4</span>
+<h3 style="margin-top:0">Cắt intron – nối exon (và cắt nối thay thế)</h3>
+<p class="note">Exon 1 và Exon 5 luôn được giữ lại. Bật hoặc tắt các exon ở giữa để xem một gene có thể tạo ra nhiều loại mRNA, và do đó nhiều loại protein, như thế nào.</p>
+<div id="preBar" class="exbar"></div>
+<div class="row" id="exChecks"></div>
+<div id="matBar" class="exbar"></div>
+<div id="spliceInfo" class="note"></div>
+</div>
+
+<h2>6. Ba loại RNA chủ chốt</h2>
+<div class="card tbl"><table>
+<tr><th>RNA</th><th>Cấu trúc</th><th>Chức năng</th><th>Ví von</th></tr>
+<tr><td><b>mRNA</b></td><td>Mạch đơn, thẳng. Ở nhân sơ, một mRNA có thể chứa trình tự của nhiều gene</td><td>Khuôn cho dịch mã, mang thông tin từ gene tới ribosome</td><td>Bản photo công thức</td></tr>
+<tr><td><b>tRNA</b></td><td>Mạch đơn có đoạn tự bắt đôi, tạo 3 thuỳ. Một thuỳ mang <b>anticodon</b>. Đầu 3' là nơi gắn amino acid</td><td>Chở amino acid tới ribosome. Có ít nhất 20 loại, thường 30–40 loại</td><td>Shipper</td></tr>
+<tr><td><b>rRNA</b></td><td>Mạch đơn, có nhiều đoạn bắt cặp tạo cấu trúc không gian phức tạp</td><td>Cấu tạo nên ribosome. Ví dụ rRNA 16S ở nhân sơ nhận ra vùng nằm trước codon mở đầu</td><td>Bộ khung căn bếp</td></tr>
+</table></div>
+
+<h2>7. Phiên mã ngược</h2>
+<div class="card">
+<p>Phiên mã ngược là quá trình tổng hợp <b>DNA từ khuôn RNA</b>, do <b>enzyme phiên mã ngược</b> thực hiện.</p>
+<ul>
+<li><b>Virus RNA</b> như HIV: vào tế bào, virus tổng hợp DNA từ RNA, rồi DNA này tích hợp vào hệ gene tế bào chủ.</li>
+<li><b>Telomerase</b> (trong tế bào sinh giao tử): dùng mạch RNA có sẵn trong chính enzyme làm khuôn để kéo dài đầu mút NST, bù lại phần bị ngắn đi sau mỗi lần nhân đôi.</li>
+<li><b>cDNA:</b> tổng hợp từ mRNA trưởng thành nên <b>không có intron</b>. Được dùng để chuyển gene nhân thực vào vi khuẩn, vì vi khuẩn không cắt được intron. Enzyme phiên mã ngược cũng được dùng để xét nghiệm virus RNA như HIV, SARS-CoV-2.</li>
+</ul>
+<div class="trap"><b>Bẫy:</b> "Chỉ virus mới phiên mã ngược" là <b>sai</b>, vì tế bào người có telomerase.</div>
+</div>
+
+<h2>8. Mã di truyền – "từ điển 3 chữ cái"</h2>
+<div class="card">
+<p>Mã di truyền có <b>64 bộ ba</b>, gồm 61 bộ ba mã hoá amino acid và 3 bộ ba kết thúc là <b>UAA, UAG, UGA</b>. <b>AUG</b> là bộ ba mở đầu, mã hoá Met ở nhân thực và fMet ở nhân sơ.</p>
+<ul>
+<li><b>Mã bộ ba:</b> 3 nucleotide liền kề quy định 1 amino acid.</li>
+<li><b>Đọc liên tục</b> từ AUG theo chiều 5'→3', từng bộ ba một, <b>không gối lên nhau</b>.</li>
+<li><b>Thoái hoá:</b> nhiều bộ ba cùng mã hoá 1 amino acid. Leu, Ser, Arg có 6 bộ ba; Met (AUG) và Trp (UGG) chỉ có 1.</li>
+<li><b>Đặc hiệu:</b> mỗi bộ ba chỉ mã hoá 1 amino acid.</li>
+<li><b>Phổ biến:</b> gần như mọi loài dùng chung. Ngoại lệ ở ti thể người: UGA mã hoá Trp, AUA mã hoá Met, còn AGA và AGG là bộ ba kết thúc.</li>
+</ul>
+<div class="analogy"><b>Mẹo phân biệt:</b> <b>Thoái</b> hoá là "nhiều từ đồng nghĩa" (nhiều codon cho 1 amino acid). <b>Đặc</b> hiệu là "mỗi từ chỉ có một nghĩa" (1 codon cho 1 amino acid). Đừng nhầm hai chiều này.</div>
+</div>
+
+<div class="sim"><span class="lbl">MÔ PHỎNG 5</span>
+<h3 style="margin-top:0">Bảng mã di truyền tương tác</h3>
+<p class="note">Bấm vào một amino acid để xem nó có bao nhiêu bộ ba mã hoá, tức là mức độ thoái hoá.</p>
+<div class="aabtns" id="aaBtns"></div>
+<div id="aaInfo" class="note" style="min-height:1.5em"></div>
+<div class="ctab" id="ctab"></div>
+</div>
+
+<h2>9. Dịch mã – "đầu bếp" ribosome làm việc</h2>
+<div class="card">
+<p>Trước khi dịch mã, <b>20 loại enzyme</b> gắn từng loại amino acid vào đúng tRNA của nó. Ribosome gồm tiểu phần nhỏ và tiểu phần lớn, bình thường nằm tách rời nhau. Ribosome có 3 vị trí: <b>E</b> (exit, lối ra) – <b>P</b> (giữ chuỗi đang dài ra) – <b>A</b> (nhận tRNA mới).</p>
+<ul>
+<li><b>Khởi đầu:</b> tiểu phần nhỏ gắn vào mRNA tại AUG. tRNA mang fMet (anticodon 3'UAC5') khớp với AUG. Sau đó tiểu phần lớn gắn vào để tạo ribosome hoàn chỉnh.</li>
+<li><b>Kéo dài:</b> tRNA mới vào vị trí A, liên kết peptide hình thành với amino acid ở vị trí P. Ribosome dịch 1 codon theo chiều 5'→3'. tRNA "rỗng" sang vị trí E rồi rời đi. Nhiều ribosome có thể cùng dịch một mRNA (<b>polyribosome</b>), tạo ra nhiều chuỗi <b>giống nhau</b>.</li>
+<li><b>Kết thúc:</b> khi codon kết thúc vào vị trí A, không có tRNA nào khớp. <b>Yếu tố giải phóng</b> tách chuỗi ra và ribosome tách thành 2 tiểu phần. Chuỗi sau đó bị cắt amino acid mở đầu và biến đổi thêm để có chức năng.</li>
+</ul>
+</div>
+
+<div class="sim"><span class="lbl">MÔ PHỎNG 6</span>
+<h3 style="margin-top:0">Từ gene đến protein: phiên mã + dịch mã từng bước</h3>
+<div class="row" style="flex-wrap:nowrap"><select id="seqType" style="max-width:230px">
+<option value="coding">Mạch mã hoá DNA (5'→3')</option>
+<option value="template">Mạch khuôn DNA (3'→5')</option>
+<option value="mrna">mRNA (5'→3')</option></select></div>
+<input type="text" id="seqIn" value="ATGCACGCACCTCCTTACTAA">
+<div class="row"><button class="btn sm ghost" data-seq="ATGCACGCACCTCCTTACTAA|coding">HAPPY (đề thi 2026)</button><button class="btn sm ghost" data-seq="TACAAACCGATT|template">Mạch khuôn mẫu</button><button class="btn sm ghost" data-seq="GGAUGUUUGGCUGGUAGCC|mrna">mRNA có đoạn trước AUG</button></div>
+<div id="tlOut"></div>
+<div class="codons" id="codons"></div>
+<p style="margin:10px 0 0"><b>Chuỗi polypeptide:</b></p>
+<div class="chain" id="chain"></div>
+<div class="step-cap note" id="tlCap"></div>
+<div class="row"><button class="btn sm ghost" id="tlReset">↺ Làm lại</button><button class="btn sm" id="tlStep">Ribosome bước tiếp →</button><button class="btn sm ghost" id="tlAll">Chạy hết</button></div>
+</div>
+
+<h2>10. Bức tranh tổng: DNA → RNA → protein</h2>
+<div class="card">
+<p>Thông tin di truyền đi theo đường: DNA tự tái bản; DNA được phiên mã thành mRNA; mRNA được dịch mã thành protein, và protein quy định tính trạng. Trong trường hợp đặc biệt có phiên mã ngược (RNA → DNA). Mọi bước đều dựa trên <b>NTBS</b> (A–T/U, G–C).</p>
+<div class="tbl"><table>
+<tr><th></th><th>Tái bản</th><th>Phiên mã</th><th>Dịch mã</th></tr>
+<tr><td>Khuôn</td><td>Cả 2 mạch DNA</td><td>1 mạch (mạch khuôn) của gene</td><td>mRNA</td></tr>
+<tr><td>Enzyme / bộ máy chính</td><td>Enzyme tách mạch, RNA polymerase (tạo mồi), DNA polymerase, ligase</td><td>RNA polymerase</td><td>Ribosome, tRNA, 20 loại enzyme gắn amino acid</td></tr>
+<tr><td>Nguyên liệu</td><td>Nucleotide A, T, G, C</td><td>Nucleotide A, U, G, C</td><td>20 loại amino acid</td></tr>
+<tr><td>Chiều tổng hợp</td><td>5'→3'</td><td>5'→3'</td><td>Ribosome đọc mRNA 5'→3'</td></tr>
+<tr><td>NTBS</td><td>A–T, G–C</td><td>A(khuôn)–U, T–A, G–C, C–G</td><td>Codon – anticodon (A–U, G–C)</td></tr>
+<tr><td>Sản phẩm</td><td>2 DNA giống hệt nhau</td><td>mRNA, tRNA, rRNA</td><td>Chuỗi polypeptide</td></tr>
+</table></div>
+<div class="key"><b>Công thức dịch mã</b> (gene không phân mảnh, vùng mã hoá có N nucleotide tính cả 2 mạch):
+<br>• Số codon = N/6.
+<br>• Số amino acid trong chuỗi vừa tổng hợp = N/6 − 1 (trừ codon kết thúc).
+<br>• Số amino acid trong protein hoàn chỉnh = N/6 − 2 (trừ thêm amino acid mở đầu).
+<br>• Số liên kết peptide = số amino acid − 1.
+<br>• Tổng số chuỗi tạo ra = số gene con × số lần phiên mã × số ribosome trượt qua mỗi mRNA.
+<br>Với <b>gene phân mảnh</b> thì không tính trực tiếp từ gene được, vì intron bị cắt bỏ.</div>
+</div>
+</section>
+
+<!-- ================= ĐỀ ================= -->
+<section id="de" class="hide">
+<div class="card">
+<b>Bộ 3 đề luyện – Di truyền phân tử</b> <span class="badge">Cấu trúc thi TN THPT</span>
+<p class="note" style="margin:.4em 0 0">Mỗi đề gồm 28 câu, làm trong 50 phút.
+<br>• Phần I: 18 câu × 0,25đ.
+<br>• Phần II: 4 câu đúng/sai. Đúng 1 ý được 0,1đ; 2 ý 0,25đ; 3 ý 0,5đ; cả 4 ý 1đ.
+<br>• Phần III: 6 câu trả lời ngắn × 0,25đ, đáp án tối đa 4 kí tự.
+<br>Đề 1 tập trung vào DNA và tái bản; Đề 2 vào gene, phiên mã, RNA; Đề 3 vào mã di truyền, dịch mã và câu tổng hợp.</p>
+</div>
+<div class="exsel" id="exSel"></div>
+<div id="exBody"></div>
+<div class="bar">
+<span class="timer" id="timer">50:00</span>
+<span class="score hide" id="score"></span>
+<span><button class="btn ghost hide" id="reset">Làm lại</button> <button class="btn" id="submit">Nộp bài</button></span>
+</div>
+</section>
+</div>
+
+<script>
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));document.getElementById('kt').classList.toggle('hide',t.dataset.t!=='kt');document.getElementById('de').classList.toggle('hide',t.dataset.t!=='de');if(t.dataset.t==='de')startTimer();window.scrollTo(0,0)});
+
+const nt=c=>`<span class="nt n${c}">${c}</span>`;
+const COMP={A:'T',T:'A',G:'C',C:'G'};
+
+/* ---------- SIM 1: DNA ---------- */
+function drawDNA(){
+ const s=document.getElementById('dnaIn').value.toUpperCase().replace(/[^ATGC]/g,'');
+ const out=document.getElementById('dnaOut');
+ if(!s){out.innerHTML='<p class="note">Nhập ít nhất 1 nucleotide A/T/G/C.</p>';return}
+ const c=[...s].map(x=>COMP[x]).join('');
+ const bonds=[...s].map(x=>`<span class="bond">${x==='A'||x==='T'?'||':'|||'}</span>`).join('');
+ const A=[...s].filter(x=>x==='A'||x==='T').length, G=s.length-A;
+ const H=2*A+3*G, gc=Math.round(G/s.length*100);
+ out.innerHTML=`<div class="seq">5' ${[...s].map(nt).join('')} 3'<br>&nbsp;&nbsp;&nbsp;${bonds}<br>3' ${[...c].map(nt).join('')} 5'</div>
+ <div class="stats"><div class="stat"><b>${s.length*2}</b><span>tổng nucleotide (N)</span></div>
+ <div class="stat"><b>${A} / ${G}</b><span>số cặp A–T / G–C</span></div>
+ <div class="stat"><b>${H}</b><span>liên kết hydrogen</span></div>
+ <div class="stat"><b>${(s.length*0.34).toFixed(2)} nm</b><span>chiều dài</span></div>
+ <div class="stat"><b>${gc}%</b><span>tỉ lệ G+C</span><div class="meter"><i style="width:${gc}%"></i></div></div></div>
+ <p class="note">G+C càng cao thì càng nhiều liên kết hydrogen (3 so với 2), nên DNA càng bền và khó tách mạch hơn.</p>`;
+}
+document.getElementById('dnaIn').oninput=drawDNA;
+document.querySelectorAll('[data-dna]').forEach(b=>b.onclick=()=>{document.getElementById('dnaIn').value=b.dataset.dna;drawDNA()});
+drawDNA();
+
+/* ---------- SIM 2: fork ---------- */
+const FK=["DNA mẹ nguyên vẹn. Tại điểm khởi đầu sao chép (Ori), protein và enzyme bắt đầu bám vào.",
+"Enzyme tách mạch mở xoắn và tạo chạc chữ Y. Hai mạch khuôn ngược chiều nhau: mạch trên 3'→5' và mạch dưới 5'→3' (tính theo hướng chạc tiến).",
+"RNA polymerase tổng hợp các đoạn mồi (màu đỏ) để tạo đầu 3'-OH. Mạch dưới cần <b>nhiều</b> đoạn mồi, mỗi đoạn Okazaki một mồi.",
+"DNA polymerase kéo dài theo chiều 5'→3'. Mạch trên được tổng hợp <b>liên tục</b>, cùng hướng với chạc. Mạch dưới được tổng hợp ngược hướng chạc, thành từng <b>đoạn Okazaki</b>.",
+"DNA polymerase loại bỏ đoạn mồi và lấp DNA vào chỗ trống. <b>Ligase</b> nối các đoạn Okazaki thành mạch liền. Kết quả: mỗi DNA con có 1 mạch cũ và 1 mạch mới."];
+let fs=0;
+function drawFork(){for(let i=0;i<5;i++)document.getElementById('fk'+i).style.opacity=i<=fs?1:0;
+ if(fs>=1)document.getElementById('fk0').style.opacity=1;
+ if(fs===4)document.getElementById('fk2').style.opacity=0.15;
+ document.getElementById('forkCap').innerHTML=FK[fs];document.getElementById('forkNum').textContent=`Bước ${fs+1}/5`}
+document.getElementById('forkNext').onclick=()=>{fs=Math.min(4,fs+1);drawFork()};
+document.getElementById('forkPrev').onclick=()=>{fs=Math.max(0,fs-1);drawFork()};
+drawFork();
+
+/* ---------- SIM 3: semi-conservative ---------- */
+function drawGen(){
+ const k=+document.getElementById('gen').value;document.getElementById('genV').textContent=k;
+ let mols=[['o','o']];
+ for(let g=0;g<k;g++){const nx=[];mols.forEach(m=>{nx.push([m[0],'n']);nx.push([m[1],'n'])});mols=nx}
+ const hyb=mols.filter(m=>m.includes('o')).length,light=mols.length-hyb,heavy=mols.filter(m=>m[0]==='o'&&m[1]==='o').length;
+ document.getElementById('genStats').innerHTML=`<div class="stat"><b>${mols.length}</b><span>tổng DNA = 2<sup>${k}</sup></span></div>
+ <div class="stat"><b>${heavy}</b><span>DNA nặng (<sup>15</sup>N–<sup>15</sup>N)</span></div>
+ <div class="stat"><b>${k===0?0:hyb}</b><span>DNA lai (<sup>15</sup>N–<sup>14</sup>N)</span></div>
+ <div class="stat"><b>${light}</b><span>DNA nhẹ (<sup>14</sup>N–<sup>14</sup>N) = 2<sup>k</sup>−2</span></div>
+ <div class="stat"><b>${mols.length*2-2}</b><span>mạch mới = 2<sup>k+1</sup>−2</span></div>`;
+ document.getElementById('mols').innerHTML=mols.map(m=>`<div class="mol"><i class="${m[0]}"></i><i class="${m[1]}"></i></div>`).join('');
+}
+document.getElementById('gen').oninput=drawGen;drawGen();
+
+/* ---------- genetic code ---------- */
+const B="UCAG",AA1="FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG";
+const N3={F:"Phe",L:"Leu",S:"Ser",Y:"Tyr",C:"Cys",W:"Trp",P:"Pro",H:"His",Q:"Gln",R:"Arg",I:"Ile",M:"Met",T:"Thr",N:"Asn",K:"Lys",V:"Val",A:"Ala",D:"Asp",E:"Glu",G:"Gly","*":"KT"};
+const CODE={};for(let i=0;i<4;i++)for(let j=0;j<4;j++)for(let k=0;k<4;k++)CODE[B[i]+B[j]+B[k]]=AA1[16*i+4*j+k];
+
+/* ---------- SIM 5: codon table ---------- */
+(function(){
+ const tab=document.getElementById('ctab');let h='';
+ for(let i=0;i<4;i++)for(let k=0;k<4;k++)for(let j=0;j<4;j++){const c=B[i]+B[j]+B[k],a=CODE[c];h+=`<div class="cc ${a==='*'?'st':''}" data-a="${a}">${c}<br><small>${N3[a]}</small></div>`}
+ tab.innerHTML=h;
+ const order="MWFYHQNKDECIVPTAGLSR*";
+ document.getElementById('aaBtns').innerHTML=[...order].map(a=>`<button class="btn sm ghost" data-aa="${a}">${N3[a]}</button>`).join('');
+ document.querySelectorAll('[data-aa]').forEach(b=>b.onclick=()=>{const a=b.dataset.aa;let n=0;
+  tab.querySelectorAll('.cc').forEach(c=>{const on=c.dataset.a===a;c.classList.toggle('hl',on);if(on)n++});
+  document.getElementById('aaInfo').innerHTML=a==='*'?`<b>3 bộ ba kết thúc</b> (UAA, UAG, UGA): không mã hoá amino acid, không có tRNA nào khớp.`:`<b>${N3[a]}</b> được mã hoá bởi <b>${n}</b> bộ ba. ${n===1?'Không có tính thoái hoá.':'Đây là ví dụ của tính thoái hoá.'}`});
+})();
+
+/* ---------- SIM 4: splicing ---------- */
+const EX=[90,60,120,45,150],IN=[200,150,300,180];
+function drawSplice(){
+ let pre='';for(let i=0;i<5;i++){pre+=`<div class="ex" style="flex:${EX[i]}">E${i+1}</div>`;if(i<4)pre+=`<div class="in" style="flex:${IN[i]}">I${i+1}</div>`}
+ document.getElementById('preBar').innerHTML=pre;
+ const keep=[true,...[1,2,3].map(i=>document.getElementById('ek'+i).checked),true];
+ let mat='',len=0;keep.forEach((k,i)=>{if(k){mat+=`<div class="ex" style="flex:${EX[i]}">E${i+1}</div>`;len+=EX[i]}});
+ document.getElementById('matBar').innerHTML=mat;
+ const total=EX.reduce((a,b)=>a+b,0)+IN.reduce((a,b)=>a+b,0);
+ document.getElementById('spliceInfo').innerHTML=`Trên: tiền mRNA, dài ${total} nucleotide (tính riêng phần exon và intron). Dưới: mRNA trưởng thành, phần exon dài <b>${len}</b> nucleotide, tương ứng <b>${len/3}</b> bộ ba.<br>Có 3 exon ở giữa, mỗi exon có 2 khả năng (giữ hoặc bỏ), và thứ tự exon không đổi. Vì vậy có tối đa <b>2³ = 8</b> loại mRNA trưởng thành.`;
+}
+document.getElementById('exChecks').innerHTML=[1,2,3].map(i=>`<label><input type="checkbox" id="ek${i}" checked> giữ E${i+1}</label>`).join(' ');
+[1,2,3].forEach(i=>document.getElementById('ek'+i).onchange=drawSplice);drawSplice();
+
+/* ---------- SIM 6: translation ---------- */
+let TL={codons:[],pos:-1,chain:[],done:false,start:0};
+function toMRNA(s,type){s=s.toUpperCase().replace(/\s/g,'');
+ if(type==='mrna')return s.replace(/[^AUGC]/g,'');
+ s=s.replace(/[^ATGC]/g,'');
+ if(type==='coding')return s.replace(/T/g,'U');
+ return [...s].map(x=>({A:'U',T:'A',G:'C',C:'G'})[x]).join('');}
+function buildTL(){
+ const type=document.getElementById('seqType').value,m=toMRNA(document.getElementById('seqIn').value,type);
+ const st=m.indexOf('AUG');
+ let html=`<div class="seq" style="margin-top:8px"><b>mRNA:</b> 5' ${[...m].map(nt).join('')} 3'</div>`;
+ if(type==='template')html=`<p class="note">Mạch khuôn đọc 3'→5', nên mRNA được tổng hợp 5'→3' theo NTBS (A→U, T→A, G→C, C→G).</p>`+html;
+ if(type==='coding')html=`<p class="note">mRNA giống mạch mã hoá, chỉ thay T bằng U.</p>`+html;
+ document.getElementById('tlOut').innerHTML=html;
+ TL={codons:[],pos:-1,chain:[],done:false,start:st,m};
+ if(st<0){document.getElementById('codons').innerHTML='';document.getElementById('chain').innerHTML='';document.getElementById('tlCap').innerHTML='Không tìm thấy codon mở đầu AUG, nên ribosome không khởi đầu dịch mã được.';return}
+ for(let i=st;i+3<=m.length;i+=3){TL.codons.push(m.substr(i,3));if(CODE[m.substr(i,3)]==='*')break}
+ drawTL();document.getElementById('tlCap').innerHTML=st>0?`Ribosome bỏ qua ${st} nucleotide đầu và bắt đầu tại AUG đầu tiên. Bấm "bước tiếp".`:'Bấm "bước tiếp" để ribosome khởi đầu tại AUG.';
+}
+function drawTL(){
+ const p=TL.pos;
+ document.getElementById('codons').innerHTML=TL.codons.map((c,i)=>{const a=CODE[c];let site='';if(p>=0&&!TL.done){if(i===p)site='P';else if(i===p+1)site='A';else if(i===p-1)site='E'}
+  return `<div class="cd ${a==='*'?'stop':''} ${i===0?'start':''} ${p>=0&&i<p-1?'pre':''}">${site?`<span class="site">${site}</span>`:''}${c}<small>${i===0?'fMet':N3[a]}</small></div>`}).join('')+(TL.codons.length&&CODE[TL.codons[TL.codons.length-1]]!=='*'?'<span class="note">(chưa gặp codon kết thúc)</span>':'');
+ document.getElementById('chain').innerHTML=TL.chain.map((a,i)=>`<span class="aa ${i===0?'f':''}">${a}</span>`).join('<span>–</span>');
+}
+function stepTL(){if(TL.done||!TL.codons.length)return;const cap=document.getElementById('tlCap');
+ if(TL.pos<0){TL.pos=0;TL.chain=['fMet'];cap.innerHTML='<b>Khởi đầu:</b> tiểu phần nhỏ gắn vào AUG, tRNA-fMet (anticodon 3\'UAC5\') khớp vào. Tiểu phần lớn gắn vào, tRNA-fMet nằm ở vị trí <b>P</b>.';drawTL();return}
+ const nx=TL.codons[TL.pos+1];
+ if(!nx){TL.done=true;cap.innerHTML='mRNA hết mà chưa gặp codon kết thúc.';drawTL();return}
+ if(CODE[nx]==='*'){TL.done=true;const k=TL.chain.length;cap.innerHTML=`<b>Kết thúc:</b> codon ${nx} vào vị trí A, không tRNA nào khớp. Yếu tố giải phóng tách chuỗi, ribosome tách đôi. Chuỗi có <b>${k}</b> amino acid và ${k-1} liên kết peptide. Sau khi cắt fMet, protein còn <b>${k-1}</b> amino acid: ${TL.chain.slice(1).join('–')||'(không còn)'}.`;drawTL();return}
+ const an=[...nx].reverse().map(x=>({A:'U',U:'A',G:'C',C:'G'})[x]).join('');
+ TL.chain.push(N3[CODE[nx]]);TL.pos++;
+ cap.innerHTML=`<b>Kéo dài:</b> tRNA mang ${N3[CODE[nx]]} (anticodon 3'${[...an].reverse().join('')}5') vào vị trí A. Liên kết peptide hình thành, ribosome dịch 1 codon về phía 3', và tRNA rỗng sang vị trí E rồi rời đi.`;drawTL()}
+document.getElementById('tlStep').onclick=stepTL;
+document.getElementById('tlAll').onclick=()=>{let g=0;while(!TL.done&&g++<200)stepTL()};
+document.getElementById('tlReset').onclick=buildTL;
+document.getElementById('seqIn').oninput=buildTL;document.getElementById('seqType').onchange=buildTL;
+document.querySelectorAll('[data-seq]').forEach(b=>b.onclick=()=>{const [s,t]=b.dataset.seq.split('|');document.getElementById('seqIn').value=s;document.getElementById('seqType').value=t;buildTL()});
+buildTL();
+
+/* ================= EXAMS ================= */
+const EXAMS=[
+{name:"Đề 1 · DNA & tái bản",
+p1:[
+["Các nucleotide trên cùng một mạch DNA liên kết với nhau bằng",["liên kết hydrogen giữa các base","liên kết cộng hoá trị giữa đường của nucleotide này với nhóm phosphate của nucleotide kế tiếp","liên kết peptide","liên kết ion giữa các base"],1,"Trong một mạch, các nucleotide nối với nhau bằng liên kết cộng hoá trị đường – phosphate. Liên kết hydrogen là liên kết giữa hai mạch."],
+["Giữa G và C trên hai mạch của DNA có bao nhiêu liên kết hydrogen?",["1","2","3","4"],2,"G–C có 3 liên kết hydrogen, A–T có 2."],
+["Một mạch DNA có trình tự 5'–ATGCTA–3'. Mạch bổ sung của nó là",["5'–TACGAT–3'","3'–TACGAT–5'","3'–UACGAU–5'","5'–ATGCTA–3'"],1,"Theo NTBS và nguyên tắc ngược chiều, mạch bổ sung là 3'–TACGAT–5'. Phương án 5'–TACGAT–3' sai chiều."],
+["Thành phần nào sau đây KHÔNG có trong cấu tạo của nucleotide DNA?",["Nhóm phosphate","Đường deoxyribose","Base nitrogen","Đường ribose"],3,"Ribose có trong RNA. DNA chứa deoxyribose."],
+["Theo mô hình Watson – Crick, mỗi chu kì xoắn của DNA",["dài 3,4 nm và gồm 10 cặp nucleotide","dài 0,34 nm và gồm 1 cặp nucleotide","dài 2 nm và gồm 20 cặp nucleotide","dài 34 nm và gồm 100 cặp nucleotide"],0,"Mỗi chu kì xoắn dài 3,4 nm, có 10 cặp nucleotide, mỗi cặp cách nhau 0,34 nm."],
+["Vai trò của đoạn mồi trong tái bản DNA là",["nối các đoạn Okazaki","cung cấp đầu 3'-OH để DNA polymerase bắt đầu gắn nucleotide","tháo xoắn phân tử DNA","xác định điểm kết thúc tái bản"],1,"DNA polymerase chỉ gắn nucleotide vào đầu 3'-OH có sẵn, nên cần đoạn mồi."],
+["Đoạn Okazaki là",["đoạn RNA mồi","đoạn DNA ngắn được tổng hợp trên mạch gián đoạn","đoạn intron bị cắt khỏi tiền mRNA","đoạn DNA ở đầu mút NST"],1,"Mạch gián đoạn được tổng hợp thành từng đoạn ngắn gọi là đoạn Okazaki."],
+["Sau khi các đoạn Okazaki được tổng hợp, enzyme loại bỏ đoạn mồi và tổng hợp đoạn DNA thay thế là",["DNA polymerase","ligase","RNA polymerase","enzyme tách mạch"],0,"Theo SGK, DNA polymerase loại bỏ mồi và thay bằng DNA, sau đó ligase nối các đoạn."],
+["Một đơn vị tái bản gồm",["một chạc sao chép","hai chạc sao chép cùng xuất phát từ một điểm khởi đầu (Ori)","toàn bộ phân tử DNA","một đoạn Okazaki"],1,"Tái bản đi theo hai hướng ngược nhau từ Ori, tạo nên một đơn vị tái bản gồm hai chạc chữ Y."],
+["Tại một chạc sao chép, mạch mới được tổng hợp liên tục khi mạch khuôn có chiều",["5'→3' tính theo hướng chạc tháo xoắn","3'→5' tính theo hướng chạc tháo xoắn","bất kì chiều nào","chiều do enzyme ligase quyết định"],1,"Mạch mới luôn kéo dài 5'→3'. Nếu khuôn chạy 3'→5' theo hướng chạc thì mạch mới đi cùng hướng chạc, nên được tổng hợp liên tục."],
+["Kết quả của một lần tái bản từ một phân tử DNA là",["hai DNA con, một DNA hoàn toàn cũ và một DNA hoàn toàn mới","hai DNA con giống nhau và giống DNA mẹ, mỗi DNA có một mạch cũ và một mạch mới","bốn DNA con giống nhau","một DNA con và một phân tử RNA"],1,"Đây là nguyên tắc bán bảo toàn."],
+["Số điểm khởi đầu sao chép trên một phân tử DNA của sinh vật nhân sơ là",["1","2","nhiều","không có"],0,"DNA nhân sơ chỉ có một Ori. DNA nhân thực có nhiều Ori."],
+["Loại base nitrogen nào có trong DNA nhưng KHÔNG có trong RNA?",["Adenine","Guanine","Thymine","Cytosine"],2,"T chỉ có ở DNA. U chỉ có ở RNA."],
+["Nhờ đặc điểm nào mà thông tin di truyền trong DNA được truyền đạt gần như nguyên vẹn qua các thế hệ tế bào?",["DNA có kích thước lớn","Sự kết cặp đặc hiệu A – T và G – C","DNA nằm trong nhân","DNA có nhiều gene"],1,"Kết cặp đặc hiệu giúp tái bản chính xác."],
+["Protein tạo nên tính trạng nhưng không đảm nhận được chức năng vật chất di truyền, chủ yếu vì protein",["có cấu trúc không gian","không có khả năng tự tái bản theo nguyên tắc bổ sung","có kích thước nhỏ hơn DNA","được cấu tạo từ 20 loại amino acid"],1,"Vật chất di truyền phải tự sao chép chính xác được. Protein không có cơ chế bắt cặp bổ sung để làm điều này."],
+["Ứng dụng nào sau đây dựa trực tiếp trên cơ chế tái bản DNA trong ống nghiệm?",["Nhân bản DNA từ mẫu vật hiện trường vụ án để truy tìm thủ phạm","Cắt intron nối exon","Dịch mã tạo insulin","Lai tế bào sinh dưỡng"],0,"Theo mục Khoa học và đời sống trong SGK: nhân bản DNA từ mẫu vật hiện trường, tìm tác nhân gây bệnh, giải trình tự gene."],
+["Sinh vật nhân thực tái bản DNA nhanh hơn trên toàn bộ hệ gene chủ yếu là nhờ",["DNA polymerase chạy theo cả hai chiều","có nhiều điểm khởi đầu sao chép trên mỗi phân tử DNA","không cần đoạn mồi","không có mạch gián đoạn"],1,"Nhiều Ori cho phép tái bản đồng thời ở nhiều vùng trên một phân tử DNA."],
+["Kết quả phân tích thành phần base của 4 mẫu DNA mạch kép như sau. Mẫu I: A = 30%. Mẫu II: G = 35%. Mẫu III: T = 25%. Mẫu IV: C = 15%. Mẫu có liên kết giữa hai mạch bền nhất (nhiệt độ tách mạch cao nhất) là",["Mẫu I","Mẫu II","Mẫu III","Mẫu IV"],1,"Tỉ lệ G + C lần lượt là: I = 40%, II = 70%, III = 50%, IV = 30%. G + C càng cao thì càng nhiều liên kết hydrogen và càng bền."]
+],
+p2:[
+["Vi khuẩn E. coli được nuôi lâu trong môi trường chỉ có <sup>15</sup>N, sau đó chuyển sang môi trường chỉ có <sup>14</sup>N. Sau mỗi thế hệ, người ta tách DNA và li tâm. DNA nặng (<sup>15</sup>N–<sup>15</sup>N), DNA lai và DNA nhẹ (<sup>14</sup>N–<sup>14</sup>N) tạo thành các băng ở vị trí khác nhau.",
+[["Sau thế hệ thứ nhất chỉ thu được băng DNA lai.",1],["Sau 3 thế hệ, DNA lai chiếm 25% tổng số phân tử DNA.",1],["Băng DNA nặng xuất hiện ở mọi thế hệ trong môi trường <sup>14</sup>N.",0],["Nếu DNA tái bản theo kiểu bảo toàn, sau thế hệ thứ nhất sẽ thấy băng nặng và băng nhẹ mà không có băng lai.",1]],
+"a) Đúng. b) Đúng: có 8 phân tử, trong đó 2 phân tử lai, bằng 25%. c) Sai: sau lần tái bản đầu tiên không còn DNA nặng. d) Đúng: bảo toàn nghĩa là DNA mẹ giữ nguyên (nặng) và DNA con hoàn toàn mới (nhẹ)."],
+["Tại một chạc sao chép, theo hướng chạc tháo xoắn, mạch khuôn I có chiều 3'→5' và mạch khuôn II có chiều 5'→3'.",
+[["Mạch mới trên khuôn I được tổng hợp liên tục.",1],["Trên khuôn II, mỗi đoạn Okazaki được kéo dài theo chiều 3'→5'.",0],["Số đoạn mồi cần cho mạch mới trên khuôn II nhiều hơn trên khuôn I.",1],["Nếu thiếu ligase, mạch mới trên khuôn II vẫn là một chuỗi polynucleotide liền mạch.",0]],
+"a) Đúng. b) Sai: mọi mạch mới đều kéo dài 5'→3'. c) Đúng: mỗi đoạn Okazaki cần một mồi. d) Sai: ligase là enzyme nối các đoạn Okazaki."],
+["Bảng thành phần base (%) trong vật chất di truyền của 4 loài:<table class='mini'><tr><th>Loài</th><th>A</th><th>T</th><th>U</th><th>G</th><th>C</th></tr><tr><td>1</td><td>30</td><td>30</td><td>0</td><td>20</td><td>20</td></tr><tr><td>2</td><td>20</td><td>20</td><td>0</td><td>30</td><td>30</td></tr><tr><td>3</td><td>25</td><td>35</td><td>0</td><td>15</td><td>25</td></tr><tr><td>4</td><td>25</td><td>0</td><td>25</td><td>25</td><td>25</td></tr></table>",
+[["Vật chất di truyền của loài 3 là DNA mạch đơn.",1],["DNA của loài 2 bền nhiệt hơn DNA của loài 1.",1],["Vật chất di truyền của loài 4 là DNA mạch kép.",0],["Nếu DNA loài 1 có 2000 cặp nucleotide thì có 4800 liên kết hydrogen.",1]],
+"a) Đúng: có T nhưng A ≠ T và G ≠ C, nên không tuân theo NTBS giữa hai mạch. b) Đúng: G + C bằng 60% so với 40%. c) Sai: có U và không có T, nên đây là RNA. d) Đúng: N = 4000, A = 1200, G = 800, H = 2400 + 2400 = 4800."],
+["Nhiều enzyme tái bản ở vi khuẩn khác với enzyme cùng loại ở người. Thuốc X ức chế đặc hiệu ligase của vi khuẩn. Thuốc Y ức chế mọi loại DNA polymerase.",
+[["Thuốc X làm các đoạn Okazaki của vi khuẩn không được nối lại.",1],["Thuốc Y ít gây tác dụng phụ cho người bệnh hơn thuốc X.",0],["Thuốc X ảnh hưởng đến việc hoàn thiện mạch gián đoạn nhiều hơn mạch liên tục.",1],["Thuốc X có thể dùng để điều trị nhiễm HIV.",0]],
+"a) Đúng. b) Sai: Y ức chế cả DNA polymerase của người nên gây hại nhiều hơn. c) Đúng: mạch gián đoạn gồm nhiều đoạn cần nối. d) Sai: HIV là virus, không phải vi khuẩn, và không dùng ligase của vi khuẩn."]
+],
+p3:[
+["Một gene có 2400 nucleotide, trong đó số nucleotide loại A là 480. Tính số liên kết hydrogen của gene.","3120","G = (2400 − 2 × 480) / 2 = 720. H = 2 × 480 + 3 × 720 = 3120."],
+["Một gene có 150 chu kì xoắn. Chiều dài của gene là bao nhiêu nm?","510","N = 150 × 20 = 3000, tức 1500 cặp. L = 1500 × 0,34 = 510 nm."],
+["Một phân tử DNA mạch kép có 3600 liên kết hydrogen và 600 nucleotide loại G. Số nucleotide loại A là bao nhiêu?","900","2A + 3 × 600 = 3600, suy ra A = 900."],
+["Có 5 phân tử DNA cùng nhân đôi 4 lần. Tổng số phân tử DNA con tạo ra là bao nhiêu?","80","5 × 2<sup>4</sup> = 80."],
+["Cũng 5 phân tử DNA trên nhân đôi 4 lần. Có bao nhiêu mạch polynucleotide mới được tổng hợp?","150","Mỗi DNA tạo 16 DNA con = 32 mạch, trong đó 2 mạch cũ, nên 30 mạch mới. 5 × 30 = 150."],
+["Một gene có 1200 nucleotide, A chiếm 20%. Gene nhân đôi 2 lần. Môi trường cung cấp bao nhiêu nucleotide loại G?","1080","G = 30% × 1200 = 360. G<sub>mt</sub> = 360 × (2<sup>2</sup> − 1) = 1080."]
+]},
+
+{name:"Đề 2 · Gene, phiên mã, RNA",
+p1:[
+["Gene là",["một đoạn DNA mang thông tin quy định sản phẩm là chuỗi polypeptide hoặc RNA","toàn bộ phân tử DNA trong tế bào","một đoạn mRNA mang thông tin mã hoá protein","một chuỗi polypeptide"],0,"Đây là định nghĩa trong SGK."],
+["Mạch polynucleotide của gene KHÔNG được dùng làm khuôn tổng hợp mRNA được gọi là",["mạch khuôn","mạch mã hoá","mạch gián đoạn","mạch liên tục"],1,"Mạch dùng làm khuôn là mạch khuôn. Mạch còn lại là mạch mã hoá."],
+["Promoter – nơi enzyme phiên mã liên kết – nằm ở vùng nào của gene?",["Vùng mã hoá","Vùng kết thúc","Vùng điều hoà","Intron"],2,"Vùng điều hoà ở đầu 3' mạch khuôn chứa promoter."],
+["Trong phiên mã, mRNA được tổng hợp theo chiều",["3'→5'","5'→3'","cả hai chiều","ngẫu nhiên"],1,"RNA polymerase tổng hợp RNA theo chiều 5'→3', đọc mạch khuôn theo chiều 3'→5'."],
+["Mạch mã hoá của một gene có trình tự 5'–ATG GCA–3'. Trình tự mRNA tương ứng là",["5'–UAC CGU–3'","3'–UAC CGU–5'","5'–AUG GCA–3'","5'–ATG GCA–3'"],2,"mRNA giống mạch mã hoá, chỉ thay T bằng U."],
+["Vùng kết thúc của gene nằm ở",["đầu 3' của mạch khuôn","đầu 5' của mạch khuôn","giữa các exon","trước promoter"],1,"Vùng kết thúc ở đầu 5' mạch khuôn và mang tín hiệu kết thúc phiên mã."],
+["Ở sinh vật nhân thực, quá trình cắt intron và nối exon diễn ra",["ở ribosome","ở tế bào chất","trong nhân, trước khi mRNA ra tế bào chất","sau khi dịch mã xong"],2,"Tiền mRNA được hoàn thiện trong nhân, sau đó mRNA trưởng thành mới ra khỏi nhân."],
+["Loại RNA có cấu trúc gồm ba thuỳ, trong đó một thuỳ mang bộ ba đối mã là",["mRNA","tRNA","rRNA","tiền mRNA"],1,"tRNA có 3 thuỳ, một thuỳ mang anticodon."],
+["Chức năng của rRNA là",["làm khuôn cho dịch mã","vận chuyển amino acid","cấu tạo nên ribosome","mang tín hiệu kết thúc phiên mã"],2,"Mọi loại rRNA đều là thành phần cấu tạo nên ribosome."],
+["Đầu 3' của phân tử tRNA là nơi",["mang anticodon","liên kết với amino acid","liên kết với mRNA","liên kết với promoter"],1,"Đầu 3' của mọi tRNA có cấu trúc giống nhau và là nơi gắn amino acid."],
+["Gene điều hoà là gene",["tạo sản phẩm cấu tạo nên màng tế bào","tạo sản phẩm điều hoà sự biểu hiện của các gene khác","không bao giờ được phiên mã","chỉ có ở sinh vật nhân sơ"],1,"Theo chức năng, gene được chia thành gene cấu trúc và gene điều hoà."],
+["Enzyme phiên mã ngược thường gặp ở",["mọi loại vi khuẩn","một số loại virus có vật chất di truyền là RNA","tất cả tế bào sinh dưỡng của thực vật","ribosome"],1,"Ví dụ HIV: virus có RNA và mang enzyme phiên mã ngược."],
+["Telomerase kéo dài đầu mút NST bằng cách",["dùng mạch DNA làm khuôn tổng hợp RNA","dùng mạch RNA có sẵn trong enzyme làm khuôn tổng hợp mạch DNA","nối các đoạn Okazaki","cắt bỏ intron"],1,"Telomerase là một enzyme phiên mã ngược. Nhờ đó đoạn đầu mút bị ngắn đi trong nhân đôi được phục hồi ở tế bào sinh giao tử."],
+["cDNA tổng hợp từ mRNA trưởng thành của sinh vật nhân thực khác gene gốc ở chỗ",["cDNA có thêm intron","cDNA không có intron","cDNA có U thay T","cDNA là mạch RNA"],1,"mRNA trưởng thành đã bị cắt intron, nên cDNA không có intron. Nhờ vậy có thể chuyển vào vi khuẩn để biểu hiện."],
+["Tổng số gene mã hoá protein trong hệ gene người được ước tính khoảng",["3,2 tỉ","21 300","2 130 000","213"],1,"3,2 tỉ là số cặp nucleotide, không phải số gene."],
+["Khi so sánh hệ gene người với các loài linh trưởng, loài có quan hệ họ hàng gần nhất với người là",["khỉ đột","đười ươi","tinh tinh","vượn"],2,"Theo SGK, tinh tinh có hệ gene giống người nhất."],
+["Ở sinh vật nhân sơ, các gene có liên quan về chức năng thường",["mỗi gene có vùng điều hoà riêng","nằm thành nhóm, có chung một vùng điều hoà và một vùng kết thúc","đều là gene phân mảnh","nằm trên các phân tử DNA khác nhau"],1,"Xem Hình 2.2a trong SGK."],
+["Một gene nhân thực gồm 4 exon (E1, E2, E3, E4) xen kẽ 3 intron. E1 và E4 luôn được giữ lại, E2 và E3 có thể bị cắt bỏ cùng intron, và thứ tự các exon không đổi. Theo lí thuyết, gene này tạo ra tối đa bao nhiêu loại mRNA trưởng thành?",["2","3","4","6"],2,"Mỗi exon E2, E3 có 2 khả năng (giữ hoặc bỏ): 2 × 2 = 4, gồm E1-E2-E3-E4, E1-E2-E4, E1-E3-E4 và E1-E4."]
+],
+p2:[
+["Một gene nhân thực có cấu trúc: vùng điều hoà – E1 (90 nu) – I1 (200 nu) – E2 (60 nu) – I2 (150 nu) – E3 (120 nu) – vùng kết thúc. Ở con cái, mRNA trưởng thành gồm E1–E2–E3. Ở con đực, mRNA trưởng thành gồm E1–E3. Giả sử khung đọc không đổi và không phát sinh codon kết thúc mới.",
+[["Đây là gene phân mảnh.",1],["Phần exon trong mRNA trưởng thành của con đực ngắn hơn con cái 210 nucleotide.",0],["Intron I1 có mặt trong mRNA trưởng thành của con cái.",0],["Chuỗi polypeptide ở con đực ít hơn con cái 20 amino acid.",1]],
+"a) Đúng: có intron. b) Sai: chỉ ngắn hơn 60 nucleotide (thiếu E2). c) Sai: mọi intron đều bị cắt bỏ. d) Đúng: 60 : 3 = 20 amino acid."],
+["Cho đoạn mạch khuôn của một gene ở vi khuẩn: 3'–TAC GGT CAA ATT–5'.",
+[["mRNA phiên mã từ đoạn này là 5'–AUG CCA GUU UAA–3'.",1],["RNA polymerase tổng hợp mRNA theo chiều 3'→5'.",0],["Mạch mã hoá tương ứng là 5'–ATG CCA GTT TAA–3'.",1],["Đoạn mRNA này chứa 4 codon mã hoá amino acid.",0]],
+"a) Đúng. b) Sai: mRNA được tổng hợp theo chiều 5'→3'. c) Đúng: mạch mã hoá giống mRNA, với T thay U. d) Sai: UAA là codon kết thúc, nên chỉ có 3 codon mã hoá (Met, Pro, Val)."],
+["Khi nói về các loại RNA:",
+[["Ở sinh vật nhân sơ, một phân tử mRNA có thể chứa trình tự mã hoá của nhiều gene.",1],["Đầu 3' của các loại tRNA có cấu trúc giống nhau và là nơi gắn amino acid.",1],["rRNA có cấu trúc mạch kép hoàn toàn giống DNA.",0],["Anticodon của tRNA bắt cặp bổ sung với codon trên rRNA.",0]],
+"a) Đúng. b) Đúng. c) Sai: rRNA là mạch đơn, chỉ có một số đoạn bắt cặp với nhau. d) Sai: anticodon bắt cặp với codon trên mRNA."],
+["HIV có vật chất di truyền là RNA. Thuốc AZT ức chế enzyme phiên mã ngược. Xét nghiệm RT-PCR dùng để phát hiện SARS-CoV-2.",
+[["Sau khi vào tế bào, HIV tổng hợp DNA từ khuôn RNA rồi tích hợp DNA đó vào NST của tế bào chủ.",1],["Thuốc AZT ngăn cản bước tạo DNA của virus từ RNA.",1],["RT-PCR cần bước phiên mã ngược vì hệ gene SARS-CoV-2 là RNA.",1],["Thuốc AZT ngăn cản trực tiếp quá trình dịch mã protein của virus từ DNA.",0]],
+"a), b), c) Đúng. d) Sai: dịch mã diễn ra trên mRNA chứ không trực tiếp từ DNA. AZT tác động vào bước phiên mã ngược."]
+],
+p3:[
+["Đoạn mRNA của vi khuẩn tính từ codon mở đầu đến hết codon kết thúc dài 900 nucleotide. Chuỗi polypeptide hoàn chỉnh (đã cắt amino acid mở đầu) có bao nhiêu amino acid?","298","900 : 3 = 300 codon. Trừ codon kết thúc còn 299 amino acid, trừ tiếp amino acid mở đầu còn 298."],
+["Một mRNA có A = 150, U = 200, G = 250, C = 300. Gene tạo ra mRNA này phiên mã 5 lần. Môi trường cung cấp bao nhiêu nucleotide loại U?","1000","Mỗi lần phiên mã cần 200 U. 200 × 5 = 1000."],
+["Một mRNA có tỉ lệ A = 10%, U = 20%, G = 30%, C = 40%. Tỉ lệ % nucleotide loại G của đoạn gene (mạch kép) tương ứng là bao nhiêu?","35","G<sub>gene</sub> = (G<sub>mRNA</sub> + C<sub>mRNA</sub>) / 2 = (30 + 40) / 2 = 35%."],
+["Tổng số nucleotide trong các exon của toàn bộ gene quy định protein ở người chiếm khoảng bao nhiêu % hệ gene? (Ghi dạng số thập phân, ví dụ 2,5)","1,5","Theo SGK (dẫn từ Campbell): exon khoảng 1,5%, vùng điều hoà khoảng 5%, intron khoảng 20%."],
+["Một gene nhân thực có 5 exon. Exon đầu và exon cuối luôn được giữ, 3 exon giữa có thể được giữ hoặc bị cắt, và thứ tự không đổi. Số loại mRNA trưởng thành tối đa là bao nhiêu?","8","2 × 2 × 2 = 8 (xem Mô phỏng 4)."],
+["Từ 4 loại nucleotide A, U, G, C, có bao nhiêu bộ ba chứa ít nhất một nucleotide loại A?","37","Tổng 4<sup>3</sup> = 64. Số bộ ba không chứa A là 3<sup>3</sup> = 27. 64 − 27 = 37."]
+]},
+
+{name:"Đề 3 · Mã di truyền & dịch mã",
+p1:[
+["Tính đặc hiệu của mã di truyền thể hiện ở chỗ",["mỗi bộ ba chỉ mã hoá cho một loại amino acid","nhiều bộ ba cùng mã hoá một amino acid","tất cả các loài dùng chung một bộ mã","mã được đọc liên tục từ một điểm"],0,"Đặc hiệu: 1 codon cho 1 amino acid. Thoái hoá là trường hợp ngược lại (nhiều codon cho 1 amino acid)."],
+["Codon mở đầu trên mRNA là",["UAA","AUG","UGA","UAG"],1,"AUG vừa là codon mở đầu vừa mã hoá Met (nhân thực) hoặc fMet (nhân sơ)."],
+["Số bộ ba mã hoá amino acid trong bảng mã di truyền chuẩn là",["64","20","61","60"],2,"Có 64 bộ ba, trừ 3 bộ ba kết thúc còn 61."],
+["Nhóm bộ ba nào sau đây gồm toàn bộ ba kết thúc?",["UAA, UAG, UGA","AUG, UAA, UGA","UAA, UGG, UAG","UGA, AGA, UAC"],0,"Trong mã chuẩn, ba bộ ba kết thúc là UAA, UAG, UGA."],
+["Anticodon của tRNA mang amino acid mở đầu là",["5'UAC3'","3'UAC5'","3'AUG5'","5'AUG3'"],1,"Anticodon bổ sung và ngược chiều với codon 5'AUG3', nên là 3'UAC5'."],
+["Trong dịch mã, ribosome di chuyển trên mRNA theo chiều",["3'→5'","5'→3'","từ codon kết thúc về codon mở đầu","ngẫu nhiên"],1,"Ribosome đọc mRNA theo chiều 5'→3'."],
+["tRNA không còn mang amino acid rời khỏi ribosome tại vị trí",["A","P","E","cả A và P"],2,"E là lối ra (exit)."],
+["Amino acid mở đầu trong dịch mã ở sinh vật nhân sơ là",["methionine","formylmethionine","tryptophan","serine"],1,"Nhân sơ dùng fMet, nhân thực dùng Met."],
+["Hiện tượng polyribosome có ý nghĩa",["tạo nhiều loại protein khác nhau từ một mRNA","tăng hiệu suất tổng hợp: tạo nhiều chuỗi polypeptide cùng loại trong thời gian ngắn","giúp cắt intron","giúp mRNA ra khỏi nhân"],1,"Nhiều ribosome cùng dịch một mRNA tạo ra nhiều chuỗi giống hệt nhau."],
+["Quá trình dịch mã kết thúc khi",["ribosome gặp codon AUG","ribosome gặp codon kết thúc và yếu tố giải phóng tách chuỗi polypeptide","hết tRNA trong tế bào","ribosome gặp intron"],1,"Không có tRNA nào khớp với codon kết thúc. Yếu tố giải phóng tách chuỗi và ribosome tách thành hai tiểu phần."],
+["Trước khi dịch mã, amino acid được gắn vào tRNA tương ứng nhờ",["ligase nối DNA","20 loại enzyme, mỗi loại gắn một loại amino acid vào tRNA tương ứng","RNA polymerase","ribosome"],1,"Theo SGK, mỗi tế bào có 20 loại enzyme gắn amino acid vào tRNA."],
+["Trường hợp nào sau đây thể hiện mã di truyền có ngoại lệ, tức là không hoàn toàn phổ biến?",["UAU mã hoá Tyr ở mọi loài","Trong ti thể người, UGA mã hoá Trp","AUG là codon mở đầu","GCU mã hoá Ala"],1,"Trong ti thể người: UGA mã hoá Trp, AUA mã hoá Met, AGA và AGG là codon kết thúc."],
+["Amino acid nào sau đây chỉ được mã hoá bởi một bộ ba duy nhất?",["Leucine","Serine","Tryptophan","Arginine"],2,"Trp chỉ có UGG, Met chỉ có AUG. Leu, Ser, Arg mỗi loại có 6 bộ ba."],
+["Đoạn mRNA 5'AUGGUUGCC3' được ribosome đọc thành AUG – GUU – GCC. Điều này thể hiện đặc điểm nào của mã di truyền?",["Tính thoái hoá","Mã được đọc theo từng bộ ba, liên tục và không gối lên nhau","Tính phổ biến","Tính đặc hiệu"],1,"Đây đúng là ví dụ trong SGK."],
+["Một đột biến thay nucleotide thứ ba của codon GCU thành GCA nhưng chuỗi polypeptide không thay đổi. Điều này là nhờ",["tính đặc hiệu","tính thoái hoá","tính phổ biến","codon mở đầu"],1,"GCU và GCA đều mã hoá Ala. Nhiều codon cùng mã hoá một amino acid, đó là tính thoái hoá."],
+["Sắp xếp các sự kiện của giai đoạn khởi đầu dịch mã: (1) tiểu phần lớn liên kết tạo ribosome hoàn chỉnh; (2) tiểu phần nhỏ liên kết với mRNA tại codon mở đầu; (3) tRNA mang fMet liên kết với codon AUG. Thứ tự đúng là",["(1) → (2) → (3)","(2) → (3) → (1)","(3) → (1) → (2)","(2) → (1) → (3)"],1,"Theo SGK, Hình 2.6."],
+["Mối quan hệ giữa gene và tính trạng được biểu hiện theo sơ đồ",["Protein → mRNA → gene → tính trạng","Gene (DNA) → mRNA → protein → tính trạng","mRNA → gene → protein → tính trạng","Gene → protein → mRNA → tính trạng"],1,"Đây là quá trình truyền đạt thông tin từ DNA qua mRNA tới protein."],
+["Một chuỗi peptide có trình tự His – Ala – Pro – Pro – Tyr (kí hiệu một chữ cái: HAPPY). Đoạn mRNA nào sau đây có thể mã hoá cho chuỗi này?",["5'–CAC GCA CCU CCU UAA–3'","5'–CAA GCA CCU CCU UAC–3'","5'–CAC GCA CCU CCU UAC–3'","3'–CAC GCA CCU CCU UAC–5'"],2,"CAC = His, GCA = Ala, CCU = Pro, UAC = Tyr. Các phương án còn lại sai vì: có UAA là codon kết thúc; có CAA mã hoá Gln; hoặc ghi ngược chiều 3'→5'. Đây là dạng câu đã ra trong đề thi 2026."]
+],
+p2:[
+["Mạch mã hoá của một gene ở vi khuẩn: 5'–ATG CAC GCA CCT CCT TAC TAA–3'.",
+[["mRNA tương ứng là 5'–AUG CAC GCA CCU CCU UAC UAA–3'.",1],["Chuỗi polypeptide hoàn chỉnh (đã cắt amino acid mở đầu) là His–Ala–Pro–Pro–Tyr.",1],["Anticodon của tRNA vận chuyển Tyr là 3'AUG5'.",1],["Nếu nucleotide thứ ba của codon CAC (His) bị thay C bằng A thì chuỗi polypeptide không đổi.",0]],
+"a) Đúng. b) Đúng: chuỗi là HAPPY. c) Đúng: codon 5'UAC3' bắt cặp với anticodon 3'AUG5'. d) Sai: CAA mã hoá Gln, nên His bị thay bằng Gln."],
+["Tại một thời điểm dịch mã: vị trí P chứa tRNA mang chuỗi fMet–Leu, vị trí A vừa nhận tRNA mang Ser.",
+[["Liên kết peptide tiếp theo được hình thành giữa Leu và Ser.",1],["Sau khi ribosome dịch chuyển, tRNA đang mang chuỗi peptide nằm ở vị trí P.",1],["tRNA ở vị trí E vẫn còn mang amino acid khi rời ribosome.",0],["Khi codon kết thúc vào vị trí A, một tRNA đặc biệt mang \"amino acid kết thúc\" sẽ gắn vào.",0]],
+"a) Đúng. b) Đúng: chuỗi fMet–Leu–Ser chuyển sang P. c) Sai: tRNA ở vị trí E đã trao amino acid đi. d) Sai: không có tRNA nào khớp với codon kết thúc; yếu tố giải phóng mới là thứ gắn vào."],
+["Một mRNA của vi khuẩn có 5 ribosome cùng trượt qua một lần. Mỗi chuỗi polypeptide khi vừa tổng hợp xong (chưa cắt amino acid mở đầu) có 300 amino acid.",
+[["Tạo ra 5 chuỗi polypeptide cùng loại.",1],["Các ribosome tổng hợp các chuỗi khác nhau về trình tự amino acid.",0],["Đoạn mRNA từ codon mở đầu đến hết codon kết thúc có 903 nucleotide.",1],["Tổng số liên kết peptide hình thành trong 5 chuỗi là 1495.",1]],
+"a) Đúng. b) Sai: cùng một khuôn mRNA nên các chuỗi giống nhau. c) Đúng: 300 codon mã hoá + 1 codon kết thúc = 301 codon, × 3 = 903. d) Đúng: mỗi chuỗi có 299 liên kết, × 5 = 1495."],
+["Khi nói về tính phổ biến của mã di truyền:",
+[["Mã di truyền về cơ bản được dùng chung cho mọi sinh vật trên Trái Đất.",1],["Trong DNA ti thể người, UGA mã hoá tryptophan.",1],["Trong DNA ti thể người, AGA mã hoá arginine giống như mã chuẩn.",0],["Trong DNA ti thể người, AUA mã hoá isoleucine giống như mã chuẩn.",0]],
+"a) Đúng. b) Đúng. c) Sai: AGA và AGG là codon kết thúc trong ti thể người. d) Sai: AUA mã hoá Met trong ti thể người."]
+],
+p3:[
+["Một gene của vi khuẩn tái bản liên tiếp 4 lần. Mỗi gene con phiên mã 3 lần, và mỗi mRNA có 6 ribosome trượt qua một lần. Tổng số chuỗi polypeptide được tạo ra là bao nhiêu?","288","2<sup>4</sup> × 3 × 6 = 16 × 3 × 6 = 288."],
+["Một protein hoàn chỉnh (đã cắt amino acid mở đầu) có 198 amino acid, được mã hoá bởi một gene không phân mảnh. Vùng mã hoá của gene (tính cả hai mạch) có bao nhiêu nucleotide?","1200","198 + 1 (mở đầu) + 1 (codon kết thúc) = 200 codon, tương ứng 600 nucleotide mỗi mạch. Hai mạch: 1200."],
+["Trong bảng mã di truyền chuẩn, có bao nhiêu loại amino acid được mã hoá bởi đúng 4 bộ ba?","5","Val, Pro, Thr, Ala, Gly (dùng Mô phỏng 5 để kiểm tra)."],
+["Đoạn mRNA 5'–AUG UUU UUC UUU UAA–3' được dịch mã. Giả sử mỗi codon chỉ được nhận bởi anticodon bổ sung hoàn toàn với nó. Có bao nhiêu loại anticodon khác nhau tham gia?","3","Các codon mã hoá là AUG, UUU, UUC, UUU. Có 3 loại khác nhau. UAA không có tRNA."],
+["Chuỗi polypeptide hoàn chỉnh có 198 amino acid thì có bao nhiêu liên kết peptide?","197","Số liên kết peptide = số amino acid − 1."],
+["Có bao nhiêu trình tự mRNA khác nhau (chỉ tính 3 codon mã hoá, không tính codon kết thúc) cùng mã hoá tripeptide Met – Leu – Ser?","36","Met có 1 codon, Leu 6, Ser 6. 1 × 6 × 6 = 36."]
+]}
+];
+
+/* ---------- exam engine ---------- */
+const EXAMS_R=[];const L="ABCD",tfPts=[0,0.1,0.25,0.5,1];let cur=0,left=3000,tid=null,done=false;
+document.getElementById('exSel').innerHTML=EXAMS.map((e,i)=>`<button class="btn ${i?'ghost':''}" data-ex="${i}">${e.name}</button>`).join('');
+document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{if(!done&&anyAnswered()&&!confirm('Chuyển đề sẽ xoá bài đang làm. Tiếp tục?'))return;cur=+b.dataset.ex;document.querySelectorAll('[data-ex]').forEach(x=>x.classList.toggle('ghost',x!==b));renderExam();});
+function anyAnswered(){return !!document.querySelector('#exBody input:checked')||[...document.querySelectorAll('#exBody .short')].some(x=>x.value)}
+function balance(p1,seed){return p1.map((q,i)=>{const t=(i*3+seed+Math.floor(i/4))%4;const opts=q[1].slice();const right=opts.splice(q[2],1)[0];opts.splice(t,0,right);return [q[0],opts,t,q[3]]})}
+function renderExam(){const e0=EXAMS[cur];const e={...e0,p1:balance(e0.p1,cur)};EXAMS_R[cur]=e;done=false;clearInterval(tid);tid=null;left=3000;document.getElementById('timer').textContent='50:00';
+ let h=`<h2>Phần I. Trắc nghiệm nhiều lựa chọn</h2>`;
+ e.p1.forEach((q,i)=>{h+=`<div class="q" id="q1-${i}"><span class="n">Câu ${i+1}.</span> ${q[0]}${q[1].map((o,j)=>`<label class="opt"><input type="radio" name="a${i}" value="${j}"><span><b>${L[j]}.</b> ${o}</span></label>`).join('')}<div class="exp"><b>Đáp án ${L[q[2]]}.</b> ${q[3]}</div></div>`});
+ h+=`<h2>Phần II. Trắc nghiệm đúng/sai</h2>`;
+ e.p2.forEach((q,i)=>{h+=`<div class="q" id="q2-${i}"><span class="n">Câu ${i+1}.</span> ${q[0]}<table class="tf"><tr><td></td><td class="c"><b>Đ</b></td><td class="c"><b>S</b></td></tr>${q[1].map((s,j)=>`<tr id="r${i}-${j}"><td>${'abcd'[j]}) ${s[0]}</td><td class="c"><input type="radio" name="b${i}${j}" value="1"></td><td class="c"><input type="radio" name="b${i}${j}" value="0"></td></tr>`).join('')}</table><div class="exp">${q[2]}</div></div>`});
+ h+=`<h2>Phần III. Trả lời ngắn</h2><p class="note">Chỉ ghi số, tối đa 4 kí tự, dùng dấu phẩy cho số thập phân.</p>`;
+ e.p3.forEach((q,i)=>{h+=`<div class="q" id="q3-${i}"><span class="n">Câu ${i+1}.</span> ${q[0]}<br><input class="short" id="c${i}" inputmode="decimal" maxlength="4" placeholder="Đáp án"><div class="exp"><b>Đáp án: ${q[1]}.</b> ${q[2]}</div></div>`});
+ document.getElementById('exBody').innerHTML=h;
+ document.getElementById('score').classList.add('hide');document.getElementById('submit').classList.remove('hide');document.getElementById('reset').classList.add('hide');
+ if(!document.getElementById('de').classList.contains('hide'))startTimer();window.scrollTo(0,document.getElementById('exSel').offsetTop-80)}
+function startTimer(){if(tid||done)return;tid=setInterval(()=>{left--;document.getElementById('timer').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');if(left<=0)grade()},1000)}
+function grade(){if(done)return;done=true;clearInterval(tid);tid=null;const e=EXAMS_R[cur];let s1=0,s2=0,s3=0;
+ e.p1.forEach((q,i)=>{const box=document.getElementById('q1-'+i),c=box.querySelector('input:checked');box.classList.add('done');box.querySelectorAll('.opt')[q[2]].classList.add('right');if(c){if(+c.value===q[2])s1+=.25;else c.closest('.opt').classList.add('wrong')}});
+ e.p2.forEach((q,i)=>{let k=0;q[1].forEach((st,j)=>{const c=document.querySelector(`input[name="b${i}${j}"]:checked`),r=document.getElementById(`r${i}-${j}`);if(c&&+c.value===st[1]){k++;r.classList.add('right')}else r.classList.add('wrong')});s2+=tfPts[k];document.getElementById('q2-'+i).classList.add('done')});
+ e.p3.forEach((q,i)=>{const inp=document.getElementById('c'+i),v=inp.value.trim().replace(',','.');const ok=v!==''&&Math.abs(parseFloat(v)-parseFloat(q[1].replace(',','.')))<1e-9;if(ok)s3+=.25;inp.classList.add(ok?'right':'wrong');document.getElementById('q3-'+i).classList.add('done')});
+ const r=x=>Math.round(x*100)/100,t=r(s1+s2+s3);
+ const sc=document.getElementById('score');sc.innerHTML=`${t}/10 <span class="note">(I: ${r(s1)} · II: ${r(s2)} · III: ${r(s3)})</span>`;sc.classList.remove('hide');
+ document.getElementById('submit').classList.add('hide');document.getElementById('reset').classList.remove('hide');document.querySelectorAll('#exBody input').forEach(x=>x.disabled=true)}
+document.getElementById('submit').onclick=()=>{if(confirm('Nộp bài và xem kết quả?'))grade()};
+document.getElementById('reset').onclick=renderExam;
+renderExam();
+</script>
+</body>
+</html>

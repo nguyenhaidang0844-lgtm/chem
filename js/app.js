@@ -94,7 +94,7 @@
     }
     return h + '</div>';
   }
-  function logo(extra) { return '<div class="logo">' + sakura() + '<span>Hóa 12' + (extra ? '<small>' + extra + '</small>' : '') + '</span></div>'; }
+  function logo(extra) { return '<a class="logo" href="index.html" style="color:inherit;text-decoration:none">' + sakura() + '<span>Hóa 12' + (extra ? '<small>' + extra + '</small>' : '') + '</span></a>'; }
 
   // ---------- Trang chủ ----------
   var pickMode = 'thi';

@@ -1,4 +1,4 @@
-/* Khai báo danh sách đề. Thêm đề mới: define() ở đây + tạo file js/exams/deN.js + thêm <script> vào index.html */
+/* Khai báo danh sách đề. Thêm đề mới: define() ở đây + tạo file js/exams/deN.js + thêm <script> vào hoa.html */
 (function (g) {
   'use strict';
   var E = g.Chem.Exams, chap = 'Chương 1. Ester – Lipid';
