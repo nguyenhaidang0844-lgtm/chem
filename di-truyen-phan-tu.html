@@ -34,7 +34,7 @@ h3{font-size:1.02rem;font-weight:800;text-transform:uppercase;letter-spacing:.02
 .logo small{font-weight:500;opacity:.75;text-transform:none;letter-spacing:0;margin-left:4px}
 .tb-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .tb-right .link{color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:700;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase}
-.tabs{display:flex;gap:8px;margin:16px 0;position:sticky;top:61px;background:var(--cream);padding:8px 0;z-index:5}
+.tabs{display:flex;gap:8px;margin:16px 0}
 .tab{flex:1;padding:10px;border:2px solid var(--burg-900);background:#fff;color:var(--ink);font:inherit;font-weight:800;text-transform:uppercase;letter-spacing:.02em;cursor:pointer;box-shadow:3px 3px 0 var(--burg-900);transition:transform .08s,box-shadow .08s}
 .tab:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--burg-900)}
 .tab.on{background:var(--burg-700);color:#fff;box-shadow:3px 3px 0 var(--pink-500)}
@@ -93,33 +93,64 @@ input[type=text],select{font:inherit;padding:9px 11px;border:2px solid var(--bur
 .ex{background:var(--burg-700)}.in{background:var(--muted)}
 svg text{fill:var(--ink);font-family:var(--font)}
 .step-cap{min-height:3.2em;margin-top:6px}
-/* exam */
+/* exam (đồng bộ với môn Hóa: opts dạng nút, tf dạng nút Đúng/Sai, có palette câu) */
 .exsel{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.q{background:#fff;border:2px solid var(--burg-900);box-shadow:5px 5px 0 var(--pink-300);padding:16px 18px;margin:20px 0}
-.q .n{display:inline-block;font:400 .76rem/1 var(--pixel);background:var(--burg-700);color:var(--pink-500);padding:5px 9px;margin-right:6px;text-transform:uppercase}
-.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid var(--burg-900);margin:8px 0;cursor:pointer;background:#fff}
-.opt:hover{background:var(--pink-50)}
-.opt input{margin-top:5px}
-.opt.right{background:var(--ok-soft);border-color:var(--ok)}
-.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
-.tf{width:100%;border-collapse:collapse;margin-top:8px}
-.tf td{padding:9px 8px;border:none;border-top:2px solid var(--pink-100)}
-.tf td.c{width:48px;text-align:center}
-.tf tr.right td{background:var(--ok-soft)}
-.tf tr.wrong td{background:var(--bad-soft)}
-.short{margin-top:8px;padding:9px 11px;font:inherit;border:2px solid var(--burg-900);border-radius:0;background:#fff;color:var(--ink);width:160px}
-.short.right{border-color:var(--ok);background:var(--ok-soft)}
-.short.wrong{border-color:var(--bad);background:var(--bad-soft)}
-.exp{display:none;margin-top:10px;padding:10px 12px;background:var(--pink-50);border:2px dashed var(--burg-600);font-size:.95rem}
-.done .exp{display:block}
-.bar{position:sticky;bottom:0;background:#fff;border-top:3px solid var(--burg-900);padding:12px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;margin:24px -16px 0;flex-wrap:wrap}
+.tag{display:inline-block;background:var(--burg-700);color:var(--pink-500);font:800 .68rem/1 var(--font);letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;margin-left:6px}
+.exambar{position:sticky;top:63px;z-index:6;background:var(--cream);border-bottom:2px solid var(--burg-900);padding:10px 0;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .timer{font:400 1.2rem/1 var(--pixel);color:var(--burg-700)}
-.score{font-size:1.1rem;font-weight:800;color:var(--burg-700)}
+.layout{display:grid;grid-template-columns:1fr 220px;gap:24px;align-items:start}
+.palette{position:sticky;top:132px;background:#fff;border:2px solid var(--burg-900);box-shadow:var(--hard);padding:14px}
+.palette h4{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;color:var(--burg-700)}
+.pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.pgrid a{display:block;text-align:center;font:400 .8rem/1 var(--pixel);padding:7px 0;border:2px solid var(--burg-900);color:var(--burg-900);text-decoration:none;background:#fff}
+.pgrid a:hover{background:var(--pink-100)}
+.pgrid a.done{background:var(--burg-700);color:var(--pink-500)}
+.q{background:#fff;border:2px solid var(--burg-900);box-shadow:5px 5px 0 var(--pink-300);padding:16px 18px;margin:20px 0;scroll-margin-top:140px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.qnum{font:400 .8rem/1 var(--pixel);background:var(--burg-700);color:var(--pink-500);padding:6px 10px;text-transform:uppercase}
+.qtext{margin-bottom:12px}
+.badge{font-size:.68rem;padding:3px 9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:2px solid currentColor}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}
+.badge.bad{background:var(--bad-soft);color:var(--bad)}
+.badge.part{background:#fff0c9;color:#8a5a00}
+.badge.skip{background:#eee;color:#555}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{text-align:left;display:flex;gap:10px;background:#fff;border:2px solid var(--burg-900);padding:10px 12px;font:inherit;cursor:pointer;width:100%}
+.opt b{font:400 .85rem/1.6 var(--pixel);color:var(--burg-600)}
+.opt:hover:not(:disabled){background:var(--pink-50);box-shadow:3px 3px 0 var(--burg-900);transform:translate(-1px,-1px)}
+.opt.sel{background:var(--burg-700);color:#fff}
+.opt.sel b{color:var(--pink-500)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ink);box-shadow:3px 3px 0 var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--ink);box-shadow:3px 3px 0 var(--bad)}
+.opt.right b::after{content:" ✓"}
+.opt.wrong b::after{content:" ✗"}
+.opt:disabled{cursor:default}
+.tfrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border:2px solid var(--burg-900);margin-bottom:10px;background:#fff}
+.tfrow.right{border-color:var(--ok);background:var(--ok-soft)}
+.tfrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.tftext{flex:1}
+.tfbtns{display:flex;gap:6px;flex-shrink:0}
+.tfb{border:2px solid var(--burg-900);background:#fff;padding:6px 14px;font:800 .78rem/1.4 var(--font);text-transform:uppercase;letter-spacing:.04em;cursor:pointer}
+.tfb:hover:not(:disabled){background:var(--pink-100)}
+.tfb.sel{background:var(--burg-700);color:var(--pink-500)}
+.tfb:disabled{cursor:default}
+.short{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.short input{width:min(100%,220px);padding:9px 11px;border:2px solid var(--burg-900);border-radius:0;background:#fff;color:var(--ink);font:inherit}
+.keyline{flex-basis:100%;color:var(--ok);font-weight:700}
+.explain{margin-top:14px;padding:12px 16px;background:var(--pink-50);border:2px dashed var(--burg-600);font-size:.95rem}
+.explain b{display:block;margin-bottom:4px;text-transform:uppercase;font-size:.72rem;letter-spacing:.1em;color:var(--burg-600)}
+.resultband{background:var(--burg-700);color:#fff;border:2px solid var(--burg-900);box-shadow:var(--hard);padding:24px 20px;margin:16px 0 24px;display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.big{font:400 clamp(2.6rem,8vw,3.6rem)/1 var(--pixel);color:var(--pink-500)}
+.big small{font-size:1.3rem;color:#fff;opacity:.8}
+.parts{list-style:none;display:flex;gap:12px;padding:0;margin:12px 0 16px;flex-wrap:wrap}
+.parts li{border:2px solid var(--pink-500);padding:6px 12px;font-size:.85rem}
+.parts b{font-family:var(--pixel);font-weight:400;color:var(--pink-500)}
+.rbtns{display:flex;gap:14px;flex-wrap:wrap}
 .hide{display:none!important}
 .note{color:var(--muted);font-size:.9rem}
-.badge{display:inline-block;padding:5px 9px;background:var(--burg-700);color:var(--pink-500);font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-left:6px}
 .mini{width:100%;font-size:.9rem;margin:8px 0}
 .mini td,.mini th{padding:5px 8px;text-align:center;border:1px solid var(--pink-300)}
+@media (max-width:700px){.layout{grid-template-columns:1fr}.palette{display:none}.opts{grid-template-columns:1fr}.tfrow{flex-direction:column;align-items:stretch}.tfbtns{justify-content:flex-end}}
 @media (max-width:600px){.logo small{display:none}}
 </style>
 </head>
@@ -390,7 +421,7 @@ svg text{fill:var(--ink);font-family:var(--font)}
 <!-- ================= ĐỀ ================= -->
 <section id="de" class="hide">
 <div class="card">
-<b>Bộ 3 đề luyện – Di truyền phân tử</b> <span class="badge">Cấu trúc thi TN THPT</span>
+<b>Bộ 3 đề luyện – Di truyền phân tử</b> <span class="tag">Cấu trúc thi TN THPT</span>
 <p class="note" style="margin:.4em 0 0">Mỗi đề gồm 28 câu, làm trong 50 phút.
 <br>• Phần I: 18 câu × 0,25đ.
 <br>• Phần II: 4 câu đúng/sai. Đúng 1 ý được 0,1đ; 2 ý 0,25đ; 3 ý 0,5đ; cả 4 ý 1đ.
@@ -398,12 +429,7 @@ svg text{fill:var(--ink);font-family:var(--font)}
 <br>Đề 1 tập trung vào DNA và tái bản; Đề 2 vào gene, phiên mã, RNA; Đề 3 vào mã di truyền, dịch mã và câu tổng hợp.</p>
 </div>
 <div class="exsel" id="exSel"></div>
-<div id="exBody"></div>
-<div class="bar">
-<span class="timer" id="timer">50:00</span>
-<span class="score hide" id="score"></span>
-<span><button class="btn ghost hide" id="reset">Làm lại</button> <button class="btn" id="submit">Nộp bài</button></span>
-</div>
+<div id="exArea"></div>
 </section>
 </div>
 
@@ -671,33 +697,123 @@ p3:[
 ]}
 ];
 
-/* ---------- exam engine ---------- */
-const EXAMS_R=[];const L="ABCD",tfPts=[0,0.1,0.25,0.5,1];let cur=0,left=3000,tid=null,done=false;
-document.getElementById('exSel').innerHTML=EXAMS.map((e,i)=>`<button class="btn ${i?'ghost':''}" data-ex="${i}">${e.name}</button>`).join('');
-document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{if(!done&&anyAnswered()&&!confirm('Chuyển đề sẽ xoá bài đang làm. Tiếp tục?'))return;cur=+b.dataset.ex;document.querySelectorAll('[data-ex]').forEach(x=>x.classList.toggle('ghost',x!==b));renderExam();});
-function anyAnswered(){return !!document.querySelector('#exBody input:checked')||[...document.querySelectorAll('#exBody .short')].some(x=>x.value)}
+/* ---------- exam engine (đồng bộ format với môn Hóa: nút chọn đáp án, nút Đúng/Sai, palette câu, băng kết quả) ---------- */
+const L4="ABCD",TFPTS=[0,0.1,0.25,0.5,1];
+let cur=0,S=null,tid=null;
+function fmtScore(x){return (Math.round(x*100)/100+'').replace('.',',')}
+function mmss(s){s=Math.max(0,s);const m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x}
 function balance(p1,seed){return p1.map((q,i)=>{const t=(i*3+seed+Math.floor(i/4))%4;const opts=q[1].slice();const right=opts.splice(q[2],1)[0];opts.splice(t,0,right);return [q[0],opts,t,q[3]]})}
-function renderExam(){const e0=EXAMS[cur];const e={...e0,p1:balance(e0.p1,cur)};EXAMS_R[cur]=e;done=false;clearInterval(tid);tid=null;left=3000;document.getElementById('timer').textContent='50:00';
- let h=`<h2>Phần I. Trắc nghiệm nhiều lựa chọn</h2>`;
- e.p1.forEach((q,i)=>{h+=`<div class="q" id="q1-${i}"><span class="n">Câu ${i+1}.</span> ${q[0]}${q[1].map((o,j)=>`<label class="opt"><input type="radio" name="a${i}" value="${j}"><span><b>${L[j]}.</b> ${o}</span></label>`).join('')}<div class="exp"><b>Đáp án ${L[q[2]]}.</b> ${q[3]}</div></div>`});
- h+=`<h2>Phần II. Trắc nghiệm đúng/sai</h2>`;
- e.p2.forEach((q,i)=>{h+=`<div class="q" id="q2-${i}"><span class="n">Câu ${i+1}.</span> ${q[0]}<table class="tf"><tr><td></td><td class="c"><b>Đ</b></td><td class="c"><b>S</b></td></tr>${q[1].map((s,j)=>`<tr id="r${i}-${j}"><td>${'abcd'[j]}) ${s[0]}</td><td class="c"><input type="radio" name="b${i}${j}" value="1"></td><td class="c"><input type="radio" name="b${i}${j}" value="0"></td></tr>`).join('')}</table><div class="exp">${q[2]}</div></div>`});
- h+=`<h2>Phần III. Trả lời ngắn</h2><p class="note">Chỉ ghi số, tối đa 4 kí tự, dùng dấu phẩy cho số thập phân.</p>`;
- e.p3.forEach((q,i)=>{h+=`<div class="q" id="q3-${i}"><span class="n">Câu ${i+1}.</span> ${q[0]}<br><input class="short" id="c${i}" inputmode="decimal" maxlength="4" placeholder="Đáp án"><div class="exp"><b>Đáp án: ${q[1]}.</b> ${q[2]}</div></div>`});
- document.getElementById('exBody').innerHTML=h;
- document.getElementById('score').classList.add('hide');document.getElementById('submit').classList.remove('hide');document.getElementById('reset').classList.add('hide');
- if(!document.getElementById('de').classList.contains('hide'))startTimer();window.scrollTo(0,document.getElementById('exSel').offsetTop-80)}
-function startTimer(){if(tid||done)return;tid=setInterval(()=>{left--;document.getElementById('timer').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');if(left<=0)grade()},1000)}
-function grade(){if(done)return;done=true;clearInterval(tid);tid=null;const e=EXAMS_R[cur];let s1=0,s2=0,s3=0;
- e.p1.forEach((q,i)=>{const box=document.getElementById('q1-'+i),c=box.querySelector('input:checked');box.classList.add('done');box.querySelectorAll('.opt')[q[2]].classList.add('right');if(c){if(+c.value===q[2])s1+=.25;else c.closest('.opt').classList.add('wrong')}});
- e.p2.forEach((q,i)=>{let k=0;q[1].forEach((st,j)=>{const c=document.querySelector(`input[name="b${i}${j}"]:checked`),r=document.getElementById(`r${i}-${j}`);if(c&&+c.value===st[1]){k++;r.classList.add('right')}else r.classList.add('wrong')});s2+=tfPts[k];document.getElementById('q2-'+i).classList.add('done')});
- e.p3.forEach((q,i)=>{const inp=document.getElementById('c'+i),v=inp.value.trim().replace(',','.');const ok=v!==''&&Math.abs(parseFloat(v)-parseFloat(q[1].replace(',','.')))<1e-9;if(ok)s3+=.25;inp.classList.add(ok?'right':'wrong');document.getElementById('q3-'+i).classList.add('done')});
- const r=x=>Math.round(x*100)/100,t=r(s1+s2+s3);
- const sc=document.getElementById('score');sc.innerHTML=`${t}/10 <span class="note">(I: ${r(s1)} · II: ${r(s2)} · III: ${r(s3)})</span>`;sc.classList.remove('hide');
- document.getElementById('submit').classList.add('hide');document.getElementById('reset').classList.remove('hide');document.querySelectorAll('#exBody input').forEach(x=>x.disabled=true)}
-document.getElementById('submit').onclick=()=>{if(confirm('Nộp bài và xem kết quả?'))grade()};
-document.getElementById('reset').onclick=renderExam;
-renderExam();
+function buildQs(idx,seed){
+ const e0=EXAMS[idx],p1=balance(e0.p1,seed),qs=[];
+ p1.forEach(q=>qs.push({type:'mcq',text:q[0],options:q[1],correct:q[2],explain:q[3]}));
+ e0.p2.forEach(q=>qs.push({type:'tf',text:q[0],items:q[1].map(s=>({t:s[0],a:!!s[1]})),explain:q[2]}));
+ e0.p3.forEach(q=>qs.push({type:'short',text:q[0],answer:q[1],explain:q[2]}));
+ return qs;
+}
+function isAnswered(q,ans){
+ if(q.type==='tf')return !!ans&&ans.some(x=>x===true||x===false);
+ if(q.type==='short')return ans!==undefined&&String(ans).trim()!=='';
+ return ans!==undefined;
+}
+function scoreQ(q,ans){
+ if(q.type==='mcq')return ans===q.correct?0.25:0;
+ if(q.type==='short'){if(ans===undefined)return 0;const v=String(ans).trim().replace(',','.'),a=String(q.answer).trim().replace(',','.');return v!==''&&Math.abs(parseFloat(v)-parseFloat(a))<1e-9?0.25:0}
+ if(q.type==='tf'){if(!ans)return 0;let k=0;q.items.forEach((it,i)=>{if(ans[i]===it.a)k++});return TFPTS[k]}
+ return 0;
+}
+function fullOf(q){return q.type==='tf'?1:0.25}
+function questionHTML(q,i,ans,checked){
+ let h=`<article class="q" id="q${i}" data-i="${i}"><div class="qhead"><span class="qnum">Câu ${i+1}</span>`;
+ if(checked){const s=scoreQ(q,ans),full=fullOf(q);
+  const cls=s>=full?'ok':(s>0?'part':(isAnswered(q,ans)?'bad':'skip'));
+  const label=s>=full?'Đúng':(s>0?'Đúng một phần':(isAnswered(q,ans)?'Sai':'Chưa làm'));
+  h+=`<span class="badge ${cls}">${label} · ${fmtScore(s)} đ</span>`;
+ }
+ h+=`</div><div class="qtext">${q.text}</div>`;
+ if(q.type==='mcq'){
+  h+='<div class="opts">';
+  q.options.forEach((o,k)=>{let c='opt';if(ans===k)c+=' sel';if(checked&&k===q.correct)c+=' right';if(checked&&ans===k&&k!==q.correct)c+=' wrong';
+   h+=`<button type="button" class="${c}" data-act="mcq" data-k="${k}"${checked?' disabled':''}><b>${L4[k]}.</b> <span>${o}</span></button>`});
+  h+='</div>';
+ } else if(q.type==='tf'){
+  h+='<div class="tf">';
+  q.items.forEach((it,k)=>{const a=ans?ans[k]:undefined;let rc='';if(checked)rc=a===it.a?' right':' wrong';
+   h+=`<div class="tfrow${rc}"><div class="tftext"><b>${String.fromCharCode(97+k)})</b> ${it.t}</div><div class="tfbtns">`+
+      `<button type="button" class="tfb${a===true?' sel':''}" data-act="tf" data-k="${k}" data-v="1"${checked?' disabled':''}>Đúng</button>`+
+      `<button type="button" class="tfb${a===false?' sel':''}" data-act="tf" data-k="${k}" data-v="0"${checked?' disabled':''}>Sai</button></div></div>`});
+  h+='</div>';
+ } else {
+  const val=ans===undefined?'':String(ans).replace(/"/g,'&quot;');
+  h+=`<div class="short"><input type="text" inputmode="decimal" autocomplete="off" maxlength="4" placeholder="Đáp án" data-act="short" value="${val}"${checked?' disabled':''}>`;
+  if(checked)h+=`<div class="keyline">Đáp án: <b>${q.answer}</b></div>`;
+  h+='</div>';
+ }
+ if(checked&&q.explain)h+=`<div class="explain"><b>Lời giải</b><div>${q.explain}</div></div>`;
+ h+='</article>';
+ return h;
+}
+function paint(i){const p=document.getElementById('p'+i);if(!p)return;p.className=isAnswered(S.qs[i],S.answers[i])?'done':''}
+function counter(){let n=0;S.qs.forEach((q,i)=>{if(isAnswered(q,S.answers[i]))n++});const el=document.getElementById('pcount');if(el)el.textContent=`Đã làm ${n}/${S.qs.length} câu`}
+function redraw(i){const el=document.getElementById('q'+i);if(!el)return;const tmp=document.createElement('div');tmp.innerHTML=questionHTML(S.qs[i],i,S.answers[i],S.done);el.replaceWith(tmp.firstChild)}
+function sectionsHTML(checked){
+ let h='<h2>Phần I. Trắc nghiệm nhiều lựa chọn</h2>';
+ S.qs.forEach((q,i)=>{if(q.type==='mcq')h+=questionHTML(q,i,S.answers[i],checked)});
+ h+='<h2>Phần II. Trắc nghiệm đúng/sai</h2>';
+ S.qs.forEach((q,i)=>{if(q.type==='tf')h+=questionHTML(q,i,S.answers[i],checked)});
+ h+='<h2>Phần III. Trả lời ngắn</h2>'+(checked?'':'<p class="note">Chỉ ghi số, tối đa 4 kí tự, dùng dấu phẩy cho số thập phân.</p>');
+ S.qs.forEach((q,i)=>{if(q.type==='short')h+=questionHTML(q,i,S.answers[i],checked)});
+ return h;
+}
+function renderExamView(){
+ let h=`<div class="exambar"><span class="timer" id="timer">${mmss(S.left)}</span><span class="note" id="pcount"></span><button type="button" class="btn" id="submitBtn">Nộp bài</button></div>`;
+ h+='<div class="layout"><main id="qs">'+sectionsHTML(false)+'</main><aside class="palette"><h4>Danh sách câu</h4><div class="pgrid" id="pal">';
+ S.qs.forEach((q,i)=>{h+=`<a href="#q${i}" id="p${i}">${i+1}</a>`});
+ h+='</div></aside></div>';
+ document.getElementById('exArea').innerHTML=h;
+ S.qs.forEach((q,i)=>paint(i));counter();
+ document.getElementById('submitBtn').onclick=()=>trySubmit();
+}
+function renderResult(used,auto){
+ const r=x=>Math.round(x*100)/100;let s1=0,s2=0,s3=0;
+ S.qs.forEach((q,i)=>{const s=scoreQ(q,S.answers[i]);if(q.type==='mcq')s1+=s;else if(q.type==='tf')s2+=s;else s3+=s});
+ s1=r(s1);s2=r(s2);s3=r(s3);const total=r(s1+s2+s3);
+ let h=`<div class="resultband"><div class="big">${fmtScore(total)}<small>/10</small></div><div><p style="margin:0">${auto?'Hết giờ, hệ thống đã tự nộp bài. ':''}Thời gian làm bài: <b>${mmss(used)}</b></p>`+
+  `<ul class="parts"><li>Phần I: <b>${fmtScore(s1)}</b>/4,5</li><li>Phần II: <b>${fmtScore(s2)}</b>/4</li><li>Phần III: <b>${fmtScore(s3)}</b>/1,5</li></ul>`+
+  `<div class="rbtns"><button type="button" class="btn" id="retryBtn">Làm lại đề này</button></div></div></div>`;
+ h+='<div id="qs">'+sectionsHTML(true)+'</div>';
+ document.getElementById('exArea').innerHTML=h;
+ document.getElementById('retryBtn').onclick=()=>selectExam(cur);
+ window.scrollTo(0,document.getElementById('exSel').offsetTop-80);
+}
+function startTimer(){if(tid||!S||S.done)return;tid=setInterval(()=>{S.left--;const el=document.getElementById('timer');if(el)el.textContent=mmss(S.left);if(S.left<=0)submit(true)},1000)}
+function trySubmit(){const left=S.qs.filter((q,i)=>!isAnswered(q,S.answers[i])).length;
+ if(!confirm(left?`Bạn còn ${left} câu chưa làm. Vẫn nộp bài?`:'Nộp bài ngay bây giờ?'))return;
+ submit(false);
+}
+function submit(auto){if(!S||S.done)return;S.done=true;clearInterval(tid);tid=null;const used=3000-Math.max(0,S.left);renderResult(used,auto)}
+function selectExam(i){
+ if(S&&!S.done&&Object.keys(S.answers).length&&!confirm('Chuyển đề sẽ xoá bài đang làm. Tiếp tục?'))return;
+ cur=i;
+ document.querySelectorAll('#exSel [data-ex]').forEach(x=>x.classList.toggle('ghost',+x.dataset.ex!==i));
+ S={qs:buildQs(cur,cur),answers:{},done:false,left:3000};
+ renderExamView();
+ startTimer();
+}
+document.getElementById('exSel').innerHTML=EXAMS.map((e,i)=>`<button type="button" class="btn ${i?'ghost':''}" data-ex="${i}">${e.name}</button>`).join('');
+document.querySelectorAll('#exSel [data-ex]').forEach(b=>b.onclick=()=>selectExam(+b.dataset.ex));
+document.getElementById('exArea').addEventListener('click',e=>{
+ const t=e.target.closest('[data-act]');if(!t||!S||S.done)return;
+ const art=t.closest('.q');if(!art)return;const i=+art.dataset.i;
+ if(t.dataset.act==='mcq'){S.answers[i]=+t.dataset.k;redraw(i);paint(i);counter()}
+ else if(t.dataset.act==='tf'){const a=S.answers[i]||[undefined,undefined,undefined,undefined];a[+t.dataset.k]=t.dataset.v==='1';S.answers[i]=a;redraw(i);paint(i);counter()}
+});
+document.getElementById('exArea').addEventListener('input',e=>{
+ const t=e.target;if(t.dataset.act!=='short'||!S||S.done)return;
+ const art=t.closest('.q');if(!art)return;const i=+art.dataset.i;
+ S.answers[i]=t.value;paint(i);counter();
+});
+S={qs:buildQs(cur,cur),answers:{},done:false,left:3000};
+renderExamView();
 </script>
 </body>
 </html>
