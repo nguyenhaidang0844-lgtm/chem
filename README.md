@@ -13,8 +13,9 @@ Website ôn tập gồm hai môn:
 - Lời giải chi tiết sau khi nộp bài; lịch sử điểm lưu trong trình duyệt (localStorage).
 
 ## Môn Sinh học 12
-- Một file HTML độc lập (`di-truyen-phan-tu.html`), không phụ thuộc `js/engine.js` của môn Hóa.
-- Tab "Kiến thức + mô phỏng" và tab "Luyện đề" (3 đề, đổi thứ tự đáp án mỗi lần vào, đồng hồ 50 phút).
+- Một file HTML độc lập (`di-truyen-phan-tu.html`), không phụ thuộc `js/engine.js` của môn Hóa, nhưng cùng định dạng làm đề với Hóa (đáp án dạng nút, palette câu, băng kết quả).
+- Tab "Kiến thức + mô phỏng" và tab "Luyện đề" (3 đề, đổi thứ tự đáp án mỗi lần vào).
+- 2 chế độ như Hóa: **Thi thử** (đồng hồ 50 phút, chấm khi nộp) và **Luyện tập** (không giới hạn giờ; mỗi câu có nút "Kiểm tra đáp án" riêng, trắc nghiệm thì chấm ngay khi chọn).
 - Muốn thêm chương mới: tạo file HTML tương tự, thêm 1 thẻ `.card` trỏ tới file đó trong `sinh.html`.
 
 Không cần build: chỉ là HTML/CSS/JS thuần, chạy được trên GitHub Pages.

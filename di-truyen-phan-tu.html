@@ -96,6 +96,13 @@ svg text{fill:var(--ink);font-family:var(--font)}
 /* exam (đồng bộ với môn Hóa: opts dạng nút, tf dạng nút Đúng/Sai, có palette câu) */
 .exsel{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .tag{display:inline-block;background:var(--burg-700);color:var(--pink-500);font:800 .68rem/1 var(--font);letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;margin-left:6px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.mode{text-align:left;background:#fff;border:2px solid var(--burg-900);padding:14px 16px;display:flex;flex-direction:column;gap:4px;box-shadow:var(--hard);cursor:pointer;font:inherit}
+.mode b{font-weight:900;text-transform:uppercase;font-size:1rem}
+.mode small{color:var(--muted);font-size:.85rem}
+.mode.on{background:var(--burg-700);color:#fff;box-shadow:5px 5px 0 var(--pink-500)}
+.mode.on small{color:var(--pink-300)}
+@media (max-width:600px){.modes{grid-template-columns:1fr}}
 .exambar{position:sticky;top:63px;z-index:6;background:var(--cream);border-bottom:2px solid var(--burg-900);padding:10px 0;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .timer{font:400 1.2rem/1 var(--pixel);color:var(--burg-700)}
 .layout{display:grid;grid-template-columns:1fr 220px;gap:24px;align-items:start}
@@ -428,6 +435,10 @@ svg text{fill:var(--ink);font-family:var(--font)}
 <br>• Phần III: 6 câu trả lời ngắn × 0,25đ, đáp án tối đa 4 kí tự.
 <br>Đề 1 tập trung vào DNA và tái bản; Đề 2 vào gene, phiên mã, RNA; Đề 3 vào mã di truyền, dịch mã và câu tổng hợp.</p>
 </div>
+<div class="modes" id="modeSel">
+<button type="button" class="mode on" data-mode="thi"><b>Thi thử</b><small>50 phút, chấm điểm khi nộp bài</small></button>
+<button type="button" class="mode" data-mode="luyen"><b>Luyện tập</b><small>Không giới hạn giờ, xem đáp án ngay từng câu</small></button>
+</div>
 <div class="exsel" id="exSel"></div>
 <div id="exArea"></div>
 </section>
@@ -699,7 +710,7 @@ p3:[
 
 /* ---------- exam engine (đồng bộ format với môn Hóa: nút chọn đáp án, nút Đúng/Sai, palette câu, băng kết quả) ---------- */
 const L4="ABCD",TFPTS=[0,0.1,0.25,0.5,1];
-let cur=0,S=null,tid=null;
+let cur=0,S=null,tid=null,pickMode='thi';
 function fmtScore(x){return (Math.round(x*100)/100+'').replace('.',',')}
 function mmss(s){s=Math.max(0,s);const m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x}
 function balance(p1,seed){return p1.map((q,i)=>{const t=(i*3+seed+Math.floor(i/4))%4;const opts=q[1].slice();const right=opts.splice(q[2],1)[0];opts.splice(t,0,right);return [q[0],opts,t,q[3]]})}
@@ -749,24 +760,27 @@ function questionHTML(q,i,ans,checked){
   h+='</div>';
  }
  if(checked&&q.explain)h+=`<div class="explain"><b>Lời giải</b><div>${q.explain}</div></div>`;
+ else if(!checked&&S&&S.mode==='luyen'&&!S.done&&q.type!=='mcq')h+='<button type="button" class="btn sm" data-act="check">Kiểm tra đáp án</button>';
  h+='</article>';
  return h;
 }
+function qChecked(i){return S.done||!!S.checked[i]}
 function paint(i){const p=document.getElementById('p'+i);if(!p)return;p.className=isAnswered(S.qs[i],S.answers[i])?'done':''}
 function counter(){let n=0;S.qs.forEach((q,i)=>{if(isAnswered(q,S.answers[i]))n++});const el=document.getElementById('pcount');if(el)el.textContent=`Đã làm ${n}/${S.qs.length} câu`}
-function redraw(i){const el=document.getElementById('q'+i);if(!el)return;const tmp=document.createElement('div');tmp.innerHTML=questionHTML(S.qs[i],i,S.answers[i],S.done);el.replaceWith(tmp.firstChild)}
-function sectionsHTML(checked){
+function redraw(i){const el=document.getElementById('q'+i);if(!el)return;const tmp=document.createElement('div');tmp.innerHTML=questionHTML(S.qs[i],i,S.answers[i],qChecked(i));el.replaceWith(tmp.firstChild)}
+function sectionsHTML(){
  let h='<h2>Phần I. Trắc nghiệm nhiều lựa chọn</h2>';
- S.qs.forEach((q,i)=>{if(q.type==='mcq')h+=questionHTML(q,i,S.answers[i],checked)});
+ S.qs.forEach((q,i)=>{if(q.type==='mcq')h+=questionHTML(q,i,S.answers[i],qChecked(i))});
  h+='<h2>Phần II. Trắc nghiệm đúng/sai</h2>';
- S.qs.forEach((q,i)=>{if(q.type==='tf')h+=questionHTML(q,i,S.answers[i],checked)});
- h+='<h2>Phần III. Trả lời ngắn</h2>'+(checked?'':'<p class="note">Chỉ ghi số, tối đa 4 kí tự, dùng dấu phẩy cho số thập phân.</p>');
- S.qs.forEach((q,i)=>{if(q.type==='short')h+=questionHTML(q,i,S.answers[i],checked)});
+ S.qs.forEach((q,i)=>{if(q.type==='tf')h+=questionHTML(q,i,S.answers[i],qChecked(i))});
+ h+='<h2>Phần III. Trả lời ngắn</h2>'+(S.done?'':'<p class="note">Chỉ ghi số, tối đa 4 kí tự, dùng dấu phẩy cho số thập phân.</p>');
+ S.qs.forEach((q,i)=>{if(q.type==='short')h+=questionHTML(q,i,S.answers[i],qChecked(i))});
  return h;
 }
 function renderExamView(){
- let h=`<div class="exambar"><span class="timer" id="timer">${mmss(S.left)}</span><span class="note" id="pcount"></span><button type="button" class="btn" id="submitBtn">Nộp bài</button></div>`;
- h+='<div class="layout"><main id="qs">'+sectionsHTML(false)+'</main><aside class="palette"><h4>Danh sách câu</h4><div class="pgrid" id="pal">';
+ let h='<div class="exambar">'+(S.mode==='thi'?`<span class="timer" id="timer">${mmss(S.left)}</span>`:'<span class="note">Không giới hạn thời gian</span>');
+ h+='<span class="note" id="pcount"></span><button type="button" class="btn" id="submitBtn">Nộp bài</button></div>';
+ h+='<div class="layout"><main id="qs">'+sectionsHTML()+'</main><aside class="palette"><h4>Danh sách câu</h4><div class="pgrid" id="pal">';
  S.qs.forEach((q,i)=>{h+=`<a href="#q${i}" id="p${i}">${i+1}</a>`});
  h+='</div></aside></div>';
  document.getElementById('exArea').innerHTML=h;
@@ -777,42 +791,58 @@ function renderResult(used,auto){
  const r=x=>Math.round(x*100)/100;let s1=0,s2=0,s3=0;
  S.qs.forEach((q,i)=>{const s=scoreQ(q,S.answers[i]);if(q.type==='mcq')s1+=s;else if(q.type==='tf')s2+=s;else s3+=s});
  s1=r(s1);s2=r(s2);s3=r(s3);const total=r(s1+s2+s3);
- let h=`<div class="resultband"><div class="big">${fmtScore(total)}<small>/10</small></div><div><p style="margin:0">${auto?'Hết giờ, hệ thống đã tự nộp bài. ':''}Thời gian làm bài: <b>${mmss(used)}</b></p>`+
+ let h=`<div class="resultband"><div class="big">${fmtScore(total)}<small>/10</small></div><div><p style="margin:0">${auto?'Hết giờ, hệ thống đã tự nộp bài. ':''}${S.mode==='luyen'?'Chế độ luyện tập không giới hạn giờ. ':''}Thời gian làm bài: <b>${mmss(used)}</b></p>`+
   `<ul class="parts"><li>Phần I: <b>${fmtScore(s1)}</b>/4,5</li><li>Phần II: <b>${fmtScore(s2)}</b>/4</li><li>Phần III: <b>${fmtScore(s3)}</b>/1,5</li></ul>`+
   `<div class="rbtns"><button type="button" class="btn" id="retryBtn">Làm lại đề này</button></div></div></div>`;
- h+='<div id="qs">'+sectionsHTML(true)+'</div>';
+ h+='<div id="qs">'+sectionsHTML()+'</div>';
  document.getElementById('exArea').innerHTML=h;
- document.getElementById('retryBtn').onclick=()=>selectExam(cur);
+ document.getElementById('retryBtn').onclick=()=>startExam(cur);
  window.scrollTo(0,document.getElementById('exSel').offsetTop-80);
 }
-function startTimer(){if(tid||!S||S.done)return;tid=setInterval(()=>{S.left--;const el=document.getElementById('timer');if(el)el.textContent=mmss(S.left);if(S.left<=0)submit(true)},1000)}
+function startTimer(){if(tid||!S||S.done||S.mode!=='thi')return;tid=setInterval(()=>{S.left--;const el=document.getElementById('timer');if(el)el.textContent=mmss(S.left);if(S.left<=0)submit(true)},1000)}
 function trySubmit(){const left=S.qs.filter((q,i)=>!isAnswered(q,S.answers[i])).length;
  if(!confirm(left?`Bạn còn ${left} câu chưa làm. Vẫn nộp bài?`:'Nộp bài ngay bây giờ?'))return;
  submit(false);
 }
-function submit(auto){if(!S||S.done)return;S.done=true;clearInterval(tid);tid=null;const used=3000-Math.max(0,S.left);renderResult(used,auto)}
-function selectExam(i){
- if(S&&!S.done&&Object.keys(S.answers).length&&!confirm('Chuyển đề sẽ xoá bài đang làm. Tiếp tục?'))return;
- cur=i;
- document.querySelectorAll('#exSel [data-ex]').forEach(x=>x.classList.toggle('ghost',+x.dataset.ex!==i));
- S={qs:buildQs(cur,cur),answers:{},done:false,left:3000};
+function submit(auto){if(!S||S.done)return;S.done=true;clearInterval(tid);tid=null;
+ const used=S.mode==='thi'?(3000-Math.max(0,S.left)):Math.floor((Date.now()-S.t0)/1000);
+ renderResult(used,auto);
+}
+function hasProgress(){return !!(S&&!S.done&&Object.keys(S.answers).length)}
+function startExam(idx){
+ cur=idx;
+ document.querySelectorAll('#exSel [data-ex]').forEach(x=>x.classList.toggle('ghost',+x.dataset.ex!==idx));
+ S={qs:buildQs(cur,cur),answers:{},checked:{},done:false,mode:pickMode,left:3000,t0:Date.now()};
  renderExamView();
  startTimer();
 }
+function selectExam(i){
+ if(hasProgress()&&!confirm('Chuyển đề sẽ xoá bài đang làm. Tiếp tục?'))return;
+ startExam(i);
+}
+function selectMode(m){
+ if(pickMode===m)return;
+ if(hasProgress()&&!confirm('Đổi chế độ sẽ xoá bài đang làm. Tiếp tục?'))return;
+ pickMode=m;
+ document.querySelectorAll('#modeSel [data-mode]').forEach(x=>x.classList.toggle('on',x.dataset.mode===m));
+ startExam(cur);
+}
 document.getElementById('exSel').innerHTML=EXAMS.map((e,i)=>`<button type="button" class="btn ${i?'ghost':''}" data-ex="${i}">${e.name}</button>`).join('');
 document.querySelectorAll('#exSel [data-ex]').forEach(b=>b.onclick=()=>selectExam(+b.dataset.ex));
+document.querySelectorAll('#modeSel [data-mode]').forEach(b=>b.onclick=()=>selectMode(b.dataset.mode));
 document.getElementById('exArea').addEventListener('click',e=>{
  const t=e.target.closest('[data-act]');if(!t||!S||S.done)return;
  const art=t.closest('.q');if(!art)return;const i=+art.dataset.i;
- if(t.dataset.act==='mcq'){S.answers[i]=+t.dataset.k;redraw(i);paint(i);counter()}
+ if(t.dataset.act==='mcq'){S.answers[i]=+t.dataset.k;if(S.mode==='luyen')S.checked[i]=true;redraw(i);paint(i);counter()}
  else if(t.dataset.act==='tf'){const a=S.answers[i]||[undefined,undefined,undefined,undefined];a[+t.dataset.k]=t.dataset.v==='1';S.answers[i]=a;redraw(i);paint(i);counter()}
+ else if(t.dataset.act==='check'){S.checked[i]=true;redraw(i)}
 });
 document.getElementById('exArea').addEventListener('input',e=>{
  const t=e.target;if(t.dataset.act!=='short'||!S||S.done)return;
  const art=t.closest('.q');if(!art)return;const i=+art.dataset.i;
  S.answers[i]=t.value;paint(i);counter();
 });
-S={qs:buildQs(cur,cur),answers:{},done:false,left:3000};
+S={qs:buildQs(cur,cur),answers:{},checked:{},done:false,mode:pickMode,left:3000,t0:Date.now()};
 renderExamView();
 </script>
 </body>
