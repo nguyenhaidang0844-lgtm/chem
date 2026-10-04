@@ -102,7 +102,7 @@
     stopTimer(); S = null; window.scrollTo(0, 0);
     var exams = C.Exams.list(), hist = loadHistory();
     var h = '<header class="topbar"><div class="wrap topbar-in">' + logo('Ôn thi THPT') + '<div class="tb-right"><a class="link" href="#modes" style="color:#fff">Bộ đề</a><a class="link" href="#scoring" style="color:#fff">Điểm</a>' + (B.enabled ? '<a class="link" href="#ranking" style="color:#fff">Xếp hạng</a>' : '') + '<span id="authbox">' + authHTML() + '</span></div></div></header>';
-    h += '<section class="hero">' + petals() + '<div class="wrap"><div><span class="chip">Chương 1 · Ester – Lipid</span>' +
+    h += '<section class="hero">' + petals() + '<div class="wrap"><div><span class="chip">Phần 1 · Ester – Lipid · Phần 2 · Carbohydrate</span>' +
       '<h1>Ôn thi<br>Hóa học 12</h1>' +
       '<p class="lead">Đề thi thử theo cấu trúc THPT, chia thành nhiều đề. Câu tính toán tự thay số mỗi lần làm, có lời giải chi tiết ngay sau khi nộp bài.</p>' +
       '<div class="hero-cta"><a class="btn" href="#modes">Chọn đề</a><a class="btn ghost" href="#scoring">Cách tính điểm</a></div></div>' +
@@ -112,13 +112,22 @@
     h += '<section class="cream" id="modes"><div class="wrap"><h2 class="sec-title">Chọn chế độ</h2><p class="sec-sub">Thi thử để làm như thi thật, luyện tập để xem đáp án từng câu.</p>' +
       '<div class="modes"><button class="mode' + (pickMode === 'thi' ? ' on' : '') + '" data-act="mode" data-v="thi"><b>Thi thử</b><small>40 phút, chấm điểm khi nộp bài</small></button>' +
       '<button class="mode' + (pickMode === 'luyen' ? ' on' : '') + '" data-act="mode" data-v="luyen"><b>Luyện tập</b><small>Không giới hạn giờ, xem đáp án ngay</small></button></div>' +
-      '<h2 class="sec-title" style="margin-top:44px">Bộ đề</h2><p class="sec-sub">' + exams.length + ' đề · mỗi đề 10 điểm.</p><div class="grid">';
-    exams.forEach(function (e) {
+      '<h2 class="sec-title" style="margin-top:44px">Bộ đề</h2><p class="sec-sub">' + exams.length + ' đề · mỗi đề 10 điểm.</p>';
+    var secs = C.Exams.sections();
+    if (!secs.length) secs = [{ id: undefined }];
+    secs.forEach(function (s) {
+      var list = exams.filter(function (e) { return e.section === s.id; });
+      if (!list.length) return;
+      if (s.title) h += '<div class="phan"><h3 class="phan-title">' + C.esc(s.title) + '</h3>' + (s.desc ? '<p class="sec-sub">' + C.esc(s.desc) + '</p>' : '') + '</div>';
+      h += '<div class="grid">';
+      list.forEach(function (e) {
       var b = best(e.id), no = (e.id.match(/\d+/) || ['0'])[0], name = e.title.split('·').pop().trim();
       h += '<div class="card' + (e.mix ? ' mix' : '') + '"><div class="no">' + (e.mix ? '<span class="tag">Trộn ngẫu nhiên</span>' : '') + two(parseInt(no, 10)) + '</div><div class="chap">' + C.esc(e.chapter) + '</div><h3>' + C.esc(name) + '</h3><p>' + C.esc(e.desc) + '</p>' +
         '<div class="cardfoot"><span>28 câu · 10 điểm' + (b !== null ? '<br>Cao nhất: <b>' + C.fmt(b) + '</b>' : '') + '</span><button class="btn" data-act="start" data-id="' + e.id + '">Làm bài</button></div></div>';
+      });
+      h += '</div>';
     });
-    h += '</div></div></section>';
+    h += '</div></section>';
 
     if (B.enabled) h += '<section class="cream" id="ranking"><div class="wrap"><h2 class="sec-title">Bảng xếp hạng</h2><p class="sec-sub">Điểm cao nhất của mỗi người, chỉ tính chế độ Thi thử. Bằng điểm thì ai làm nhanh hơn xếp trên.</p><div class="panel" id="rankbox"></div></div></section>';
 
@@ -136,7 +145,7 @@
       });
       h += '</tbody></table></div>';
     }
-    h += '</div></div></section><footer class="foot"><div class="wrap"><span><b>Hóa 12</b> · Ester – Lipid</span><span>Đáp án và lời giải do hệ thống tự tính, hãy đối chiếu với giáo viên khi cần.</span></div></footer>';
+    h += '</div></div></section><footer class="foot"><div class="wrap"><span><b>Hóa 12</b> · Ester – Lipid · Carbohydrate</span><span>Đáp án và lời giải do hệ thống tự tính, hãy đối chiếu với giáo viên khi cần.</span></div></footer>';
     app.innerHTML = h;
     if (B.enabled) renderRanking();
   }

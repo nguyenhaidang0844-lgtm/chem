@@ -50,9 +50,12 @@
   }
 
   // ---------- Đăng ký đề ----------
-  var registry = { meta: [], parts: {} };
+  var registry = { meta: [], parts: {}, sections: [] };
   var Exams = {
-    define: function (meta) { registry.meta.push(meta); registry.parts[meta.id] = { mcq: [], tf: [], short: [] }; },
+    // Mở một phần mới; các define() sau đó thuộc phần này
+    section: function (s) { registry.sections.push(s); },
+    sections: function () { return registry.sections; },
+    define: function (meta) { var s = registry.sections[registry.sections.length - 1]; if (s && meta.section === undefined) meta.section = s.id; registry.meta.push(meta); registry.parts[meta.id] = { mcq: [], tf: [], short: [] }; },
     part: function (id, kind, list) {
       var p = registry.parts[id];
       if (!p) throw new Error('Chưa khai báo đề ' + id);

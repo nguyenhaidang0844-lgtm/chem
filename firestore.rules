@@ -15,7 +15,7 @@ service cloud.firestore {
         && d.uid == request.auth.uid
         && id == request.auth.uid + '_' + d.examId
         && validName(d.name)
-        && d.examId in ['de1', 'de2', 'de3', 'de4', 'de5', 'de6', 'de7']
+        && d.examId in ['de1', 'de2', 'de3', 'de4', 'de5', 'de6', 'de7', 'de8', 'de9', 'de10', 'de11', 'de12', 'de13']
         && d.score is number && d.score >= 0 && d.score <= 10
         && d.time is int && d.time >= 60 && d.time <= 2700
         && d.at == request.time;

@@ -77,6 +77,9 @@ sub, sup { line-height: 0; }
 .mode.on { background: var(--burg-700); color: #fff; box-shadow: 5px 5px 0 var(--pink-500); }
 .mode.on small { color: var(--pink-300); }
 
+.phan { margin-top: 34px; padding-top: 18px; border-top: 2px dashed var(--burg-600); }
+.phan-title { margin: 0; font-size: 1.15rem; font-weight: 900; text-transform: uppercase; color: var(--burg-900); }
+.phan .sec-sub { margin: 4px 0 14px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin: 8px 0 12px; }
 .card { position: relative; background: var(--card); border: 2px solid var(--burg-900); box-shadow: var(--hard); padding: 20px 20px 18px; display: flex; flex-direction: column; gap: 8px; }
 .card .no { font: 400 2.6rem/1 var(--pixel); color: var(--pink-500); -webkit-text-stroke: 1.5px var(--burg-900); }
@@ -126,6 +129,8 @@ th { background: var(--pink-50); color: var(--burg-700); font-size: .72rem; text
 .qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
 .qnum { font: 400 .85rem/1 var(--pixel); background: var(--burg-700); color: var(--pink-500); padding: 6px 10px; text-transform: uppercase; }
 .qtext { margin-bottom: 12px; }
+.qimg { margin: 0 0 14px; padding: 10px; background: #fff; border: 2px solid var(--burg-900); overflow-x: auto; text-align: center; }
+.qimg img { max-width: 100%; height: auto; vertical-align: middle; }
 .badge { font-size: .7rem; padding: 3px 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border: 2px solid currentColor; }
 .badge.ok { background: var(--ok-soft); color: var(--ok); }
 .badge.bad { background: var(--bad-soft); color: var(--bad); }

@@ -28,6 +28,7 @@
       h += '<span class="badge ' + cls + '">' + label + ' · ' + C.fmt(s) + ' đ</span>';
     }
     h += '</div><div class="qtext">' + chem(q.text) + '</div>';
+    if (q.img) h += '<figure class="qimg"><img src="' + C.esc(q.img.src) + '" alt="' + C.esc(q.img.alt || '') + '"></figure>';
 
     if (q.type === 'mcq') {
       h += '<div class="opts">';
