@@ -3,7 +3,10 @@
 (function (g) {
   'use strict';
   var E = g.Chem.Exams, chap = 'Chương 1. Ester – Lipid';
-  E.section({ id: 1, title: 'Phần 1 · Ester – Lipid', desc: 'Ester, chất béo, xà phòng và chất giặt rửa · Đề 1 – 7.' });
+  // theory: trang lý thuyết của phần (hiện ở mục "Lý thuyết" trên trang chủ môn Hóa và link "Ôn lý thuyết" của phần)
+  E.section({ id: 1, title: 'Phần 1 · Ester – Lipid', desc: 'Ester, chất béo, xà phòng và chất giặt rửa · Đề 1 – 7.',
+    theory: { href: 'ester-lipid.html', chap: 'Chương 1', name: 'Ester – Lipid', meta: '3 bài · 4 mô phỏng · 40 câu hỏi',
+      desc: 'Ester, chất béo, xà phòng và chất giặt rửa: khái niệm, danh pháp, đồng phân, tính chất, điều chế, ứng dụng. Có ghi nhớ, bẫy hay gặp, bài tập kèm đáp án.' } });
   E.define({ id: 'de1', chapter: chap, title: 'Đề 1 · Ester', desc: 'Khái niệm, danh pháp, đồng phân, tính chất, thủy phân và điều chế ester.' });
   E.define({ id: 'de2', chapter: chap, title: 'Đề 2 · Lipid – Chất béo', desc: 'Chất béo, acid béo, phản ứng thủy phân và hydrogen hóa, tính toán khối lượng muối.' });
   E.define({ id: 'de3', chapter: chap, title: 'Đề 3 · Xà phòng và chất giặt rửa', desc: 'Cấu tạo, tính chất giặt rửa, sản xuất xà phòng, nước cứng, thí nghiệm xà phòng hóa.' });
@@ -14,7 +17,9 @@
   E.define({ id: 'de7', chapter: 'Tổng hợp · Đề 1 – 6', title: 'Đề 7 · Trộn tổng hợp', desc: 'Mỗi mã đề là một đề khác: 28 câu bốc ngẫu nhiên từ Đề 1 – 6 (ester, chất béo, xà phòng), câu tính toán vẫn đổi số.', blend: ['de1', 'de2', 'de3', 'de4', 'de5', 'de6'], mix: true });
 
   var chap2 = 'Chương 2. Carbohydrate';
-  E.section({ id: 2, title: 'Phần 2 · Carbohydrate', desc: 'Glucose, fructose, saccharose, maltose, tinh bột, cellulose · Đề 8 – 13.' });
+  E.section({ id: 2, title: 'Phần 2 · Carbohydrate', desc: 'Glucose, fructose, saccharose, maltose, tinh bột, cellulose · Đề 8 – 13.',
+    theory: { href: 'carbohydrate.html', chap: 'Chương 2', name: 'Carbohydrate', meta: '4 bài · 3 mô phỏng · 52 câu hỏi',
+      desc: 'Glucose, fructose, saccharose, maltose, tinh bột, cellulose: cấu tạo mạch hở và mạch vòng, tính chất, bảng nhận biết, công thức tính nhanh, bài tập kèm lời giải.' } });
   E.define({ id: 'de8', chapter: chap2, title: 'Đề 8 · Glucose và Fructose', desc: 'Khái niệm, phân loại carbohydrate; cấu tạo, tính chất của glucose và fructose; tráng bạc, lên men.' });
   E.define({ id: 'de9', chapter: chap2, title: 'Đề 9 · Saccharose và Maltose', desc: 'Cấu tạo disaccharide, –OH hemiacetal, phản ứng với Cu(OH)2, thủy phân và hiệu suất thủy phân.' });
   E.define({ id: 'de10', chapter: chap2, title: 'Đề 10 · Tinh bột và Cellulose', desc: 'Amylose, amylopectin, cellulose; phản ứng màu iodine, thủy phân, cellulose trinitrate, lên men rượu.' });

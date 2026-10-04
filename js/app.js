@@ -101,13 +101,24 @@
   function home() {
     stopTimer(); S = null; window.scrollTo(0, 0);
     var exams = C.Exams.list(), hist = loadHistory();
-    var h = '<header class="topbar"><div class="wrap topbar-in">' + logo('Ôn thi THPT') + '<div class="tb-right"><a class="link" href="#modes" style="color:#fff">Bộ đề</a><a class="link" href="#scoring" style="color:#fff">Điểm</a>' + (B.enabled ? '<a class="link" href="#ranking" style="color:#fff">Xếp hạng</a>' : '') + '<span id="authbox">' + authHTML() + '</span></div></div></header>';
+    var theory = C.Exams.sections().filter(function (s) { return s.theory; });
+    var h = '<header class="topbar"><div class="wrap topbar-in">' + logo('Ôn thi THPT') + '<div class="tb-right">' + (theory.length ? '<a class="link" href="#theory" style="color:#fff">Lý thuyết</a>' : '') + '<a class="link" href="#modes" style="color:#fff">Bộ đề</a><a class="link" href="#scoring" style="color:#fff">Điểm</a>' + (B.enabled ? '<a class="link" href="#ranking" style="color:#fff">Xếp hạng</a>' : '') + '<span id="authbox">' + authHTML() + '</span></div></div></header>';
     h += '<section class="hero">' + petals() + '<div class="wrap"><div><span class="chip">Phần 1 · Ester – Lipid · Phần 2 · Carbohydrate</span>' +
       '<h1>Ôn thi<br>Hóa học 12</h1>' +
-      '<p class="lead">Đề thi thử theo cấu trúc THPT, chia thành nhiều đề. Câu tính toán tự thay số mỗi lần làm, có lời giải chi tiết ngay sau khi nộp bài.</p>' +
-      '<div class="hero-cta"><a class="btn" href="#modes">Chọn đề</a><a class="btn ghost" href="#scoring">Cách tính điểm</a></div></div>' +
+      '<p class="lead">Lý thuyết đầy đủ từng chương kèm mô phỏng tương tác, cùng các đề thi thử theo cấu trúc THPT. Câu tính toán tự thay số mỗi lần làm, có lời giải chi tiết ngay sau khi nộp bài.</p>' +
+      '<div class="hero-cta">' + (theory.length ? '<a class="btn" href="#theory">Học lý thuyết</a><a class="btn ghost" href="#modes">Chọn đề</a>' : '<a class="btn" href="#modes">Chọn đề</a><a class="btn ghost" href="#scoring">Cách tính điểm</a>') + '</div></div>' +
       '<div class="pixcard"><div class="pixpanel">' + sakura() + '</div><div class="pixcap">Cấu trúc mỗi đề · 28 câu · 40 phút</div>' +
       '<div class="stats"><div class="stat"><b>18</b><span>Trắc nghiệm</span></div><div class="stat"><b>04</b><span>Đúng / Sai</span></div><div class="stat"><b>06</b><span>Trả lời ngắn</span></div></div></div></div></section>';
+
+    if (theory.length) {
+      h += '<section class="cream" id="theory"><div class="wrap"><h2 class="sec-title">Lý thuyết</h2><p class="sec-sub">Toàn bộ kiến thức từng chương: ghi nhớ, bẫy hay gặp, bài tập có đáp án, câu hỏi tự kiểm tra và mô phỏng tương tác.</p><div class="grid">';
+      theory.forEach(function (s, i) {
+        var t = s.theory;
+        h += '<div class="card"><div class="no">' + two(i + 1) + '</div><div class="chap">' + C.esc(t.chap) + ' · Lý thuyết</div><h3>' + C.esc(t.name) + '</h3><p>' + C.esc(t.desc) + '</p>' +
+          '<div class="cardfoot"><span>' + C.esc(t.meta) + '</span><a class="btn" href="' + t.href + '">Học lý thuyết</a></div></div>';
+      });
+      h += '</div></div></section>';
+    }
 
     h += '<section class="cream" id="modes"><div class="wrap"><h2 class="sec-title">Chọn chế độ</h2><p class="sec-sub">Thi thử để làm như thi thật, luyện tập để xem đáp án từng câu.</p>' +
       '<div class="modes"><button class="mode' + (pickMode === 'thi' ? ' on' : '') + '" data-act="mode" data-v="thi"><b>Thi thử</b><small>40 phút, chấm điểm khi nộp bài</small></button>' +
@@ -118,7 +129,8 @@
     secs.forEach(function (s) {
       var list = exams.filter(function (e) { return e.section === s.id; });
       if (!list.length) return;
-      if (s.title) h += '<div class="phan"><h3 class="phan-title">' + C.esc(s.title) + '</h3>' + (s.desc ? '<p class="sec-sub">' + C.esc(s.desc) + '</p>' : '') + '</div>';
+      if (s.title) h += '<div class="phan"><h3 class="phan-title">' + C.esc(s.title) + '</h3>' + (s.desc ? '<p class="sec-sub">' + C.esc(s.desc) + '</p>' : '') +
+        (s.theory ? '<a class="link" href="' + s.theory.href + '" style="padding-left:0">Ôn lý thuyết ' + C.esc(s.theory.chap.toLowerCase()) + ' trước khi làm đề →</a>' : '') + '</div>';
       h += '<div class="grid">';
       list.forEach(function (e) {
       var b = best(e.id), no = (e.id.match(/\d+/) || ['0'])[0], name = e.title.split('·').pop().trim();

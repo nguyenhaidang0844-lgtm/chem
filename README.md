@@ -2,11 +2,13 @@
 
 Website ôn tập gồm hai môn:
 - **Hóa học 12** (`hoa.html`) — đề thi thử theo cấu trúc đề THPT (18 trắc nghiệm · 4 đúng/sai · 6 trả lời ngắn = 28 câu, 10 điểm, 40 phút), câu tính toán tự **đổi số** mỗi lần làm. Chia theo phần, mỗi đợt thêm đề là một phần mới: Phần 1 · Ester – Lipid (Đề 1 – 7), Phần 2 · Carbohydrate (Đề 8 – 13).
+  Mỗi phần có trang **lý thuyết** riêng: `ester-lipid.html` (Chương 1, Bài 1 – 3) và `carbohydrate.html` (Chương 2, Bài 4 – 7), gồm ghi nhớ, bẫy hay gặp, bài tập có đáp án ẩn (bấm để xem), câu hỏi tự kiểm tra chấm ngay, công thức bỏ túi, các dạng bài có lời giải và 7 mô phỏng tương tác.
 - **Sinh học 12** (`sinh.html` → `di-truyen-phan-tu.html`) — lý thuyết kèm mô phỏng tương tác (xưởng lắp DNA, chạc sao chép, bán bảo toàn, cắt nối exon, bảng mã di truyền, dịch mã từng bước) và 3 đề luyện (28 câu, 50 phút). Chương 1: Di truyền phân tử.
 
 `index.html` ở gốc là trang chọn môn học, dẫn vào từng môn ở trên.
 
 ## Môn Hóa học 12
+- **Lý thuyết:** trang chủ môn Hóa có mục "Lý thuyết" (lấy từ khai báo `theory` trong `E.section` ở `js/exams/meta.js`), mỗi phần đề có link "Ôn lý thuyết". Mô phỏng chương 1: đếm đồng phân, máy ghép ester, lắp chất béo, xà phòng làm sạch vết dầu (kèm nước cứng). Mô phỏng chương 2: mạch hở ⇄ mạch vòng, bàn thí nghiệm nhận biết, máy tính bài toán (tinh bột → ethanol, lên men, tráng bạc, cellulose trinitrate).
 - **Đề 7 / Đề 13 (trộn):** mỗi mã đề bốc ngẫu nhiên 18 + 4 + 6 câu từ kho câu của Đề 1 – 6 (chương 1) / Đề 8 – 12 (chương 2), không trùng dạng câu. Thêm đề mới vào kho bằng cách khai báo thêm id trong `blend` ở `js/exams/meta.js`.
 - **Đăng nhập Google và bảng xếp hạng** (theo từng đề và tab Tổng): cần bật Firebase một lần, xem [SETUP.md](SETUP.md). Chưa bật thì web tự ẩn phần này.
 - 2 chế độ: **Thi thử** (đồng hồ 40 phút, chấm khi nộp) và **Luyện tập** (xem đáp án ngay).
@@ -31,9 +33,15 @@ Chạy thử trên máy: mở `index.html` bằng trình duyệt (hoặc `npx se
 ```
 index.html                trang chọn môn học (Hóa / Sinh)
 hoa.html                   trang chính môn Hóa học 12
+ester-lipid.html           Hóa 12 · lý thuyết Chương 1: Ester – Lipid, xà phòng và chất giặt rửa
+carbohydrate.html          Hóa 12 · lý thuyết Chương 2: Carbohydrate
 sinh.html                  trang chọn chương môn Sinh học 12
 di-truyen-phan-tu.html     Sinh 12 · Chương 1: Di truyền phân tử (lý thuyết + mô phỏng + đề)
-css/style.css              giao diện dùng chung (có chế độ tối tự động)
+css/style.css              giao diện dùng chung
+css/ly-thuyet.css          giao diện trang lý thuyết Hóa (mục lục, khung ghi nhớ, mô phỏng, câu hỏi)
+js/ly-thuyet.js            trang lý thuyết: tự viết chỉ số công thức, mục lục, ô đáp án ẩn, câu tự kiểm tra
+js/sim-ester.js            mô phỏng chương 1
+js/sim-carb.js             mô phỏng chương 2
 js/engine.js               seed, chấm điểm THPT, dựng đề (môn Hóa)
 js/calc1.js, calc2.js      bộ sinh câu tính toán (ester, chất béo, xà phòng)
 js/render.js, app.js       hiển thị và điều khiển (môn Hóa)
@@ -53,3 +61,10 @@ js/exams/deN.js            nội dung từng đề (môn Hóa)
 Câu có hình: thêm `img: { src: 'img/ten.png', alt: '...' }` vào câu hỏi (hàm `tf(text, items, img)` trong `de8.js` – `de12.js`). Vị trí nguyên tử carbon viết `C#1` để chữ số không bị thành chỉ số dưới.
 
 Ký hiệu công thức: `C4H8O2` tự thành chỉ số dưới; dùng `C_{n}H_{2n}O_{2}` cho chỉ số chữ và `Ca^{2+}` cho chỉ số trên.
+
+## Thêm chương lý thuyết mới (Hóa)
+1. Copy `carbohydrate.html` thành file mới, giữ khung `<main class="lt">`, thay nội dung từng `<section class="lesson">`. Mục lục tự dựng từ các thẻ `h2` (trong `.lesson-head`), `h3`, `h4`.
+2. Viết công thức như phần đề (tự thành chỉ số); mũi tên có điều kiện viết `→{t°}`, `⇌{H2SO4 đặc, t°}`; `C#1` là nguyên tử carbon số 1.
+3. Khung có sẵn: `.box`, `.key` (ghi nhớ), `.trap` (bẫy), `.tip`, `.ext` (mở rộng), `.eq` (phương trình), `.tbl` (bảng), ô ẩn đáp án `class="hid"` + nút `data-reveal="id-bảng"`, lời giải `<details class="ans">`.
+4. Câu tự kiểm tra: `<div class="qz" data-a="B"><p>đề</p><ol><li>A</li>…</ol><div class="why">giải thích</div></div>`; câu đúng/sai: `<div class="tfq"><ul><li data-a="1">phát biểu<span class="why">…</span></li></ul></div>`; gom vào `<div class="qset">` để có bộ đếm điểm.
+5. Khai báo `theory: { href, chap, name, desc, meta }` trong `E.section(...)` của phần tương ứng ở `js/exams/meta.js`.
