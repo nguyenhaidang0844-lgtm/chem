@@ -19,7 +19,7 @@
     'html.gate-lock body > :not(#gate){display:none!important}' +
     '#gate{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;overflow:auto;padding:16px;background:#3b0a1a;font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#2a0a14}' +
     '#gate .g-in{background:#fff8fa;border:3px solid #2a0a14;box-shadow:8px 8px 0 #ff8fb3;padding:24px;width:min(100%,440px);margin:auto}' +
-    '#gate h2{font-size:1.35rem;font-weight:900;text-transform:uppercase;color:#7a1633;margin:0 0 8px}' +
+    '#gate h2{font-size:1.35rem;font-weight:900;text-transform:uppercase;color:#7a1633;margin:0 0 14px}' +
     '#gate p{margin:0 0 14px;color:#6d4a57;font-size:.92rem;line-height:1.5}' +
     '#gate label{display:block;font-weight:700;font-size:.85rem;margin:12px 0 4px}' +
     '#gate label small{font-weight:500;color:#6d4a57}' +
@@ -48,7 +48,7 @@
 
   function loadingView() { show('<h2>Ôn tập THPT</h2><p>Đang kiểm tra đăng nhập…</p>'); }
   function loginView(msg) {
-    show('<h2>Đăng nhập</h2><p>Bạn cần đăng nhập bằng tài khoản Google và điền thông tin học sinh để sử dụng web ôn tập.</p>' +
+    show('<h2>Đăng nhập</h2>' +
       '<button class="g-btn" data-g="login">Đăng nhập bằng Google</button><p class="g-err">' + esc(msg || '') + '</p>');
   }
   function field(id, label, val, attrs) {
@@ -57,18 +57,17 @@
   function formView() {
     var i = (U && U.info) || {};
     show('<h2>' + (complete(U) ? 'Thông tin của bạn' : 'Thông tin học sinh') + '</h2>' +
-      '<p>Điền đầy đủ để tiếp tục. Họ tên, lớp, trường và số điện thoại chỉ quản trị viên web xem được; bảng xếp hạng chỉ hiện biệt danh.</p>' +
       '<form data-g="form" novalidate>' +
       field('fullName', 'Họ và tên', i.fullName || (U && U.google) || '', 'maxlength="60" autocomplete="name" required') +
-      field('className', 'Lớp <small>(ví dụ 12A1)</small>', i.className || '', 'maxlength="20" required') +
+      field('className', 'Lớp', i.className || '', 'maxlength="20" placeholder="12A1" required') +
       field('school', 'Trường', i.school || '', 'maxlength="100" autocomplete="organization" required') +
       field('phone', 'Số điện thoại', i.phone || '', 'type="tel" maxlength="15" inputmode="tel" autocomplete="tel" required') +
-      field('nick', 'Biệt danh <small>(hiện trên bảng xếp hạng, 2 – 20 ký tự)</small>', (U && U.name) || '', 'maxlength="20" required') +
+      field('nick', 'Biệt danh', (U && U.name) || '', 'maxlength="20" required') +
       '<p class="g-err" id="g-err"></p>' +
       '<div class="g-row"><button class="g-btn" type="submit">' + (complete(U) ? 'Lưu' : 'Vào web') + '</button>' +
       (complete(U) ? '<button class="g-link" type="button" data-g="close">Đóng</button>' : '') +
       '<button class="g-link" type="button" data-g="logout">Đăng xuất</button></div>' +
-      '<p class="g-who">Đang đăng nhập: ' + esc(U && (U.email || U.google)) + '</p></form>');
+      '<p class="g-who">' + esc(U && (U.email || U.google)) + '</p></form>');
   }
 
   function val(id) { var el = doc.getElementById('g-' + id); return el ? clean(el.value) : ''; }
