@@ -21,6 +21,25 @@ service cloud.firestore {
         && d.at == request.time;
     }
 
+    function str(s, lo, hi) {
+      return s is string && s.size() >= lo && s.size() <= hi;
+    }
+
+    // Thông tin học sinh (bắt buộc để dùng web): chỉ chủ tài khoản đọc/ghi, quản trị viên xem trong Console
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['fullName', 'className', 'school', 'phone', 'email', 'at'])
+        && str(request.resource.data.fullName, 2, 60)
+        && str(request.resource.data.className, 1, 20)
+        && str(request.resource.data.school, 2, 100)
+        && request.resource.data.phone is string
+        && request.resource.data.phone.matches('^(0|[+]84)[0-9]{9,10}$')
+        && str(request.resource.data.email, 0, 100)
+        && request.resource.data.at == request.time;
+      allow delete: if false;
+    }
+
     // Biệt danh: chỉ chủ tài khoản đọc/ghi
     match /profiles/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;

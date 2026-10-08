@@ -1,5 +1,6 @@
 /* Đăng nhập Google + bảng xếp hạng bằng Firebase (Auth + Firestore), nạp SDK từ CDN khi cần.
    Dữ liệu:  profiles/{uid} = { name }
+             users/{uid} = { fullName, className, school, phone, email, at }  (thông tin bắt buộc, riêng tư)
              scores/{uid}_{examId} = { uid, name, examId, score, time, at }  (điểm cao nhất mỗi người mỗi đề) */
 (function (g) {
   'use strict';
@@ -16,10 +17,14 @@
       fb = { A: m[1], F: m[2], auth: m[1].getAuth(app), db: m[2].getFirestore(app) };
       fb.A.onAuthStateChanged(fb.auth, function (u) {
         if (!u) { user = null; emit(); return; }
-        fb.F.getDoc(fb.F.doc(fb.db, 'profiles', u.uid)).then(function (s) {
-          user = { uid: u.uid, name: s.exists() ? s.data().name : null, google: (u.displayName || '').split(' ').pop() };
+        var F = fb.F;
+        Promise.all([
+          F.getDoc(F.doc(fb.db, 'profiles', u.uid)).then(function (s) { return s.exists() ? s.data().name : null; }).catch(function () { return null; }),
+          F.getDoc(F.doc(fb.db, 'users', u.uid)).then(function (s) { return s.exists() ? s.data() : null; }).catch(function () { return null; })
+        ]).then(function (r) {
+          user = { uid: u.uid, email: u.email || '', name: r[0], info: r[1], google: u.displayName || '' };
           emit();
-        }).catch(function () { user = { uid: u.uid, name: null, google: '' }; emit(); });
+        });
       });
       return fb;
     });
@@ -47,6 +52,15 @@
       }).then(function (snap) {
         return Promise.all(snap.docs.map(function (d) { var x = d.data(); x.name = name; x.at = F.serverTimestamp(); return F.setDoc(d.ref, x); }));
       }).then(function () { user.name = name; cache = {}; emit(); });
+    },
+    // Hồ sơ học sinh (bắt buộc trước khi dùng web), chỉ chủ tài khoản và quản trị viên xem được
+    saveInfo: function (info) {
+      var F = fb.F, d = { fullName: info.fullName, className: info.className, school: info.school, phone: info.phone, email: user.email || '' };
+      return F.setDoc(F.doc(fb.db, 'users', user.uid), Object.assign({ at: F.serverTimestamp() }, d)).then(function () {
+        user.info = d;
+        if (info.nick && info.nick !== user.name) return Backend.setName(info.nick);
+        emit();
+      });
     },
     // Lưu điểm nếu tốt hơn kỷ lục cũ: điểm cao hơn, hoặc bằng điểm nhưng nhanh hơn
     submit: function (examId, score, time) {

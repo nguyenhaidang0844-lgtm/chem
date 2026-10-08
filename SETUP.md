@@ -32,6 +32,8 @@ window.CHEM_FIREBASE = {
 Các giá trị này không phải bí mật. Việc ai được đọc hoặc ghi dữ liệu do `firestore.rules` kiểm soát.
 
 ## Cách hoạt động
+- **Bắt buộc đăng nhập:** mọi trang bị che cho tới khi đăng nhập Google và điền đủ Họ tên, Lớp, Trường, Số điện thoại, Biệt danh (`js/gate.js`). Thông tin lưu ở collection `users` (mỗi học sinh chỉ đọc được của mình); quản trị viên xem tại Firebase Console → Firestore → `users`. Nút **Tài khoản** trên thanh trên cùng để sửa thông tin hoặc đăng xuất.
+- Mỗi lần cập nhật `firestore.rules` phải dán lại vào Console và **Publish**, nếu không học sinh sẽ không lưu được thông tin.
 - Đăng nhập Google, lần đầu chọn **biệt danh** (2 – 20 ký tự). Chỉ biệt danh và điểm hiện công khai, không lộ tên thật hay email.
 - Chỉ tính chế độ **Thi thử**. Mỗi người mỗi đề giữ **điểm cao nhất**; bằng điểm thì ai làm nhanh hơn xếp trên.
 - Bài làm dưới 1 phút không được tính.

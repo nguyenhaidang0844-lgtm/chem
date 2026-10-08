@@ -60,6 +60,7 @@ js/calc1.js, calc2.js      bộ sinh câu tính toán (ester, chất béo, xà p
 js/render.js, app.js       hiển thị và điều khiển (môn Hóa)
 js/backend.js              đăng nhập Google + bảng xếp hạng (Firebase, môn Hóa)
 js/firebase-config.js      cấu hình Firebase (dán vào theo SETUP.md)
+js/gate.js                 cổng bắt buộc đăng nhập + nhập thông tin học sinh (mọi trang)
 firestore.rules            luật bảo mật Firestore
 js/exams/meta.js           danh sách đề (môn Hóa)
 js/exams/deN.js            nội dung từng đề (môn Hóa)
