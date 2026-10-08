@@ -5,6 +5,8 @@ Website ôn tập gồm hai môn:
   Mỗi phần có trang **lý thuyết** riêng: `ester-lipid.html` (Chương 1, Bài 1 – 3) và `carbohydrate.html` (Chương 2, Bài 4 – 7), gồm ghi nhớ, bẫy hay gặp, bài tập có đáp án ẩn (bấm để xem), câu hỏi tự kiểm tra chấm ngay, công thức bỏ túi, các dạng bài có lời giải và 7 mô phỏng tương tác.
 - **Sinh học 12** (`sinh.html` → `di-truyen-phan-tu.html`) — lý thuyết kèm mô phỏng tương tác (xưởng lắp DNA, chạc sao chép, bán bảo toàn, cắt nối exon, bảng mã di truyền, dịch mã từng bước) và 3 đề luyện (28 câu, 50 phút). Chương 1: Di truyền phân tử.
 
+- **Từ vựng SAT** (`sat.html`) — toàn bộ bảng SAT Vocabulary (Google Sheets), chia theo sheet và theo buổi, học kiểu Quizlet.
+
 `index.html` ở gốc là trang chọn môn học, dẫn vào từng môn ở trên.
 
 ## Môn Hóa học 12
@@ -19,6 +21,12 @@ Website ôn tập gồm hai môn:
 - Tab "Kiến thức + mô phỏng" và tab "Luyện đề" (3 đề, đổi thứ tự đáp án mỗi lần vào).
 - 2 chế độ như Hóa: **Thi thử** (đồng hồ 50 phút, chấm khi nộp) và **Luyện tập** (không giới hạn giờ; mỗi câu có nút "Kiểm tra đáp án" riêng, trắc nghiệm thì chấm ngay khi chọn).
 - Muốn thêm chương mới: tạo file HTML tương tự, thêm 1 thẻ `.card` trỏ tới file đó trong `sinh.html`.
+
+## Từ vựng SAT
+- 8 bộ thẻ theo đúng các sheet: SAT Vocab v3.0 (794 thẻ, 40 buổi), SAT Vocab v2.1 (723, 36 buổi), Prefixes/Suffixes/Roots (33), Archaic words (53), SAT Math Vocab (140, theo chủ đề); và "Kho mở rộng" từ các sheet ẩn: SAT Vocab (Cũ) (757), SAT Vocab-old (721), Merge (2090, theo mức ưu tiên). Tổng 5.311 thẻ, 2.846 từ khác nhau. Sheet `Diff` không đưa vào vì trùng đúng danh sách từ của `Merge`.
+- 4 cách học mỗi buổi/bộ: **Thẻ ghi nhớ** (lật, phát âm, Đã biết/Chưa biết, vuốt trên điện thoại), **Học** (trắc nghiệm rồi gõ từ, sai thì hỏi lại), **Kiểm tra** (trắc nghiệm, đúng/sai, tự luận, chấm điểm, in đề/lưu PDF), **Ghép thẻ** (tính giờ, lưu kỷ lục); kèm danh sách đầy đủ (nghĩa, phiên âm, ví dụ, mẹo nhớ, CEFR) và tìm kiếm toàn bộ.
+- **Chuỗi ngày học**, mục tiêu thẻ/ngày, **số từ đã biết**, **Ôn từ cũ** (lặp lại ngắt quãng 1 → 3 → 7 → 14 → 30 → 60 ngày; tạo bài kiểm tra/bộ thẻ từ: đến hạn, hay sai, đã biết, tất cả từ đã học, gắn sao). Tiến độ lưu trong localStorage (`satvocab.progress.v1`), có nút sao lưu/khôi phục ra file JSON.
+- Cập nhật dữ liệu khi sheet thay đổi: tải sheet dạng .xlsx (Tệp → Tải xuống → Microsoft Excel) rồi chạy `node tools/build-vocab.js duong-dan/file.xlsx` — tạo lại `js/vocab/*.js`. Cùng một từ ở các bộ khác nhau dùng chung tiến độ.
 
 Không cần build: chỉ là HTML/CSS/JS thuần, chạy được trên GitHub Pages.
 
@@ -36,6 +44,11 @@ hoa.html                   trang chính môn Hóa học 12
 ester-lipid.html           Hóa 12 · lý thuyết Chương 1: Ester – Lipid, xà phòng và chất giặt rửa
 carbohydrate.html          Hóa 12 · lý thuyết Chương 2: Carbohydrate
 sinh.html                  trang chọn chương môn Sinh học 12
+sat.html                   Từ vựng SAT (thẻ ghi nhớ, học, kiểm tra, ghép thẻ, ôn từ cũ)
+css/vocab.css              giao diện trang Từ vựng SAT
+js/vocab-app.js            điều khiển trang Từ vựng SAT (tiến độ, chuỗi ngày, các chế độ học)
+js/vocab/index.js, *.js    dữ liệu từ vựng (tạo tự động, đừng sửa tay)
+tools/build-vocab.js       tạo js/vocab/*.js từ file .xlsx của Google Sheets
 di-truyen-phan-tu.html     Sinh 12 · Chương 1: Di truyền phân tử (lý thuyết + mô phỏng + đề)
 css/style.css              giao diện dùng chung
 css/ly-thuyet.css          giao diện trang lý thuyết Hóa (mục lục, khung ghi nhớ, mô phỏng, câu hỏi)
