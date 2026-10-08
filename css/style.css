@@ -9,7 +9,7 @@
   --pixel: "Silkscreen", "Courier New", monospace;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 body { margin: 0; background: var(--cream); color: var(--ink); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
 #app { min-height: 100vh; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
@@ -21,13 +21,14 @@ sub, sup { line-height: 0; }
 .pix { font-family: var(--pixel); letter-spacing: 0; }
 
 /* ---- Thanh trên ---- */
-.topbar { position: sticky; top: 0; z-index: 40; background: var(--burg-700); color: #fff; border-bottom: 3px solid var(--pink-500); }
-.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; flex-wrap: wrap; padding-top: 6px; padding-bottom: 6px; }
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: .02em; text-transform: uppercase; font-size: .95rem; }
-.logo svg { width: 26px; height: 26px; }
+.topbar { position: sticky; top: 0; z-index: 40; background: var(--burg-700); color: #fff; border-bottom: 2px solid var(--pink-500); }
+.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; flex-wrap: nowrap; padding-top: 3px; padding-bottom: 3px; }
+.topbar .link { padding: 4px 6px; font-size: .7rem; }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 900; letter-spacing: .02em; text-transform: uppercase; font-size: .82rem; flex-shrink: 0; white-space: nowrap; }
+.logo svg { width: 20px; height: 20px; }
 .logo small { font-weight: 500; opacity: .75; text-transform: none; letter-spacing: 0; margin-left: 4px; }
-.tb-right { display: flex; align-items: center; gap: 10px; }
-.clock { font: 400 1.5rem/1 var(--pixel); background: var(--burg-900); color: var(--pink-500); padding: 8px 12px; border: 2px solid var(--pink-500); }
+.tb-right { display: flex; align-items: center; gap: 6px; }
+.clock { font: 400 1.1rem/1 var(--pixel); background: var(--burg-900); color: var(--pink-500); padding: 5px 9px; border: 2px solid var(--pink-500); }
 .clock.warn { background: var(--bad); color: #fff; border-color: #fff; animation: blink 1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: .65; } }
 
@@ -38,7 +39,9 @@ sub, sup { line-height: 0; }
 .btn.ghost { background: transparent; color: #fff; border-color: #fff; box-shadow: 4px 4px 0 rgba(255, 255, 255, .35); }
 .btn.dark { background: var(--burg-700); color: #fff; }
 .btn.small { margin-top: 14px; padding: 8px 14px; box-shadow: 3px 3px 0 var(--burg-900); }
-.topbar .btn { padding: 9px 16px; box-shadow: 3px 3px 0 var(--burg-900); border-color: var(--burg-900); }
+.topbar .btn { padding: 6px 12px; box-shadow: 2px 2px 0 var(--burg-900); border-color: var(--burg-900); }
+.tb-right { min-width: 0; overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; white-space: nowrap; }
+.tb-right::-webkit-scrollbar { display: none; }
 .link { background: none; border: 0; color: inherit; padding: 8px 6px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-transform: uppercase; font-size: .75rem; letter-spacing: .04em; }
 .link:hover { color: var(--pink-500); }
 .cream .link, .pinkband .link { color: var(--burg-700); }
@@ -116,7 +119,7 @@ th { background: var(--pink-50); color: var(--burg-700); font-size: .72rem; text
 
 /* ---- Làm bài ---- */
 .layout { display: grid; grid-template-columns: 1fr 230px; gap: 28px; align-items: start; padding-top: 8px; padding-bottom: 40px; }
-.palette { position: sticky; top: 84px; background: var(--card); border: 2px solid var(--burg-900); box-shadow: var(--hard); padding: 14px; margin-top: 22px; }
+.palette { position: sticky; top: 62px; background: var(--card); border: 2px solid var(--burg-900); box-shadow: var(--hard); padding: 14px; margin-top: 22px; }
 .palette h4 { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; color: var(--burg-700); }
 .pgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
 .pgrid a { text-align: center; font: 400 .8rem/1 var(--pixel); padding: 7px 0; border: 2px solid var(--burg-900); color: var(--burg-900); text-decoration: none; background: #fff; }
@@ -208,8 +211,12 @@ table.rank tr.me td { background: var(--pink-100); font-weight: 700; }
   .card.mix { display: flex; }
   .card.mix .no { flex-direction: row; align-items: center; }
   .card.mix .cardfoot { flex-direction: row; align-items: center; text-align: left; border-top: 2px dashed var(--burg-600); padding-top: 12px; margin-top: 10px; }
-  .topbar-in { min-height: 52px; }
+  .topbar-in { min-height: 40px; }
   .logo small { display: none; }
+}
+@media (max-width: 520px) {
+  .logo span { display: none; }
+  .topbar .link { padding: 4px 4px; font-size: .66rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .petals, .pixpanel svg, .clock.warn { animation: none; }

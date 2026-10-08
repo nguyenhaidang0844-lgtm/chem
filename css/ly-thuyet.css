@@ -2,7 +2,7 @@
 
 /* ---- Bố cục: mục lục bên trái, nội dung bên phải ---- */
 .lt-wrap { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 36px; align-items: start; padding-top: 34px; padding-bottom: 48px; }
-.toc { position: sticky; top: 84px; max-height: calc(100vh - 100px); overflow: auto; background: var(--card); border: 2px solid var(--burg-900); box-shadow: var(--hard); padding: 14px 10px 14px 12px; }
+.toc { position: sticky; top: 62px; max-height: calc(100vh - 100px); overflow: auto; background: var(--card); border: 2px solid var(--burg-900); box-shadow: var(--hard); padding: 14px 10px 14px 12px; }
 .toc-h { font: 400 .78rem/1 var(--pixel); text-transform: uppercase; color: var(--burg-700); margin: 0 0 10px 6px; }
 .toc ol, .toc-m ol { list-style: none; margin: 0; padding: 0; }
 .toc a, .toc-m a { display: block; text-decoration: none; color: var(--ink); padding: 4px 8px; border-left: 3px solid transparent; font-size: .86rem; line-height: 1.35; }

@@ -1,8 +1,8 @@
 /* Từ vựng SAT · thẻ ghi nhớ kiểu Quizlet, cùng phong cách burgundy + pixel của site (dùng chung css/style.css) */
 
 /* ---- Thanh trên: chuỗi ngày ---- */
-.tb-streak { display: inline-flex; align-items: center; gap: 6px; font: 400 .95rem/1 var(--pixel); background: var(--burg-900); color: var(--pink-500); border: 2px solid var(--pink-500); padding: 6px 10px; text-decoration: none; }
-.tb-streak svg { width: 14px; height: 16px; shape-rendering: crispEdges; }
+.tb-streak { display: inline-flex; align-items: center; gap: 5px; font: 400 .8rem/1 var(--pixel); background: var(--burg-900); color: var(--pink-500); border: 2px solid var(--pink-500); padding: 4px 8px; text-decoration: none; flex-shrink: 0; }
+.tb-streak svg { width: 11px; height: 13px; shape-rendering: crispEdges; }
 .tb-streak.off { color: rgba(255, 255, 255, .55); border-color: rgba(255, 255, 255, .35); }
 .tb-streak.off svg { filter: grayscale(1); opacity: .6; }
 

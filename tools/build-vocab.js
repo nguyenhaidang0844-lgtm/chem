@@ -77,6 +77,9 @@ function chunk(cards, size, label) {
   return sets;
 }
 
+// Sửa lỗi trong bảng quy đổi đơn vị của sheet gốc (1 yard ghi nhầm "0.76 m^2", 180 độ bị mất chữ π)
+var MATH_FIX = { '1 yard': '0.9144 m (meter)', '180 degrees': 'π rad' };
+
 var BUILD = {
   v30: function (rows) {
     return byBuoi(rows, function (r) { return { t: r[1], p: r[2], d: r[3], i: r[4], e: r[5], ev: r[6], mv: r[7] }; });
@@ -116,7 +119,9 @@ var BUILD = {
       if (!cur || !r[0] || !r[1]) return;
       if (r[0] === 'ĐƠN VỊ GỐC') return; // hàng tiêu đề bảng quy đổi
       // Thẻ: mặt trước là thuật ngữ tiếng Anh, mặt sau là nghĩa tiếng Việt (bảng quy đổi: đơn vị gốc → quy đổi)
-      cur.c.push(clean(units ? { t: r[0], d: r[1], g: sub } : { t: r[1], d: r[0], e: r[2], g: sub }));
+      var c = units ? { t: r[0], d: r[1], g: sub } : { t: r[1], d: r[0], e: r[2], g: sub };
+      if (units && MATH_FIX[c.t]) c.d = MATH_FIX[c.t];
+      cur.c.push(clean(c));
     });
     sets.forEach(function (s) { s.n = s.n.replace(/^(\S)/, function (a) { return a.toUpperCase(); }); });
     return sets;
